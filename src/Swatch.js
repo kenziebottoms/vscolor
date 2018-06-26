@@ -14,6 +14,7 @@ class Swatch extends Component {
         style={{background: this.props.color}}
         onClick={() => this.props.onClick()}
       >
+        <span className='hover'>x</span>
         {this.props.new ? '+' : ''}
       </div>
     )
