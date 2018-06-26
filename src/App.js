@@ -18,6 +18,11 @@ class App extends Component {
     this.setState({ syntax });
   };
 
+  save = () => {
+    let { localStorage } = window;
+    localStorage.setItem('theme', JSON.stringify(this.state));
+  };
+
   render() {
     return (
       <div className="wrapper">
@@ -38,6 +43,11 @@ class App extends Component {
         <div>
           <h3>Code</h3>
           <pre>{JSON.stringify(this.state)}</pre>
+        </div>
+        <div>
+          <button onClick={this.save} type='Submit'>
+            Save
+          </button>
         </div>
       </div>
     );
