@@ -20,10 +20,29 @@ class Palette extends Component {
     this.setState({ colors, active });
   };
 
-  render() {
-    let swatches = this.state.colors.map((c, i) => {
-      return <div className='swatch' key={i} style={{ background: c }}></div>;
+  activate = (i, e) => {
+    this.setState({ active: i });
+  };
+
+  renderSwatch = i => {
+    return (
+      <div
+        className='swatch'
+        key={i}
+        style={{ background: this.state.colors[i] }}
+        onClick={() => this.activate(i)}
+      >
+      </div>
+    );
+  };
+
+  renderSwatches = () => {
+    return this.state.colors.map((c, i) => {
+      return this.renderSwatch(i);
     });
+  };
+
+  render() {
     return (
       <div className='picker'>
         <ChromePicker
@@ -31,7 +50,7 @@ class Palette extends Component {
           onChangeComplete={this.change}
         />
         <div className='colors'>
-          {swatches}
+          {this.renderSwatches()}
           <div className='swatch new' onClick={this.add}>
             +
           </div>
