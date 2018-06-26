@@ -27,7 +27,7 @@ class Palette extends Component {
   renderSwatch = i => {
     return (
       <div
-        className='swatch'
+        className={'swatch'+(this.state.active == i ? ' active ' : '')}
         key={i}
         style={{ background: this.state.colors[i] }}
         onClick={() => this.activate(i)}
@@ -49,7 +49,7 @@ class Palette extends Component {
           color={this.state.colors[this.state.active]}
           onChangeComplete={this.change}
         />
-        <div className='colors'>
+        <div className='palette'>
           {this.renderSwatches()}
           <div className='swatch new' onClick={this.add}>
             +
