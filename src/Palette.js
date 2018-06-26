@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
+import Swatch from './Swatch.js';
 import './Palette.css';
 
 class Palette extends Component {
@@ -8,37 +9,35 @@ class Palette extends Component {
     active: 0
   };
 
+  // change active swatch
   change = (c, e) => {
-    let colors = this.state.colors;
+    let colors = this.state.colors.slice();
     colors[this.state.active] = c.hex;
     this.setState({ colors });
   };
 
+  // add new blank swatch
   add = e => {
     let colors = this.state.colors.slice();
-    let active = colors.push('#fff') - 1;
+    let active = colors.push('#fff') - 1;   // push returns the new length of the array
     this.setState({ colors, active });
   };
 
-  activate = (i, e) => {
-    this.setState({ active: i });
+  // handle swatch click
+  click = (i, e) => {
+    if (this.state.active === i) {
+      let colors = this.state.colors.slice();
+      colors.splice(i, 1);
+      this.setState({ colors, active: colors.length - 1 });
+    } else {
+      this.setState({ active: i });
+    }
   };
 
-  renderSwatch = i => {
-    return (
-      <div
-        className={'swatch'+(this.state.active == i ? ' active ' : '')}
-        key={i}
-        style={{ background: this.state.colors[i] }}
-        onClick={() => this.activate(i)}
-      >
-      </div>
-    );
-  };
-
+  // make a swatch for each color in state.colors
   renderSwatches = () => {
     return this.state.colors.map((c, i) => {
-      return this.renderSwatch(i);
+      return <Swatch key={i} color={c} active={i === this.state.active} onClick={() => this.click(i)} />;
     });
   };
 
@@ -51,9 +50,7 @@ class Palette extends Component {
         />
         <div className='palette'>
           {this.renderSwatches()}
-          <div className='swatch new' onClick={this.add}>
-            +
-          </div>
+          <Swatch key={'new'} active={false} new={true} onClick={() => this.add()} />
         </div>
       </div>
     );
