@@ -14,6 +14,7 @@ class Palette extends Component {
     let colors = this.state.colors.slice();
     colors[this.state.active] = c.hex;
     this.setState({ colors });
+    this.props.update(this.state.colors);
   };
 
   // add new blank swatch
@@ -21,6 +22,7 @@ class Palette extends Component {
     let colors = this.state.colors.slice();
     let active = colors.push('#fff') - 1;   // push returns the new length of the array
     this.setState({ colors, active });
+    this.props.update(this.state.colors);
   };
 
   // handle swatch click
@@ -29,6 +31,7 @@ class Palette extends Component {
       let colors = this.state.colors.slice();
       colors.splice(i, 1);
       this.setState({ colors, active: colors.length - 1 });
+      this.props.update(this.state.colors);
     } else {
       this.setState({ active: i });
     }
@@ -37,7 +40,13 @@ class Palette extends Component {
   // make a swatch for each color in state.colors
   renderSwatches = () => {
     return this.state.colors.map((c, i) => {
-      return <Swatch key={i} color={c} active={i === this.state.active} onClick={() => this.click(i)} />;
+      return <Swatch
+        key={i}
+        color={c}
+        active={i === this.state.active}
+        onClick={() => this.click(i)}
+        onChange={() => this.onChange()}
+      />;
     });
   };
 
