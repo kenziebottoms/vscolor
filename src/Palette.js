@@ -54,7 +54,6 @@ class Palette extends Component {
         color={c}
         active={i === this.state.active}
         onClick={() => this.click(i)}
-        onChange={() => this.handleChange(this.state.colors)}
       />;
     });
   };
