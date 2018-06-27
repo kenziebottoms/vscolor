@@ -1,22 +1,66 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-// import ColorPicker from './ColorPicker.js';
+import { ChromePicker } from 'react-color';
 import './App.css';
 import Palette from './Palette.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.getSaved();
+  };
+
+  getSaved = () => {
+    let stored = window.localStorage.getItem("theme");
+    if (!stored) {
+      return null;
+    } else {
+      let { background, syntax } = JSON.parse(stored);
+      return {
+        background: background || '#fff',
+        syntax: syntax || ['#fff']
+      }
+    }
+  };
+
+  updateBG = (c, e) => {
+    let background = c.hex;
+    this.setState({ background });
+  };
+
+  updateSyntax = (syntax) => {
+    this.setState({ syntax });
+  };
+
+  save = () => {
+    let { localStorage } = window;
+    localStorage.setItem('theme', JSON.stringify(this.state));
+  };
+
   render() {
     return (
       <div className="wrapper">
         <header>
-          <img src={logo} className="logo" alt="logo" />
-          <h1 className="title">Welcome to React</h1>
+          <h1 className="title">Color Picker</h1>
         </header>
-        <p className="intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <div>
-          <Palette/>
+          <h3>Background</h3>
+          <ChromePicker
+            color={this.state.background}
+            onChangeComplete={this.updateBG}
+          />
+        </div>
+        <div>
+          <h3>Syntax colors</h3>
+          <Palette colors={this.state.syntax} update={this.updateSyntax} />
+        </div>
+        <div>
+          <h3>Code</h3>
+          <pre>{JSON.stringify(this.state)}</pre>
+        </div>
+        <div>
+          <button onClick={this.save} type='Submit'>
+            Save
+          </button>
         </div>
       </div>
     );
