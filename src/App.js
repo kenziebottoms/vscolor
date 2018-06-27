@@ -4,9 +4,22 @@ import './App.css';
 import Palette from './Palette.js';
 
 class App extends Component {
-  state = {
-    background: '#fff',
-    syntax: ['#fff']
+  constructor(props) {
+    super(props);
+    this.state = this.getSaved();
+  };
+
+  getSaved = () => {
+    let stored = window.localStorage.getItem("theme");
+    if (!stored) {
+      return null;
+    } else {
+      let { background, syntax } = JSON.parse(stored);
+      return {
+        background: background || '#fff',
+        syntax: syntax || ['#fff']
+      }
+    }
   };
 
   updateBG = (c, e) => {
@@ -38,7 +51,7 @@ class App extends Component {
         </div>
         <div>
           <h3>Syntax colors</h3>
-          <Palette update={this.updateSyntax} />
+          <Palette colors={this.state.syntax} update={this.updateSyntax} />
         </div>
         <div>
           <h3>Code</h3>
