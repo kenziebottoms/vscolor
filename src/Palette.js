@@ -6,31 +6,27 @@ import './Palette.css';
 class Palette extends Component {
   constructor(props) {
     super(props);
-    if (props.colors) {
-      this.state = {
-        colors: props.colors,
-        active: props.colors.length - 1
-      };
-    } else {
-      this.state = {
-        colors: ['#fff'],
-        active: 0
-      };
-    }
+    let storedColors = props.colors.slice();
+    console.log(storedColors);
+    this.state = {
+      colors: storedColors || ['#fff'],
+      active: storedColors.length - 1 || 0
+    };
+    console.log(this.state);
   };
 
   // change active swatch
   change = (c, e) => {
     let colors = this.state.colors.slice();
     colors[this.state.active] = c.hex;
-    this.handleChange({colors});
+    this.handleChange({ colors });
   };
 
   // add new blank swatch
   add = e => {
     let colors = this.state.colors.slice();
     let active = colors.push('#fff') - 1;   // push returns the new length of the array
-    this.handleChange({active, colors});
+    this.handleChange({ active, colors });
   };
 
   // handle swatch click
