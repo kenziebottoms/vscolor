@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import Swatch from './Swatch.js';
-import './Palette.css';
 
 class Palette extends Component {
   constructor(props) {

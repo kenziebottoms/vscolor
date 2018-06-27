@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
-// import './ColorPicker.css';
 
 class ColorPicker extends Component {
   state = {

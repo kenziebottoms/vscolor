@@ -10,6 +10,21 @@ header {
   text-align: center;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 20rem;
+  height: 100vh;
+}
+
+textarea {
+  width: 100%;
+  overflow: scroll;
+  word-wrap: break-word;
+}
+section {
+  padding: 0 1rem 1rem 1rem;
+}
+
 .title {
   font-size: 1.5em;
 }
@@ -21,4 +36,12 @@ header {
 @keyframes logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.picker {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.palette {
+  padding: 1rem .75rem;
 }

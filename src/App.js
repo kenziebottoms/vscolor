@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import './App.css';
 import Palette from './Palette.js';
+import Swatch from './Swatch';
 
 class App extends Component {
   constructor(props) {
@@ -39,30 +40,32 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
+        <main>
+          <section>
+            <h3>Background</h3>
+            <div className='picker'>
+              <ChromePicker
+                color={this.state.background}
+                onChange={this.updateBG}
+              />
+              <div className='palette'>
+                <Swatch color={this.state.background} active={true} />
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Syntax colors</h3>
+            <Palette colors={this.state.syntax} update={this.updateSyntax} />
+          </section>
+        </main>
         <header>
           <h1 className="title">Color Picker</h1>
-        </header>
-        <div>
-          <h3>Background</h3>
-          <ChromePicker
-            color={this.state.background}
-            onChangeComplete={this.updateBG}
-          />
-        </div>
-        <div>
-          <h3>Syntax colors</h3>
-          <Palette colors={this.state.syntax} update={this.updateSyntax} />
-        </div>
-        <div>
-          <h3>Code</h3>
-          <pre>{JSON.stringify(this.state)}</pre>
-        </div>
-        <div>
+          <textarea rows='5'>{JSON.stringify(this.state)}</textarea>
           <button onClick={this.save} type='Submit'>
             Save
           </button>
-        </div>
-      </div>
+        </header>
+      </div >
     );
   }
 }
