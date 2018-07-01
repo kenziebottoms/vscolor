@@ -45,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div className="wrapper" style={{background: this.state.bg, color: this.state.fg}}>
         <main>
           <section>
             <h3>Background</h3>
@@ -76,7 +76,7 @@ class App extends Component {
             <Palette colors={this.state.syntax} update={this.updateSyntax} />
           </section>
         </main>
-        <header>
+        <header style={{background: this.state.fg, color: this.state.bg}}>
           <h1 className="title">Color Picker</h1>
           <textarea value={JSON.stringify(this.state)} rows='5'></textarea>
           <button onClick={this.save} type='Submit'>
