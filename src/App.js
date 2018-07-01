@@ -60,7 +60,7 @@ class App extends Component {
         </main>
         <header>
           <h1 className="title">Color Picker</h1>
-          <textarea rows='5'>{JSON.stringify(this.state)}</textarea>
+          <textarea defaultValue={JSON.stringify(this.state)} rows='5'></textarea>
           <button onClick={this.save} type='Submit'>
             Save
           </button>
