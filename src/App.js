@@ -15,10 +15,12 @@ class App extends Component {
     if (!stored) {
       return null;
     } else {
-      let { bg, fg, syntax } = JSON.parse(stored);
+      let { bg, fg, syntax, pos, neg } = JSON.parse(stored);
       return {
         bg: bg || '#ffffff',
         fg: fg || '#000000',
+        pos: pos || '#00FF00',
+        neg: neg || '#FF0000',
         syntax: syntax || ['#fff']
       }
     }
@@ -55,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper" style={{background: this.state.bg, color: this.state.fg}}>
+      <div className="wrapper" style={{ background: this.state.bg, color: this.state.fg }}>
         <main>
           <div>
             <section>
@@ -75,7 +77,7 @@ class App extends Component {
                   onChange={this.updateFG}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => {}} color={this.state.fg} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.fg} active={true} />
                 </div>
               </div>
             </section>
@@ -89,7 +91,7 @@ class App extends Component {
                   onChange={this.updatePos}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => {}} color={this.state.pos} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.pos} active={true} />
                 </div>
               </div>
             </section>
@@ -101,7 +103,7 @@ class App extends Component {
                   onChange={this.updateNeg}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => {}} color={this.state.neg} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.neg} active={true} />
                 </div>
               </div>
             </section>
@@ -111,7 +113,7 @@ class App extends Component {
             <Palette colors={this.state.syntax} update={this.updateSyntax} />
           </section>
         </main>
-        <header style={{background: this.state.fg, color: this.state.bg}}>
+        <header style={{ background: this.state.fg, color: this.state.bg }}>
           <h1 className="title">Color Picker</h1>
           <textarea value={JSON.stringify(this.state)} rows='5'></textarea>
           <button onClick={this.save} type='Submit'>
