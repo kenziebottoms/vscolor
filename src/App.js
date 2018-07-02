@@ -34,6 +34,16 @@ class App extends Component {
     this.setState({ fg });
   };
 
+  updatePos = (c, e) => {
+    let pos = c.hex;
+    this.setState({ pos });
+  };
+
+  updateNeg = (c, e) => {
+    let neg = c.hex;
+    this.setState({ neg });
+  };
+
   updateSyntax = (syntax) => {
     this.setState({ syntax });
   };
@@ -47,30 +57,55 @@ class App extends Component {
     return (
       <div className="wrapper" style={{background: this.state.bg, color: this.state.fg}}>
         <main>
-          <section>
-            <h3>Background</h3>
-            <div className='picker'>
-              <ChromePicker
-                color={this.state.bg}
-                onChange={this.updateBG}
-              />
-              <div className='palette'>
-                <Swatch color={this.state.bg} active={true} />
+          <div>
+            <section>
+              <h3>Background</h3>
+              <div className='picker'>
+                <ChromePicker
+                  color={this.state.bg}
+                  onChange={this.updateBG}
+                />
               </div>
-            </div>
-          </section>
-          <section>
-            <h3>Foreground</h3>
-            <div className='picker'>
-              <ChromePicker
-                color={this.state.fg}
-                onChange={this.updateFG}
-              />
-              <div className='palette'>
-                <Swatch color={this.state.fg} active={true} />
+            </section>
+            <section>
+              <h3>Foreground</h3>
+              <div className='picker'>
+                <ChromePicker
+                  color={this.state.fg}
+                  onChange={this.updateFG}
+                />
+                <div className='palette fg'>
+                  <Swatch onClick={() => {}} color={this.state.fg} active={true} />
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
+          <div>
+            <section>
+              <h3>Positive color (ex: green)</h3>
+              <div className='picker'>
+                <ChromePicker
+                  color={this.state.pos}
+                  onChange={this.updatePos}
+                />
+                <div className='palette fg'>
+                  <Swatch onClick={() => {}} color={this.state.pos} active={true} />
+                </div>
+              </div>
+            </section>
+            <section>
+              <h3>Negative color (ex: red)</h3>
+              <div className='picker'>
+                <ChromePicker
+                  color={this.state.neg}
+                  onChange={this.updateNeg}
+                />
+                <div className='palette fg'>
+                  <Swatch onClick={() => {}} color={this.state.neg} active={true} />
+                </div>
+              </div>
+            </section>
+          </div>
           <section>
             <h3>Syntax colors</h3>
             <Palette colors={this.state.syntax} update={this.updateSyntax} />

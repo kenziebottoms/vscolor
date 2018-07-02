@@ -24,6 +24,10 @@ header {
 main {
   overflow: scroll;
 }
+main > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 textarea {
   width: 100%;

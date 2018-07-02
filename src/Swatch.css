@@ -23,3 +23,6 @@
 .active.swatch:hover .hover {
   display: block;
 }
+.fg .swatch:hover .hover {
+  display: none;
+}
