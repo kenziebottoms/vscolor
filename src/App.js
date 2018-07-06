@@ -15,14 +15,15 @@ class App extends Component {
     if (!stored) {
       return null;
     } else {
-      let { bg, fg, syntax, pos, neg } = JSON.parse(stored);
+      let { bg, fg, syntax, pos, neg, ui } = JSON.parse(stored);
       return {
-        bg: bg || '#ffffff',
-        fg: fg || '#000000',
-        pos: pos || '#00FF00',
-        neg: neg || '#FF0000',
-        syntax: syntax || ['#fff']
-      }
+        bg,
+        fg,
+        pos,
+        neg,
+        syntax,
+        ui
+      };
     }
   };
 
@@ -46,6 +47,11 @@ class App extends Component {
     this.setState({ neg });
   };
 
+  updateUI = (c, e) => {
+    let ui = c.hex;
+    this.setState({ ui });
+  };
+
   updateSyntax = (syntax) => {
     this.setState({ syntax });
   };
@@ -64,7 +70,7 @@ class App extends Component {
               <h3>Background</h3>
               <div className='picker'>
                 <ChromePicker
-                  color={this.state.bg}
+                  color={this.state.bg || '#000000'}
                   onChange={this.updateBG}
                 />
               </div>
@@ -73,11 +79,11 @@ class App extends Component {
               <h3>Foreground</h3>
               <div className='picker'>
                 <ChromePicker
-                  color={this.state.fg}
+                  color={this.state.fg || '#ffffff'}
                   onChange={this.updateFG}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => { }} color={this.state.fg} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.fg || '#ffffff'} active={true} />
                 </div>
               </div>
             </section>
@@ -87,11 +93,11 @@ class App extends Component {
               <h3>Positive color (ex: green)</h3>
               <div className='picker'>
                 <ChromePicker
-                  color={this.state.pos}
+                  color={this.state.pos || '#00ff00'}
                   onChange={this.updatePos}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => { }} color={this.state.pos} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.pos || '#00ff00'} active={true} />
                 </div>
               </div>
             </section>
@@ -99,23 +105,41 @@ class App extends Component {
               <h3>Negative color (ex: red)</h3>
               <div className='picker'>
                 <ChromePicker
-                  color={this.state.neg}
+                  color={this.state.neg || '#ff0000'}
                   onChange={this.updateNeg}
                 />
                 <div className='palette fg'>
-                  <Swatch onClick={() => { }} color={this.state.neg} active={true} />
+                  <Swatch onClick={() => { }} color={this.state.neg || '#ff0000'} active={true} />
                 </div>
               </div>
             </section>
           </div>
-          <section>
-            <h3>Syntax colors</h3>
-            <Palette colors={this.state.syntax} update={this.updateSyntax} />
-          </section>
+          <div>
+            <section>
+              <h3>Syntax colors</h3>
+              <Palette colors={this.state.syntax || ['#ffffff']} update={this.updateSyntax} />
+            </section>
+            <section>
+              <h3>UI accent</h3>
+              <div className='picker'>
+                <ChromePicker
+                  color={this.state.ui || '#ffffff'}
+                  onChange={this.updateUI}
+                />
+                <div className='palette fg'>
+                  <Swatch onClick={() => { }} color={this.state.ui || '#ffffff'} active={true} />
+                </div>
+              </div>
+            </section>
+          </div>
         </main>
         <header style={{ background: this.state.fg, color: this.state.bg }}>
           <h1 className="title">Color Picker</h1>
-          <textarea value={JSON.stringify(this.state)} rows='5'></textarea>
+          <textarea
+            value={JSON.stringify(this.state)}
+            rows='5'
+            onChange={() => {this.value = JSON.stringify(this.state)}}>
+          </textarea>
           <button onClick={this.save} type='Submit'>
             Save
           </button>
