@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ChromePicker } from 'react-color';
+import './Palette.css';
 import Swatch from './Swatch.js';
 
 class Palette extends Component {
@@ -7,8 +7,8 @@ class Palette extends Component {
     super(props);
     let storedColors = props.colors.slice();
     this.state = {
-      colors: storedColors || ['#fff'],
-      active: storedColors.length - 1 || 0
+      colors: storedColors,
+      active: props.active
     };
   };
 
@@ -59,15 +59,9 @@ class Palette extends Component {
 
   render() {
     return (
-      <div className='picker'>
-        <ChromePicker
-          color={this.state.colors[this.state.active]}
-          onChangeComplete={this.change}
-        />
-        <div className='palette'>
-          {this.renderSwatches()}
-          <Swatch key={'new'} active={false} new={true} onClick={() => this.add()} />
-        </div>
+      <div className='palette'>
+        {this.renderSwatches()}
+        <Swatch key={'new'} active={false} new={true} onClick={() => this.add()} />
       </div>
     );
   }

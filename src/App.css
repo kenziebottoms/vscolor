@@ -1,8 +1,3 @@
-body {
-  background: #000;
-  color: #fff;
-}
-
 .logo {
   animation: logo-spin infinite 20s linear;
   height: 80px;
@@ -23,19 +18,26 @@ header {
 
 main {
   overflow: scroll;
+  max-width: 75rem;
+  margin: auto;
 }
 main > div {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
-
+h3 {
+  font-weight: normal;
+  font-family: monospace;
+}
+.swatch {
+  text-align: right;
+  float: none;
+}
 textarea {
   width: 100%;
   overflow: scroll;
   word-wrap: break-word;
-}
-section {
-  padding: 0 1rem 1rem 1rem;
 }
 
 .title {
@@ -44,17 +46,4 @@ section {
 
 .intro {
   font-size: large;
-}
-
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.picker {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-.palette {
-  padding: 1rem .75rem;
 }

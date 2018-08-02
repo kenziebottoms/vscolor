@@ -1,16 +1,17 @@
 .swatch {
   width: 2rem;
+  display: inline-block;
   height: 2rem;
   border-radius: 50%;
-  border: 1px solid #0003;
+  border: 1px solid #333;
   transition: .15s;
-  margin: .25rem;
-  float: left;
+  margin-right: 1rem;
   box-sizing: border-box;
   color: #000;
   padding: .25rem;
   cursor: pointer;
   text-align: center;
+  justify-self: end;
 }
 .active.swatch {
   width: 3rem;
@@ -20,7 +21,7 @@
 .swatch .hover {
   display: none;
 }
-.active.swatch:hover .hover {
+.palette .active.swatch:hover .hover {
   display: block;
 }
 .fg .swatch:hover .hover {
