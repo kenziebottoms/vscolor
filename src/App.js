@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import './App.css';
-import Palette from './Palette.js';
 import Swatch from './Swatch';
 
 class App extends Component {
@@ -12,7 +11,7 @@ class App extends Component {
   };
 
   getSaved = () => {
-    let stored = window.localStorage.getItem("theme");
+    let stored = window.localStorage.getItem('theme');
     if (!stored) {
       return {
         bg: '#000000',
@@ -38,10 +37,22 @@ class App extends Component {
   setActive = (prop) => {
     this.setState({ active: prop});
   };
+  
+  getActiveColor = () => {
+    if (this.state.active && this.state.active.indexOf('syntax') !== -1) {
+      return this.state.theme.syntax[this.state.active.split(':')[1]];
+    } else {
+      return this.state.theme[this.state.active];
+    }
+  };
 
   updateActiveColor = (c, e) => {
     let stateUpdate = { theme: this.state.theme };
-    stateUpdate.theme[this.state.active] = c.hex;
+    if (this.state.active.indexOf('syntax') !== -1) {
+      stateUpdate.theme.syntax[this.state.active.split(':')[1]] = c.hex;
+    } else {
+      stateUpdate.theme[this.state.active] = c.hex;
+    }
     this.setState(stateUpdate);
   };
 
@@ -56,9 +67,48 @@ class App extends Component {
     )
   };
 
+  displaySyntax = () => {
+    return this.state.theme.syntax.map((c, i) => {
+      return (
+        <Swatch
+          key={i}
+          color={this.state.theme.syntax[i]}
+          onClick={() => {this.setActive('syntax:'+i)}}
+          active={this.state.active === 'syntax:'+i}
+          new={false}
+        />
+      )
+    });
+  };
+  
+  displayAddSwatch = () => {
+    return (
+      <Swatch
+        key={'new'}
+        active={false}
+        new={true}
+        onClick={() => this.add()}
+      />
+    );
+  };
+
+  // add new blank swatch
+  add = e => {
+    let colors = this.state.theme.syntax.slice();
+    let active = colors.push('#fff') - 1;   // push returns the new length of the array
+    this.updateSyntax(colors);
+    this.setActive('syntax:'+active);
+  };
+
+  updateSyntax = syntax => {
+    let stateUpdate = {theme: this.state.theme};
+    stateUpdate.theme.syntax = syntax;
+    this.setState({stateUpdate});
+  };
+
   render() {
     return (
-      <div className="wrapper" style={{ background: this.state.theme.bg, color: this.state.theme.fg }}>
+      <div className='wrapper' style={{ background: this.state.theme.bg, color: this.state.theme.fg }}>
         <main>
           <div>
             {this.displaySwatch('bg')}
@@ -69,15 +119,19 @@ class App extends Component {
             <h3>Positive color (ex: green)</h3>
             {this.displaySwatch('neg')}
             <h3>Negative color (ex: red)</h3>
-            <Palette colors={this.state.theme.syntax} update={this.updateSyntax} active={this.active==='syntax'} onClick={() => {this.setActive('syntax')}}/>
+            <div className='syntax'>
+              {this.displaySyntax()}
+              {this.displayAddSwatch()}
+            </div>
             <h3>Syntax colors</h3>
             {this.displaySwatch('ui')}
             <h3>UI accent</h3>
           </div>
         </main>
         <header style={{ background: this.state.theme.fg, color: this.state.theme.bg }}>
-          <h1 className="title">Color Picker</h1>
-          <ChromePicker color={this.state.theme[this.state.active]} onChange={this.updateActiveColor}/>
+          <h1 className='title'>Color Picker</h1>
+          {this.state.active}
+          <ChromePicker color={this.getActiveColor()} onChange={this.updateActiveColor}/>
           <textarea
             value={JSON.stringify(this.state.theme)}
             rows='5'

@@ -8,7 +8,7 @@ class Palette extends Component {
     let storedColors = props.colors.slice();
     this.state = {
       colors: storedColors,
-      active: props.active
+      active: props.active,
     };
   };
 
@@ -52,7 +52,8 @@ class Palette extends Component {
         key={i}
         color={c}
         active={i === this.state.active}
-        onClick={() => this.click(i)}
+        onClick={() => {this.click(i); this.props.onClick(i)}}
+        onChange={this.handleChange}
       />;
     });
   };
