@@ -133,9 +133,9 @@ class App extends Component {
             {this.displaySwatch('fg')}
             <h3>Foreground</h3>
             {this.displaySwatch('pos')}
-            <h3>Positive color (ex: green)</h3>
+            <h3>Positive color</h3>
             {this.displaySwatch('neg')}
-            <h3>Negative color (ex: red)</h3>
+            <h3>Negative color</h3>
             <div className='syntax'>
               {this.displaySyntax()}
               {this.displayAddSwatch()}
@@ -146,17 +146,30 @@ class App extends Component {
           </div>
         </main>
         <header style={{ background: this.state.theme.fg, color: this.state.theme.bg }}>
-          {this.state.active}
           <ChromePicker color={this.getActiveColor()} onChange={this.updateActiveColor}/>
-          <h3>Spine</h3>
-          <textarea
-            value={JSON.stringify(this.state.theme)}
-            rows='5'
-            onChange={() => {this.value = JSON.stringify(this.state.theme)}}>
-          </textarea>
           <button onClick={this.save} type='Submit'>
             Save
           </button>
+          <div class='code'>
+            <h3>Spine</h3>
+            <textarea
+              value={JSON.stringify(this.state.theme)}
+              rows='5'
+              onChange={() => {this.value = JSON.stringify(this.state.theme)}}>
+            </textarea>
+            <h3>Theme Code</h3>
+            <textarea
+              value={JSON.stringify(genTheme(this.state.theme))}
+              rows='5'
+              onChange={() => {this.value = JSON.stringify(genTheme(this.state.theme))}}>
+            </textarea>
+            <h3>Workspace Settings</h3>
+            <textarea
+              value={JSON.stringify(genSettings(this.state.theme))}
+              rows='5'
+              onChange={() => {JSON.stringify(genSettings(this.state.theme))}}>
+            </textarea>
+          </div>
         </header>
       </div >
     );
