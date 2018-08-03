@@ -24,8 +24,8 @@ module.exports.genTheme = colors => {
   if (!neg) neg = t1;
   if (!pos) pos = t2;
 
-  let gitadd = `${pos}44`;
-  let gitremove = `${neg}44`;
+  let pos_faint = `${pos}44`;
+  let neg_faint = `${neg}44`;
   let theme = {
     "colors": {
       "foreground": m8,
@@ -73,13 +73,13 @@ module.exports.genTheme = colors => {
       "editor.selectionBackground": m3,
       "editor.inactiveSelectionBackground": m3,
       "editor.selectionHighlightBackground": m2,
-      "editor.findMatchHighlightBackground": gitadd,
+      "editor.findMatchHighlightBackground": pos_faint,
       "editor.findRangeHighlightBackground": m2,
       "editor.hoverHighlightBackground": m1,
       "editorHoverWidget.background": m2,
       "editorHoverWidget.border": ui,
-      "diffEditor.insertedTextBackground": gitadd,
-      "diffEditor.removedTextBackground": gitremove,
+      "diffEditor.insertedTextBackground": pos_faint,
+      "diffEditor.removedTextBackground": neg_faint,
       "diffEditor.insertedTextBorder": "#00000000",
       "diffEditor.removedTextBorder": "#00000000",
       "merge.currentHeaderBackground": t3,
@@ -108,8 +108,8 @@ module.exports.genTheme = colors => {
       "peekViewResult.lineForeground": m8,
       "peekViewResult.fileForeground": m8,
       "peekViewResult.selectionForeground": m8,
-      "peekViewResult.matchHighlightBackground": gitadd,
-      "peekViewEditor.matchHighlightBackground": gitadd,
+      "peekViewResult.matchHighlightBackground": pos_faint,
+      "peekViewEditor.matchHighlightBackground": pos_faint,
       "tab.activeBackground": m3,
       "tab.inactiveBackground": m2,
       "tab.border": m1,
@@ -143,8 +143,8 @@ module.exports.genTheme = colors => {
       "debugExceptionWidget.border": t3,
       "debugExceptionWidget.background": m1,
       "editorGutter.modifiedBackground": `${t3}44`,
-      "editorGutter.addedBackground": gitadd,
-      "editorGutter.deletedBackground": t1,
+      "editorGutter.addedBackground": pos_faint,
+      "editorGutter.deletedBackground": neg,
       "debugToolBar.background": m1,
       "extensionButton.prominentBackground": t3,
       "extensionButton.prominentForeground": m1,
@@ -414,7 +414,7 @@ module.exports.genTheme = colors => {
         "name": "Invalid",
         "scope": "invalid",
         "settings": {
-          "background": t1,
+          "background": neg,
           "foreground": m8
         }
       },
@@ -423,7 +423,7 @@ module.exports.genTheme = colors => {
         "scope": "invalid.deprecated",
         "settings": {
           "foreground": m8,
-          "background": t1
+          "background": neg
         }
       },
       {
@@ -646,7 +646,7 @@ module.exports.genTheme = colors => {
         "name": "Invalid Broken",
         "scope": "invalid.broken",
         "settings": {
-          "background": gitremove,
+          "background": neg_faint,
           "foreground": m8
         }
       },
@@ -654,7 +654,7 @@ module.exports.genTheme = colors => {
         "name": "Invalid Unimplemented",
         "scope": "invalid.unimplemented",
         "settings": {
-          "background": gitremove,
+          "background": neg_faint,
           "foreground": m8
         }
       },
@@ -663,7 +663,7 @@ module.exports.genTheme = colors => {
         "scope": "invalid.illegal",
         "settings": {
           "foreground": m8,
-          "background": gitremove
+          "background": neg_faint
         }
       },
       {
@@ -1100,7 +1100,7 @@ module.exports.genTheme = colors => {
         "name": "Markdown Italics",
         "scope": "markup.italic.markdown",
         "settings": {
-          "foreground": t2,
+          "foreground": t1,
           "fontStyle": "italic"
         }
       },
@@ -1108,7 +1108,7 @@ module.exports.genTheme = colors => {
         "name": "Markdown Bold",
         "scope": "markup.bold.markdown",
         "settings": {
-          "foreground": t4,
+          "foreground": m8,
           "fontStyle": "bold"
         }
       },
@@ -1174,7 +1174,7 @@ module.exports.genTheme = colors => {
           "beginning.punctuation.definition.list.markdown"
         ],
         "settings": {
-          "foreground": t4
+          "foreground": t2
         }
       },
       {

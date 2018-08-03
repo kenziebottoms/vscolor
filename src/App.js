@@ -150,7 +150,7 @@ class App extends Component {
           <button onClick={this.save} type='Submit'>
             Save
           </button>
-          <div class='code'>
+          <div className='code'>
             <h3>Spine</h3>
             <textarea
               value={JSON.stringify(this.state.theme)}
