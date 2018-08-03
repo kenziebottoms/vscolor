@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Swatch.css';
 import classnames from 'classnames';
 
 class Swatch extends Component {
@@ -14,8 +13,8 @@ class Swatch extends Component {
         style={{background: this.props.color}}
         onClick={() => this.props.onClick()}
       >
-        <span className='hover'>x</span>
-        {this.props.new ? '+' : ''}
+        <span className='hover'>{'\u00D7'}</span>
+        <span className='add'>{this.props.new ? '+' : '\u00A0'}</span>
       </div>
     )
   }

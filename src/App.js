@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import
+  React,
+  { Component }
+from 'react';
 import { ChromePicker } from 'react-color';
-import './App.css';
 import Swatch from './Swatch';
+import {
+  genTheme,
+  genSettings
+} from './Theme';
 
 class App extends Component {
   constructor(props) {
@@ -73,12 +79,23 @@ class App extends Component {
         <Swatch
           key={i}
           color={this.state.theme.syntax[i]}
-          onClick={() => {this.setActive('syntax:'+i)}}
+          onClick={() => {this.clickSwatch(i)}}
           active={this.state.active === 'syntax:'+i}
           new={false}
         />
       )
     });
+  };
+  
+  clickSwatch = i => {
+    if (this.state.active === 'syntax:'+i) {
+      let syntaxUpdate = this.state.theme.syntax.slice();
+      syntaxUpdate.splice(i, 1);
+      console.log(syntaxUpdate);
+      this.updateSyntax(syntaxUpdate);
+    } else {
+      this.setActive('syntax:'+i);
+    }
   };
   
   displayAddSwatch = () => {
@@ -87,7 +104,7 @@ class App extends Component {
         key={'new'}
         active={false}
         new={true}
-        onClick={() => this.add()}
+        onClick={this.add}
       />
     );
   };
@@ -129,9 +146,9 @@ class App extends Component {
           </div>
         </main>
         <header style={{ background: this.state.theme.fg, color: this.state.theme.bg }}>
-          <h1 className='title'>Color Picker</h1>
           {this.state.active}
           <ChromePicker color={this.getActiveColor()} onChange={this.updateActiveColor}/>
+          <h3>Spine</h3>
           <textarea
             value={JSON.stringify(this.state.theme)}
             rows='5'
