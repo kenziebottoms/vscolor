@@ -91,7 +91,6 @@ class App extends Component {
     if (this.state.active === 'syntax:'+i) {
       let syntaxUpdate = this.state.theme.syntax.slice();
       syntaxUpdate.splice(i, 1);
-      console.log(syntaxUpdate);
       this.updateSyntax(syntaxUpdate);
     } else {
       this.setActive('syntax:'+i);
@@ -128,7 +127,6 @@ class App extends Component {
     if (this.validateSpine(spine)) {
       this.setState({ theme: JSON.parse(spine) });
     } else {
-      console.log(this.validateSpine(spine));
       e.target.value = JSON.stringify(this.state.theme);
     }
   };
@@ -150,7 +148,6 @@ class App extends Component {
         }
       }
       let syntaxes = spine.syntax;
-      console.log(syntaxes);
       for (let j=0; j<syntaxes.length; j++) {
         if (!colorTest.test(syntaxes[j])) {
           return false;
