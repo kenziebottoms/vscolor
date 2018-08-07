@@ -123,6 +123,45 @@ class App extends Component {
     this.setState({stateUpdate});
   };
 
+  updateSpine = (e) => {
+    let spine = e.target.value;
+    if (this.validateSpine(spine)) {
+      this.setState({ theme: JSON.parse(spine) });
+    } else {
+      console.log(this.validateSpine(spine));
+      e.target.value = JSON.stringify(this.state.theme);
+    }
+  };
+
+  validateSpine = (spineJSON) => {
+    try {
+      let spine = JSON.parse(spineJSON);
+      let props = ['bg', 'fg', 'pos', 'neg', 'ui'];
+      let colorTest = /^#([0-9a-f]{3}){1,2}$/i;
+      for (let i=0; i<props.length; i++) {
+        let prop = props[i];
+        let color = spine[prop];
+        if (!!color) {
+          if (!colorTest.test(color)) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+      let syntaxes = spine.syntax;
+      console.log(syntaxes);
+      for (let j=0; j<syntaxes.length; j++) {
+        if (!colorTest.test(syntaxes[j])) {
+          return false;
+        }
+      }
+      return true;
+    } catch(err) {
+      return false;
+    }
+  };
+
   render() {
     return (
       <div className='wrapper' style={{ background: this.state.theme.bg, color: this.state.theme.fg }}>
@@ -153,9 +192,9 @@ class App extends Component {
           <div className='code'>
             <h3>Spine</h3>
             <textarea
-              value={JSON.stringify(this.state.theme)}
+              defaultValue={JSON.stringify(this.state.theme)}
               rows='5'
-              onChange={() => {this.value = JSON.stringify(this.state.theme)}}>
+              onBlur={this.updateSpine}>
             </textarea>
             <h3>Theme Code</h3>
             <textarea
