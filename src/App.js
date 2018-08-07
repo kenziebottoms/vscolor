@@ -16,6 +16,12 @@ class App extends Component {
     this.state.theme = this.getSaved();
   };
 
+  // save current palette to localStorage
+  save = () => {
+    let { localStorage } = window;
+    localStorage.setItem('theme', JSON.stringify(this.state.theme));
+  };
+  // extract any saved palette from localStorage
   getSaved = () => {
     let stored = window.localStorage.getItem('theme');
     if (!stored) {
@@ -40,39 +46,48 @@ class App extends Component {
     }
   };
 
+  // set this.state.active
   setActive = (prop) => {
     this.setState({ active: prop});
   };
-  
+  // get color value of active swatch
   getActiveColor = () => {
+    // syntax colors
     if (this.state.active && this.state.active.indexOf('syntax') !== -1) {
       return this.state.theme.syntax[this.state.active.split(':')[1]];
-    } else {
+    }
+    // non-syntax
+    else {
       return this.state.theme[this.state.active];
     }
   };
-
+  // update color value of active swatch
   updateActiveColor = (c, e) => {
+    // copy theme to update
+    //   like a POST intead of a PUT
     let stateUpdate = { theme: this.state.theme };
+    // syntax colors
     if (this.state.active.indexOf('syntax') !== -1) {
       stateUpdate.theme.syntax[this.state.active.split(':')[1]] = c.hex;
-    } else {
+    }
+    // non-syntax
+    else {
       stateUpdate.theme[this.state.active] = c.hex;
     }
     this.setState(stateUpdate);
   };
 
-  save = () => {
-    let { localStorage } = window;
-    localStorage.setItem('theme', JSON.stringify(this.state.theme));
-  };
-
+  // render normal swatch with normal ops
   displaySwatch = (slug) => {
     return (
-      <Swatch onClick={() => {this.setActive(slug)}} color={this.state.theme[slug]} active={this.state.active === slug} />
+      <Swatch
+        onClick={() => {this.setActive(slug)}}
+        color={this.state.theme[slug]}
+        active={this.state.active === slug}
+      />
     )
   };
-
+  // render the swatches for the syntax colors
   displaySyntax = () => {
     return this.state.theme.syntax.map((c, i) => {
       return (
@@ -86,7 +101,19 @@ class App extends Component {
       )
     });
   };
+  // render add swatch
+  displayAddSwatch = () => {
+    return (
+      <Swatch
+        key={'new'}
+        active={false}
+        new={true}
+        onClick={this.addSwatch}
+      />
+    );
+  };
   
+  // handle a click on swatch `i`
   clickSwatch = i => {
     if (this.state.active === 'syntax:'+i) {
       let syntaxUpdate = this.state.theme.syntax.slice();
@@ -96,41 +123,34 @@ class App extends Component {
       this.setActive('syntax:'+i);
     }
   };
-  
-  displayAddSwatch = () => {
-    return (
-      <Swatch
-        key={'new'}
-        active={false}
-        new={true}
-        onClick={this.add}
-      />
-    );
-  };
 
   // add new blank swatch
-  add = e => {
+  addSwatch = e => {
     let colors = this.state.theme.syntax.slice();
     let active = colors.push('#fff') - 1;   // push returns the new length of the array
     this.updateSyntax(colors);
     this.setActive('syntax:'+active);
   };
 
+  // update this.state.theme.syntax without overwriting anything else
   updateSyntax = syntax => {
     let stateUpdate = {theme: this.state.theme};
     stateUpdate.theme.syntax = syntax;
     this.setState({stateUpdate});
   };
 
-  updateSpine = (e) => {
-    let spine = e.target.value;
-    if (this.validateSpine(spine)) {
-      this.setState({ theme: JSON.parse(spine) });
+  // validate pasted spine and use it if valid
+  importSpine = () => {
+    let spine = document.getElementById("import");
+    let validation = this.validateSpine(spine.value);
+    if (validation instanceof Error) {
+      spine.value = 'ERROR: '+validation.message;
     } else {
-      e.target.value = JSON.stringify(this.state.theme);
+      this.setState({ theme: JSON.parse(spine.value) });
+      spine.value = '';
     }
   };
-
+  // make sure the pasted spine has the right property names and valid colors
   validateSpine = (spineJSON) => {
     try {
       let spine = JSON.parse(spineJSON);
@@ -141,72 +161,125 @@ class App extends Component {
         let color = spine[prop];
         if (!!color) {
           if (!colorTest.test(color)) {
-            return false;
+            return new Error({
+              status: 400,
+              message: color+' is not a valid hex code'
+            });
           }
         } else {
-          return false;
+          return new Error({
+            status: 400,
+            message: color+' is not a valid hex code'
+          });
         }
       }
       let syntaxes = spine.syntax;
       for (let j=0; j<syntaxes.length; j++) {
         if (!colorTest.test(syntaxes[j])) {
-          return false;
+          return new Error({
+            status: 400,
+            message: syntaxes[j]+' is not a valid hex code'
+          });
         }
       }
       return true;
     } catch(err) {
-      return false;
+      return err;
     }
   };
 
   render() {
     return (
       <div className='wrapper' style={{ background: this.state.theme.bg, color: this.state.theme.fg }}>
+      
         <main>
+
           <div>
+
             {this.displaySwatch('bg')}
             <h3>Background</h3>
+
             {this.displaySwatch('fg')}
             <h3>Foreground</h3>
+            
             {this.displaySwatch('pos')}
             <h3>Positive color</h3>
+            
             {this.displaySwatch('neg')}
             <h3>Negative color</h3>
+            
             <div className='syntax'>
               {this.displaySyntax()}
               {this.displayAddSwatch()}
             </div>
             <h3>Syntax colors</h3>
+            
             {this.displaySwatch('ui')}
             <h3>UI accent</h3>
+
           </div>
+          
         </main>
+
         <header style={{ background: this.state.theme.fg, color: this.state.theme.bg }}>
+
           <ChromePicker color={this.getActiveColor()} onChange={this.updateActiveColor}/>
+
           <button onClick={this.save} type='Submit'>
             Save
           </button>
+
           <div className='code'>
-            <h3>Spine</h3>
-            <textarea
-              defaultValue={JSON.stringify(this.state.theme)}
-              rows='5'
-              onBlur={this.updateSpine}>
-            </textarea>
-            <h3>Theme Code</h3>
-            <textarea
-              value={JSON.stringify(genTheme(this.state.theme))}
-              rows='5'
-              onChange={() => {this.value = JSON.stringify(genTheme(this.state.theme))}}>
-            </textarea>
-            <h3>Workspace Settings</h3>
-            <textarea
-              value={JSON.stringify(genSettings(this.state.theme))}
-              rows='5'
-              onChange={() => {JSON.stringify(genSettings(this.state.theme))}}>
-            </textarea>
+
+            <div>
+              <h3>Import Spine</h3>
+              <textarea
+                id="import"
+                rows='5'
+                onChange={this.updateSpine}>
+              </textarea>
+              <button onClick={this.importSpine}>Import</button>
+            </div>
+
+            <div>
+              <h3>Spine</h3>
+              <textarea
+                id='spine'
+                hidden={true}
+                value={JSON.stringify(this.state.theme)}
+                rows='5'
+                onChange={() => {this.value = JSON.stringify(this.state.theme)}}>
+              </textarea>
+              <button onClick={this.copySpine}>Copy</button>
+            </div>
+
+            <div>
+              <h3>Theme Code</h3>
+              <textarea
+                id='theme'
+                hidden={true}
+                value={JSON.stringify(genTheme(this.state.theme))}
+                rows='5'
+                onChange={() => {this.value = JSON.stringify(genTheme(this.state.theme))}}>
+              </textarea>
+              <button onClick={this.copyTheme}>Copy</button>
+            </div>
+
+            <div>
+              <h3>Workspace Settings</h3>
+              <textarea
+                id='settings'
+                hidden={true}
+                value={JSON.stringify(genSettings(this.state.theme))}
+                rows='5'
+                onChange={() => {JSON.stringify(genSettings(this.state.theme))}}>
+              </textarea>
+              <button onClick={this.copySettings}>Copy</button>
+            </div>
           </div>
+
         </header>
+
       </div >
     );
   }

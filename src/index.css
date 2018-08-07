@@ -26,21 +26,20 @@ main {
 }
 main > div {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 50% 50%;
   grid-gap: 0 1rem;
   align-items: center;
-}
-main > div > div {
-  height: 60px;
 }
 .code {
   height: 50vh;
   overflow: scroll;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 h3 {
   font-weight: normal;
   font-family: monospace;
-  margin: 1.25rem 0;
+  margin: .75rem 0;
 }
 .swatch {
   text-align: right;
@@ -51,6 +50,7 @@ h3 {
 }
 .syntax {
   align-items: center;
+  flex-wrap: wrap;
 }
 textarea {
   width: auto;
@@ -73,7 +73,7 @@ textarea {
   border-radius: 50%;
   border: 1px solid #333;
   transition: .15s;
-  margin: 10px 5px;
+  margin: 5px 5px;
   box-sizing: border-box;
   color: #000;
   padding: 5px;
@@ -107,6 +107,7 @@ textarea {
 }
 .syntax {
   text-align: right;
+  padding: 5px 0;
 }
 .syntax .active.swatch:hover .hover {
   opacity: 1;
