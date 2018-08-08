@@ -8,6 +8,7 @@ import {
   genTheme,
   genSettings
 } from './Theme';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class App extends Component {
   constructor(props) {
@@ -122,6 +123,12 @@ class App extends Component {
     } else {
       this.setActive('syntax:'+i);
     }
+  };
+
+  copy = slug => {
+    let text = document.getElementById(slug);
+    text.select();
+    document.execCommand('copy');
   };
 
   // add new blank swatch
@@ -243,38 +250,23 @@ class App extends Component {
 
             <div>
               <h3>Spine</h3>
-              <textarea
-                id='spine'
-                hidden={true}
-                value={JSON.stringify(this.state.theme)}
-                rows='5'
-                onChange={() => {this.value = JSON.stringify(this.state.theme)}}>
-              </textarea>
-              <button onClick={this.copySpine}>Copy</button>
+              <CopyToClipboard text={JSON.stringify(this.state.theme)} >
+                <button>Copy</button>
+              </CopyToClipboard>
             </div>
 
             <div>
               <h3>Theme Code</h3>
-              <textarea
-                id='theme'
-                hidden={true}
-                value={JSON.stringify(genTheme(this.state.theme))}
-                rows='5'
-                onChange={() => {this.value = JSON.stringify(genTheme(this.state.theme))}}>
-              </textarea>
-              <button onClick={this.copyTheme}>Copy</button>
+              <CopyToClipboard text={JSON.stringify(genTheme(this.state.theme))} >
+                <button>Copy</button>
+              </CopyToClipboard>
             </div>
 
             <div>
               <h3>Workspace Settings</h3>
-              <textarea
-                id='settings'
-                hidden={true}
-                value={JSON.stringify(genSettings(this.state.theme))}
-                rows='5'
-                onChange={() => {JSON.stringify(genSettings(this.state.theme))}}>
-              </textarea>
-              <button onClick={this.copySettings}>Copy</button>
+              <CopyToClipboard text={JSON.stringify(genSettings(this.state.theme))} >
+                <button>Copy</button>
+              </CopyToClipboard>
             </div>
           </div>
 
