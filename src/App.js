@@ -9,6 +9,7 @@ import {
   genSettings
 } from './Theme';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+const _ = require('lodash');
 
 class App extends Component {
   constructor(props) {
@@ -145,6 +146,10 @@ class App extends Component {
     stateUpdate.theme.syntax = syntax;
     this.setState({stateUpdate});
   };
+  shuffleSyntax = () => {
+    let syntax = this.state.theme.syntax;
+    this.updateSyntax(_.shuffle(syntax));
+  };
 
   // validate pasted spine and use it if valid
   importSpine = () => {
@@ -219,7 +224,12 @@ class App extends Component {
               {this.displaySyntax()}
               {this.displayAddSwatch()}
             </div>
-            <h3>Syntax colors</h3>
+            <h3>
+              Syntax colors&nbsp;
+              <button onClick={this.shuffleSyntax}>
+                Shuffle
+              </button>
+            </h3>
             
             {this.displaySwatch('ui')}
             <h3>UI accent</h3>
