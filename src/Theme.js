@@ -30,12 +30,13 @@ module.exports.genTheme = colors => {
     "colors": {
       "foreground": m8,
       "errorForeground": neg,
-      "focusBorder": m1,
+      "focusBorder": ui,
       "contrastBorder": m1,
       "input.foreground": m8,
-      "input.border": ui,
+      "input.background": m2,
+      "input.placeholderForeground": m6,
+      "input.border": `${ui}44`,
       "inputOption.activeBorder": m8,
-      "input.placeholderForeground": m8,
       "inputValidation.infoBackground": t3,
       "inputValidation.infoBorder": t3,
       "inputValidation.warningBackground": neg,
@@ -59,8 +60,8 @@ module.exports.genTheme = colors => {
       "list.highlightForeground": m8,
       "pickerGroup.foreground": t3,
       "button.foreground": m1,
-      "button.background": t2,
-      "button.hoverBackground": ui,
+      "button.background": ui,
+      "button.hoverBackground": t3,
       "badge.background": ui,
       "badge.foreground": m1,
       "scrollbarSlider.background": m4,
@@ -76,6 +77,9 @@ module.exports.genTheme = colors => {
       "editor.findMatchHighlightBackground": pos_faint,
       "editor.findRangeHighlightBackground": m2,
       "editor.hoverHighlightBackground": m1,
+      "editorSuggestWidget.background": m2,
+      "editorSuggestWidget.border": m5,
+      "editorSuggestWidget.foreground": m8,
       "editorHoverWidget.background": m2,
       "editorHoverWidget.border": ui,
       "diffEditor.insertedTextBackground": pos_faint,
@@ -113,7 +117,7 @@ module.exports.genTheme = colors => {
       "tab.activeBackground": m3,
       "tab.inactiveBackground": m2,
       "tab.border": m1,
-      "tab.activeBorder": ui || "#0000000",
+      "tab.activeBorder": ui,
       "tab.unfocusedActiveBorder": m1,
       "tab.activeForeground": m8,
       "tab.inactiveForeground": m6,
@@ -122,9 +126,10 @@ module.exports.genTheme = colors => {
       "panel.background": m1,
       "panel.border": m1,
       "panelTitle.activeForeground": m8,
+      "panelTitle.inactiveForeground": m6,
       "panelTitle.activeBorder": ui,
-      "statusBar.foreground": m6,
-      "statusBar.background": m1,
+      "statusBar.foreground": m1,
+      "statusBar.background": m6,
       "statusBar.noFolderBackground": m1,
       "statusBar.border": m1,
       "activityBar.background": m1,
@@ -137,23 +142,36 @@ module.exports.genTheme = colors => {
       "sideBar.foreground": m8,
       "sideBar.border": m1,
       "sideBarTitle.foreground": m8,
-      "sideBarSectionHeader.background": m3,
-      "sideBarSectionHeader.foreground": m8,
-      "titleBar.activeForeground": m8,
+      "sideBarSectionHeader.background": `${ui}33`,
+      "sideBarSectionHeader.foreground": `${m8}aa`,
+      "titleBar.activeForeground": m1,
+      "titleBar.inactiveForeground": m1,
+      "titleBar.activeBackground": m6,
       "debugExceptionWidget.border": t3,
       "debugExceptionWidget.background": m1,
       "editorGutter.modifiedBackground": `${t3}44`,
       "editorGutter.addedBackground": pos_faint,
-      "editorGutter.deletedBackground": neg,
+      "editorGutter.deletedBackground": neg_faint,
       "debugToolBar.background": m1,
       "extensionButton.prominentBackground": t3,
       "extensionButton.prominentForeground": m1,
       "extensionButton.prominentHoverBackground": t3,
+      "settings.textInputBackground": m3,
+      "settings.checkboxBackground": m3,
+      "settings.numberInputBackground": m3,
+      "settings.dropdownBackground": m3,
+      "settings.checkboxForeground": m8,
+      "settings.inactiveSelectedItemBorder": ui,
+      "settings.modifiedItemForeground": ui,
+      "settings.textInputBorder": "#0000",
+      "settings.checkboxBorder": "#0000",
+      "settings.numberInputBorder": "#0000",
+      "settings.dropdownBorder": "#0000",
       "terminal.ansiBlack": m7,
       "terminal.ansiRed": neg,
       "terminal.ansiGreen": pos,
       "terminal.ansiYellow": t4,
-      "terminal.ansiBlue": t3,
+      "terminal.ansiBlue": t5,
       "terminal.ansiMagenta": t1,
       "terminal.ansiCyan": t3,
       "terminal.ansiWhite": m8,
@@ -165,7 +183,7 @@ module.exports.genTheme = colors => {
       "terminal.ansiBrightMagenta": t2,
       "terminal.ansiBrightCyan": t3,
       "terminal.ansiBrightWhite": m8,
-      "gitDecoration.modifiedResourceForeground": t3,
+      "gitDecoration.modifiedResourceForeground": t5,
       "gitDecoration.untrackedResourceForeground": pos,
       "gitDecoration.ignoredResourceForeground": m6,
       "gitDecoration.conflictingResourceForeground": neg
@@ -203,15 +221,19 @@ module.exports.genTheme = colors => {
         "name": "RegExp String",
         "scope": [
           "string.regexp",
-          "string.regexp keyword.other"
+          "string.regexp keyword.other",
+          "punctuation.definition.template-expression"
         ],
         "settings": {
-          "foreground": t3
+          "foreground": t4
         }
       },
       {
         "name": "Template Strings",
-        "scope": "string.template meta.template.expression",
+        "scope": [
+          "string.template meta.template.expression",
+          "string.template.js"
+        ],
         "settings": {
           "foreground": t1
         }
@@ -693,6 +715,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // errors
       {
         "name": "Invalid",
         "scope": [
