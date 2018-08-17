@@ -177,27 +177,54 @@ module.exports.genTheme = colors => {
           "background": m1
         }
       },
+      // comments
       {
         "name": "Comment",
-        "scope": "comment",
+        "scope": [
+          "comment",
+          "comment.line.double-slash"
+        ],
         "settings": {
           "foreground": m5
         }
       },
+      // strings
       {
         "name": "String",
-        "scope": "string",
+        "scope": [
+          "string",
+          "string.quoted"
+        ],
         "settings": {
           "foreground": t3
         }
       },
       {
-        "name": "String Quoted",
-        "scope": "string.quoted",
+        "name": "RegExp String",
+        "scope": [
+          "string.regexp",
+          "string.regexp keyword.other"
+        ],
         "settings": {
           "foreground": t3
         }
       },
+      {
+        "name": "Template Strings",
+        "scope": "string.template meta.template.expression",
+        "settings": {
+          "foreground": t1
+        }
+      },
+      // booleans
+      {
+        "name": "Boolean",
+        "scope": "constant.language.boolean",
+        "settings": {
+          "foreground": t5
+        }
+      },
+      // constants
       {
         "name": "Support Constant Math",
         "scope": "support.constant.math",
@@ -206,21 +233,13 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Number",
-        "scope": [
-          "constant.numeric",
-          "constant.character.numeric"
-        ],
-        "settings": {
-          "foreground": t5
-        }
-      },
-      {
         "name": "Built-in constant",
         "scope": [
           "constant.language",
           "punctuation.definition.constant",
-          "variable.other.constant"
+          "variable.other.constant",
+          "source.elixir constant.other.symbol.elixir",
+          "source.elixir constant.other.keywords.elixir"
         ],
         "settings": {
           "foreground": t4
@@ -237,6 +256,24 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "Support Constant, `new` keyword, Special Method Keyword",
+        "scope": [
+          "support.constant",
+          "keyword.other.special-method",
+          "keyword.other.new"
+        ],
+        "settings": {
+          "foreground": t5
+        }
+      },
+      {
+        "name": "JSON Support Constants",
+        "scope": "support.constant.json",
+        "settings": {
+          "foreground": t4
+        }
+      },
+      {
         "name": "Constant Character Escape",
         "scope": "constant.character.escape",
         "settings": {
@@ -244,20 +281,20 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "RegExp String",
+        "name": "Number",
         "scope": [
-          "string.regexp",
-          "string.regexp keyword.other"
+          "constant.numeric",
+          "constant.character.numeric"
         ],
         "settings": {
-          "foreground": t3
+          "foreground": t5
         }
       },
       {
         "name": "Comma in functions",
         "scope": "meta.function punctuation.separator.comma",
         "settings": {
-          "foreground": m8
+          "foreground": m7
         }
       },
       {
@@ -267,6 +304,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
+      // keywords
       {
         "name": "Keyword",
         "scope": [
@@ -278,10 +316,31 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "Keyword Other Unit",
+        "scope": "keyword.other.unit",
+        "settings": {
+          "foreground": t2
+        }
+      },
+      {
+        "name": "Keyword Operator",
+        "scope": "keyword.operator",
+        "settings": {
+          "foreground": t2
+        }
+      },
+      {
         "name": "Storage",
         "scope": "storage",
         "settings": {
           "foreground": t2
+        }
+      },
+      {
+        "name": "Null",
+        "scope": "constant.language.null",
+        "settings": {
+          "foreground": t5
         }
       },
       {
@@ -295,6 +354,7 @@ module.exports.genTheme = colors => {
           "foreground": t1
         }
       },
+      // class names
       {
         "name": "Class name",
         "scope": [
@@ -312,6 +372,7 @@ module.exports.genTheme = colors => {
           "foreground": t3
         }
       },
+      // function names
       {
         "name": "Function name",
         "scope": "entity.name.function",
@@ -326,6 +387,7 @@ module.exports.genTheme = colors => {
           "foreground": t3
         }
       },
+      // meta
       {
         "name": "Meta Tag",
         "scope": [
@@ -336,6 +398,28 @@ module.exports.genTheme = colors => {
           "foreground": m8
         }
       },
+      // documentation
+      {
+        "name": "Entity Names in Code Documentations",
+        "scope": [
+          "entity.name.type.instance.jsdoc",
+          "entity.name.type.instance.phpdoc"
+        ],
+        "settings": {
+          "foreground": m8
+        }
+      },
+      {
+        "name": "Other Variables in Code Documentations",
+        "scope": [
+          "variable.other.jsdoc",
+          "variable.other.phpdoc"
+        ],
+        "settings": {
+          "foreground": t3
+        }
+      },
+      // Language: HTML
       {
         "name": "HTML Tag names",
         "scope": [
@@ -360,6 +444,27 @@ module.exports.genTheme = colors => {
         ],
         "settings": {
           "foreground": t1
+        }
+      },
+      {
+        "name": "ID Attribute Name in HTML",
+        "scope": "entity.other.attribute-name.id.html",
+        "settings": {
+          "foreground": t4
+        }
+      },
+      {
+        "name": "HTML Punctuation Definition Tag",
+        "scope": "punctuation.definition.tag.html",
+        "settings": {
+          "foreground": t5
+        }
+      },
+      {
+        "name": "HTML Doctype",
+        "scope": "meta.tag.sgml.doctype.html",
+        "settings": {
+          "foreground": t2
         }
       },
       {
@@ -411,29 +516,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Invalid",
-        "scope": "invalid",
-        "settings": {
-          "background": neg,
-          "foreground": m8
-        }
-      },
-      {
-        "name": "Invalid deprecated",
-        "scope": "invalid.deprecated",
-        "settings": {
-          "foreground": m8,
-          "background": neg
-        }
-      },
-      {
-        "name": "Keyword Operator",
-        "scope": "keyword.operator",
-        "settings": {
-          "foreground": t2
-        }
-      },
-      {
         "name": "Keyword Operator Relational",
         "scope": "keyword.operator.relational",
         "settings": {
@@ -448,20 +530,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Double-Slashed Comment",
-        "scope": "comment.line.double-slash",
-        "settings": {
-          "foreground": m6
-        }
-      },
-      {
-        "name": "Null",
-        "scope": "constant.language.null",
-        "settings": {
-          "foreground": t5
-        }
-      },
-      {
         "name": "Meta Brace",
         "scope": "meta.brace",
         "settings": {
@@ -473,13 +541,6 @@ module.exports.genTheme = colors => {
         "scope": "meta.delimiter.period",
         "settings": {
           "foreground": t2
-        }
-      },
-      {
-        "name": "Boolean",
-        "scope": "constant.language.boolean",
-        "settings": {
-          "foreground": t5
         }
       },
       {
@@ -525,13 +586,6 @@ module.exports.genTheme = colors => {
       {
         "name": "Constant Other Color",
         "scope": "constant.other.color",
-        "settings": {
-          "foreground": t2
-        }
-      },
-      {
-        "name": "Keyword Other Unit",
-        "scope": "keyword.other.unit",
         "settings": {
           "foreground": t2
         }
@@ -588,6 +642,7 @@ module.exports.genTheme = colors => {
           "foreground": t2
         }
       },
+      // variables
       {
         "name": "Variable Instances",
         "scope": [
@@ -596,6 +651,13 @@ module.exports.genTheme = colors => {
           "variable.reaedwrite.instance",
           "variable.other.readwrite.instance"
         ],
+        "settings": {
+          "foreground": t1
+        }
+      },
+      {
+        "name": "Language Variable",
+        "scope": "variable.language",
         "settings": {
           "foreground": t1
         }
@@ -625,21 +687,21 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Support Constant, `new` keyword, Special Method Keyword",
-        "scope": [
-          "support.constant",
-          "keyword.other.special-method",
-          "keyword.other.new"
-        ],
+        "name": "Support Function",
+        "scope": "support.function",
         "settings": {
           "foreground": t5
         }
       },
       {
-        "name": "Support Function",
-        "scope": "support.function",
+        "name": "Invalid",
+        "scope": [
+          "invalid",
+          "invalid.deprecated"
+        ],
         "settings": {
-          "foreground": t5
+          "background": neg_faint,
+          "foreground": m8
         }
       },
       {
@@ -664,13 +726,6 @@ module.exports.genTheme = colors => {
         "settings": {
           "foreground": m8,
           "background": neg_faint
-        }
-      },
-      {
-        "name": "Language Variable",
-        "scope": "variable.language",
-        "settings": {
-          "foreground": t1
         }
       },
       {
@@ -709,13 +764,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Template Strings",
-        "scope": "string.template meta.template.expression",
-        "settings": {
-          "foreground": t1
-        }
-      },
-      {
         "name": "Italics",
         "scope": "italic",
         "settings": {
@@ -735,8 +783,7 @@ module.exports.genTheme = colors => {
         "name": "Quote",
         "scope": "quote",
         "settings": {
-          "foreground": t3,
-          "fontStyle": "italic"
+          "foreground": t3
         }
       },
       {
@@ -746,15 +793,16 @@ module.exports.genTheme = colors => {
           "foreground": t3
         }
       },
+      // language: CoffeeScript
       {
-        "name": "CoffeScript Variable Assignment",
+        "name": "CoffeeScript Variable Assignment",
         "scope": "variable.assignment.coffee",
         "settings": {
           "foreground": t5
         }
       },
       {
-        "name": "CoffeScript Parameter Function",
+        "name": "CoffeeScript Parameter Function",
         "scope": "variable.parameter.function.coffee",
         "settings": {
           "foreground": m8
@@ -767,6 +815,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // Language: C#
       {
         "name": "C# Readwrite Variables",
         "scope": "variable.other.readwrite.cs",
@@ -791,6 +840,7 @@ module.exports.genTheme = colors => {
           "foreground": t2
         }
       },
+      // Language: CSS
       {
         "name": "Tag names in Stylesheets",
         "scope": [
@@ -828,6 +878,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // Language: Elixir
       {
         "name": "Elixir Classes",
         "scope": [
@@ -841,16 +892,6 @@ module.exports.genTheme = colors => {
       {
         "name": "Elixir Functions",
         "scope": "source.elixir entity.name.function",
-        "settings": {
-          "foreground": t4
-        }
-      },
-      {
-        "name": "Elixir Constants",
-        "scope": [
-          "source.elixir constant.other.symbol.elixir",
-          "source.elixir constant.other.keywords.elixir"
-        ],
         "settings": {
           "foreground": t4
         }
@@ -879,6 +920,7 @@ module.exports.genTheme = colors => {
           "foreground": t2
         }
       },
+      // Language: Go 
       {
         "name": "Go Function Calls",
         "scope": "source.go meta.function-call.go",
@@ -886,27 +928,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
-      {
-        "name": "ID Attribute Name in HTML",
-        "scope": "entity.other.attribute-name.id.html",
-        "settings": {
-          "foreground": t4
-        }
-      },
-      {
-        "name": "HTML Punctuation Definition Tag",
-        "scope": "punctuation.definition.tag.html",
-        "settings": {
-          "foreground": t5
-        }
-      },
-      {
-        "name": "HTML Doctype",
-        "scope": "meta.tag.sgml.doctype.html",
-        "settings": {
-          "foreground": t2
-        }
-      },
+      // Language: Javascript
       {
         "name": "JavaScript Classes",
         "scope": "meta.class entity.name.type.class.js",
@@ -934,26 +956,6 @@ module.exports.genTheme = colors => {
         "scope": "meta.js punctuation.definition.js",
         "settings": {
           "foreground": m8
-        }
-      },
-      {
-        "name": "Entity Names in Code Documentations",
-        "scope": [
-          "entity.name.type.instance.jsdoc",
-          "entity.name.type.instance.phpdoc"
-        ],
-        "settings": {
-          "foreground": m8
-        }
-      },
-      {
-        "name": "Other Variables in Code Documentations",
-        "scope": [
-          "variable.other.jsdoc",
-          "variable.other.phpdoc"
-        ],
-        "settings": {
-          "foreground": t3
         }
       },
       {
@@ -1019,18 +1021,12 @@ module.exports.genTheme = colors => {
           "foreground": m8
         }
       },
+      // Language: JSON
       {
         "name": "JSON Property Names",
         "scope": "support.type.property-name.json",
         "settings": {
           "foreground": t1
-        }
-      },
-      {
-        "name": "JSON Support Constants",
-        "scope": "support.constant.json",
-        "settings": {
-          "foreground": t4
         }
       },
       {
@@ -1054,6 +1050,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // language: Ruby
       {
         "name": "Ruby Variables",
         "scope": "variable.other.ruby",
@@ -1068,6 +1065,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // Language: LESS
       {
         "name": "LESS Tag names",
         "scope": "entity.name.tag.less",
@@ -1089,6 +1087,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // Language: Markdown
       {
         "name": "Markdown Headings",
         "scope": "markup.heading.markdown",
@@ -1177,6 +1176,7 @@ module.exports.genTheme = colors => {
           "foreground": t2
         }
       },
+      // Language: PHP
       {
         "name": "Support Classes in PHP",
         "scope": "support.class.php",
@@ -1205,6 +1205,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
+      // Language: Python
       {
         "name": "Language Constants in Python",
         "scope": "constant.language.python",
@@ -1236,6 +1237,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
+      // Language: SASS
       {
         "name": "Variables in SASS At-Rules",
         "scope": [
@@ -1276,6 +1278,7 @@ module.exports.genTheme = colors => {
           "foreground": t2
         }
       },
+      // Language: TypeScript[React]
       {
         "name": "TypeScript[React] Variables and Object Properties",
         "scope": [
@@ -1363,6 +1366,7 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // global font styles
       {
         "name": "Normalize font style of certain Components",
         "scope": [
@@ -1413,7 +1417,6 @@ module.exports.genTheme = colors => {
           "meta.object-literal.key",
           "meta.var.expr storage.type",
           "parameter",
-          "string",
           "italic",
           "quote",
           "keyword",
