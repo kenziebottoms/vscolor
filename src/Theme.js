@@ -145,7 +145,7 @@ module.exports.genTheme = colors => {
       "sideBarTitle.foreground": m8,
       "sideBarSectionHeader.background": m1,
       "sideBarSectionHeader.foreground": m6,
-      "titleBar.activeForeground": m1,
+      "titleBar.activeForeground": m6,
       "titleBar.inactiveForeground": m6,
       "titleBar.activeBackground": m1,
       "debugExceptionWidget.border": t3,
