@@ -195,18 +195,21 @@ module.exports.genTheme = colors => {
       {
         "settings": {
           "foreground": m8,
-          "background": m1
         }
       },
       // comments
       {
         "name": "Comment",
-        "scope": [
-          "comment",
-          "comment.line.double-slash"
-        ],
+        "scope": "comment",
         "settings": {
           "foreground": m5
+        }
+      },
+      {
+        "name": "Comment Block",
+        "scope": "comment.block",
+        "settings": {
+          "foreground": m6
         }
       },
       // strings
@@ -457,7 +460,7 @@ module.exports.genTheme = colors => {
           "meta.tag.html"
         ],
         "settings": {
-          "foreground": t1
+          "foreground": t2
         }
       },
       {
@@ -468,14 +471,7 @@ module.exports.genTheme = colors => {
           "entity.name.tag"
         ],
         "settings": {
-          "foreground": t1
-        }
-      },
-      {
-        "name": "ID Attribute Name in HTML",
-        "scope": "entity.other.attribute-name.id.html",
-        "settings": {
-          "foreground": t4
+          "foreground": t3
         }
       },
       {
@@ -486,13 +482,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "HTML Doctype",
-        "scope": "meta.tag.sgml.doctype.html",
-        "settings": {
-          "foreground": t2
-        }
-      },
-      {
         "name": "Tag attribute",
         "scope": "entity.other.attribute-name",
         "settings": {
@@ -500,10 +489,44 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "ID Attribute Name in HTML",
+        "scope": [
+          "entity.other.attribute-name.id.html",
+          "meta.attribute.id.html entity.other.attribute-name",
+          "meta.attribute.name.html entity.other.attribute-name",
+          "meta.attribute.href.html entity.other.attribute-name",
+          "meta.attribute.src.html entity.other.attribute-name"
+        ],
+        "settings": {
+          "foreground": t2
+        }
+      },
+      {
         "name": "Entity Name Tag Custom",
         "scope": "entity.name.tag.custom",
         "settings": {
           "foreground": t4
+        }
+      },
+      {
+        "name": "Unicode",
+        "scope": "constant.character.entity.named",
+        "settings": {
+          "foreground": t1
+        }
+      },
+      {
+        "name": "HTML Doctype",
+        "scope": [
+          "meta.tag.sgml.doctype.html",
+          "entity.name.tag.doctype",
+          "meta.tag.sgml.doctype",
+          "meta.tag.metadata.doctype.html entity.name.tag.html",
+          "meta.tag.metadata.doctype.html entity.other.attribute-name.html",
+          "meta.tag.metadata.doctype.html punctuation.definition.tag"
+        ],
+        "settings": {
+          "foreground": `${t2}88`
         }
       },
       {
@@ -626,7 +649,7 @@ module.exports.genTheme = colors => {
         "name": "Entity Other Attribute Name Id",
         "scope": "entity.other.attribute-name.id",
         "settings": {
-          "foreground": t4
+          "foreground": t3
         }
       },
       {
@@ -634,16 +657,6 @@ module.exports.genTheme = colors => {
         "scope": "meta.property-name",
         "settings": {
           "foreground": t3
-        }
-      },
-      {
-        "name": "Doctypes",
-        "scope": [
-          "entity.name.tag.doctype",
-          "meta.tag.sgml.doctype"
-        ],
-        "settings": {
-          "foreground": t2
         }
       },
       {
@@ -726,32 +739,28 @@ module.exports.genTheme = colors => {
           "invalid.deprecated"
         ],
         "settings": {
-          "background": neg_faint,
-          "foreground": m8
+          "foreground": neg
         }
       },
       {
         "name": "Invalid Broken",
         "scope": "invalid.broken",
         "settings": {
-          "background": neg_faint,
-          "foreground": m8
+          "foreground": neg
         }
       },
       {
         "name": "Invalid Unimplemented",
         "scope": "invalid.unimplemented",
         "settings": {
-          "background": neg_faint,
-          "foreground": m8
+          "foreground": neg
         }
       },
       {
         "name": "Invalid Illegal",
         "scope": "invalid.illegal",
         "settings": {
-          "foreground": m8,
-          "background": neg_faint
+          "foreground": neg
         }
       },
       {
@@ -967,7 +976,7 @@ module.exports.genTheme = colors => {
         "scope": "meta.method.declaration storage.type.js",
         "settings": {
           "foreground": t4,
-          "fontStyle": "normal"
+          "fontStyle": ""
         }
       },
       {
@@ -1397,21 +1406,21 @@ module.exports.genTheme = colors => {
         "name": "comment docs",
         "scope": "comment.block.javadoc keyword.other.documentation",
         "settings": {
-          "foreground": `${t2}88`
+          "foreground": `${t2}90`
         }
       },
       {
         "name": "comment docs",
         "scope": "comment.block.javadoc entity.name.type.class",
         "settings": {
-          "foreground": `${t4}88`
+          "foreground": `${t4}90`
         }
       },
       {
         "name": "comment docs",
         "scope": "comment.block.javadoc variable.parameter",
         "settings": {
-          "foreground": `${t3}88`
+          "foreground": `${t3}90`
         }
       },
       {
@@ -1426,6 +1435,27 @@ module.exports.genTheme = colors => {
         "scope": "variable.other.object.java",
         "settings": {
           "foreground": t3
+        }
+      },
+      {
+        "name": "Other object variables",
+        "scope": "storage.modifier.import.java",
+        "settings": {
+          "foreground": `${t2}99`
+        }
+      },
+      {
+        "name": "Other object variables",
+        "scope": "keyword.other.import.java",
+        "settings": {
+          "foreground": `${t3}99`
+        }
+      },
+      {
+        "name": "Other object variables",
+        "scope": "meta.import.java punctuation",
+        "settings": {
+          "foreground": `${m8}99`
         }
       },
       // global font styles
@@ -1449,7 +1479,7 @@ module.exports.genTheme = colors => {
           "punctuation"
         ],
         "settings": {
-          "fontStyle": "normal"
+          "fontStyle": ""
         }
       },
       {
