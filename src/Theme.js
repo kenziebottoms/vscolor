@@ -187,7 +187,9 @@ module.exports.genTheme = colors => {
       "gitDecoration.modifiedResourceForeground": t5,
       "gitDecoration.untrackedResourceForeground": pos,
       "gitDecoration.ignoredResourceForeground": m6,
-      "gitDecoration.conflictingResourceForeground": neg
+      "gitDecoration.conflictingResourceForeground": neg,
+      "textLink.foreground": t5,
+      "textLink.activeForeground": t5
     },
     "tokenColors": [
       {
@@ -252,7 +254,7 @@ module.exports.genTheme = colors => {
         "name": "Support Constant Math",
         "scope": "support.constant.math",
         "settings": {
-          "foreground": t4
+          "foreground": t4,
         }
       },
       {
@@ -1390,6 +1392,42 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      // language: Java
+      {
+        "name": "comment docs",
+        "scope": "comment.block.javadoc keyword.other.documentation",
+        "settings": {
+          "foreground": `${t2}88`
+        }
+      },
+      {
+        "name": "comment docs",
+        "scope": "comment.block.javadoc entity.name.type.class",
+        "settings": {
+          "foreground": `${t4}88`
+        }
+      },
+      {
+        "name": "comment docs",
+        "scope": "comment.block.javadoc variable.parameter",
+        "settings": {
+          "foreground": `${t3}88`
+        }
+      },
+      {
+        "name": "Generic storage type",
+        "scope": "storage.type.generic.java",
+        "settings": {
+          "foreground": t5
+        }
+      },
+      {
+        "name": "Other object variables",
+        "scope": "variable.other.object.java",
+        "settings": {
+          "foreground": t3
+        }
+      },
       // global font styles
       {
         "name": "Normalize font style of certain Components",
@@ -1405,6 +1443,7 @@ module.exports.genTheme = colors => {
           "keyword.operator.comparison",
           "keyword.operator.assignment",
           "keyword.operator.operator",
+          "keyword.control.ternary",
           "keyword.operator.or.regexp",
           "punctuation.definintion.string",
           "punctuation"
