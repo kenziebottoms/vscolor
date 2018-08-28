@@ -1424,6 +1424,20 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "Object separating dots",
+        "scope": "punctuation.separator.period.java",
+        "settings": {
+          "foreground": t3
+        }
+      },
+      {
+        "name": "Java strings",
+        "scope": "string.quoted.double.java",
+        "settings": {
+          "foreground": t4
+        }
+      },
+      {
         "name": "Generic storage type",
         "scope": "storage.type.generic.java",
         "settings": {
@@ -1434,12 +1448,22 @@ module.exports.genTheme = colors => {
         "name": "Other object variables",
         "scope": "variable.other.object.java",
         "settings": {
+          "foreground": m8
+        }
+      },
+      {
+        "name": "Instance function calls",
+        "scope": "meta.method-call.java entity.name.function.java",
+        "settings": {
           "foreground": t3
         }
       },
       {
         "name": "Other object variables",
-        "scope": "storage.modifier.import.java",
+        "scope": [
+          "storage.modifier.import.java",
+          "meta.import.java storage.modifier.java"
+        ],
         "settings": {
           "foreground": `${t2}99`
         }
