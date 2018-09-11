@@ -184,7 +184,7 @@ module.exports.genTheme = colors => {
       "terminal.ansiBrightMagenta": t2,
       "terminal.ansiBrightCyan": t3,
       "terminal.ansiBrightWhite": m8,
-      "gitDecoration.modifiedResourceForeground": t5,
+      "gitDecoration.modifiedResourceForeground": t4,
       "gitDecoration.untrackedResourceForeground": pos,
       "gitDecoration.ignoredResourceForeground": m6,
       "gitDecoration.conflictingResourceForeground": neg,
