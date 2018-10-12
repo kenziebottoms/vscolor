@@ -185,7 +185,7 @@ module.exports.genTheme = colors => {
       "terminal.ansiBrightMagenta": t2,
       "terminal.ansiBrightCyan": t3,
       "terminal.ansiBrightWhite": m8,
-      "gitDecoration.modifiedResourceForeground": t4,
+      "gitDecoration.modifiedResourceForeground": ui,
       "gitDecoration.untrackedResourceForeground": pos,
       "gitDecoration.ignoredResourceForeground": m6,
       "gitDecoration.conflictingResourceForeground": neg,
@@ -914,6 +914,23 @@ module.exports.genTheme = colors => {
           "foreground": t5
         }
       },
+      {
+        "name": "CSS Property Names",
+        "scope": "support.type.property-name.css",
+        "settings": {
+          "foreground": fg
+        }
+      },
+      {
+        "name": "CSS Property Values",
+        "scope": [
+          "meta.property-value.scss",
+          "meta.property-value.scss support.type.property-name.css"
+        ],
+        "settings": {
+          "foreground": t4
+        }
+      },
       // Language: Elixir
       {
         "name": "Elixir Classes",
@@ -1273,7 +1290,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
-      // Language: SASS
+      // Language: SASS/SCSS
       {
         "name": "Variables in SASS At-Rules",
         "scope": [
@@ -1312,6 +1329,16 @@ module.exports.genTheme = colors => {
         ],
         "settings": {
           "foreground": t2
+        }
+      },
+      {
+        "name": "SASS Support Functions",
+        "scope": [
+          "support.function.misc.scss",
+          "support.function.misc.sass",
+        ],
+        "settings": {
+          "foreground": t3
         }
       },
       // Language: TypeScript[React]
