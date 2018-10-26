@@ -981,7 +981,7 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
-      // Language: Javascript
+      // Language: JavaScript
       {
         "name": "JavaScript Classes",
         "scope": "meta.class entity.name.type.class.js",
@@ -1022,6 +1022,13 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "JavaScript Hex",
+        "scope": "constant.numeric.hex.js",
+        "settings": {
+          "foreground": t3
+        }
+      },
+      {
         "name": "JavaScript Variable Parameter Function",
         "scope": "variable.parameter.function.js",
         "settings": {
@@ -1033,6 +1040,13 @@ module.exports.genTheme = colors => {
         "scope": "variable.other.readwrite.js",
         "settings": {
           "foreground": m8
+        }
+      },
+      {
+        "name": "JavaScript Variable Other ReadWrite",
+        "scope": "string.quoted.double.js meta.object-literal.key",
+        "settings": {
+          "foreground": t2
         }
       },
       {
@@ -1074,6 +1088,15 @@ module.exports.genTheme = colors => {
           "foreground": m8
         }
       },
+      {
+        "name": "JavaScript Object Keys (String)",
+        "scope": [
+          "meta.object-literal.key.js string.quoted",
+        ],
+        "settings": {
+          "foreground": t1
+        }
+      },
       // Language: JSON
       {
         "name": "JSON Property Names",
@@ -1084,14 +1107,10 @@ module.exports.genTheme = colors => {
       },
       {
         "name": "JSON Property values (string)",
-        "scope": "meta.structure.dictionary.value.json string.quoted.double",
-        "settings": {
-          "foreground": t3
-        }
-      },
-      {
-        "name": "Strings in JSON values",
-        "scope": "string.quoted.double.json punctuation.definition.string.json",
+        "scope": [
+          "string.quoted.double.json meta.structure.dictionary.value.json",
+          "string.quoted.double.json punctuation.definition.string.json",
+        ],
         "settings": {
           "foreground": t3
         }
