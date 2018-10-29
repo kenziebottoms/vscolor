@@ -320,13 +320,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Comma in functions",
-        "scope": "meta.function punctuation.separator.comma",
-        "settings": {
-          "foreground": m7
-        }
-      },
-      {
         "name": "Variable",
         "scope": "variable",
         "settings": {
@@ -341,7 +334,7 @@ module.exports.genTheme = colors => {
           "keyword"
         ],
         "settings": {
-          "foreground": t2
+          "foreground": m7
         }
       },
       {
@@ -465,14 +458,41 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "Important HTML Tag Names",
+        "scope": [
+          "meta.tag.structure.body entity.name.tag",
+          "meta.tag.structure.head entity.name.tag",
+          "meta.tag.structure.html entity.name.tag",
+          "meta.tag.metadata.style entity.name.tag",
+          "meta.tag.structure.html punctuation.definition.tag",
+          "meta.tag.structure.head punctuation.definition.tag",
+          "meta.tag.structure.body punctuation.definition.tag",
+          "meta.tag.metadata.style punctuation.definition.tag",
+        ],
+        "settings": {
+          "fontStyle": "bold"
+        }
+      },
+      {
         "name": "HTML Tag names",
         "scope": [
           "entity.name.tag.tsx",
           "entity.name.tag.js",
-          "entity.name.tag"
+          "entity.name.tag",
+          "punctuation.definition.tag"
         ],
         "settings": {
           "foreground": t3
+        }
+      },
+      {
+        "name": "HTML Script Tag",
+        "scope": [
+          "meta.tag.metadata.script entity.name.tag",
+          "meta.tag.metadata.script punctuation.definition.tag"
+        ],
+        "settings": {
+          "foreground": t5
         }
       },
       {
@@ -487,6 +507,13 @@ module.exports.genTheme = colors => {
         "scope": "entity.other.attribute-name",
         "settings": {
           "foreground": t4
+        }
+      },
+      {
+        "name": "HTML attribute values",
+        "scope": "meta.attribute string.quoted",
+        "settings": {
+          "foreground": t1
         }
       },
       {
@@ -527,7 +554,8 @@ module.exports.genTheme = colors => {
           "meta.tag.metadata.doctype.html punctuation.definition.tag"
         ],
         "settings": {
-          "foreground": `${t2}88`
+          "foreground": `${t2}99`,
+          "fontStyle": "italic"
         }
       },
       {
@@ -627,7 +655,10 @@ module.exports.genTheme = colors => {
       },
       {
         "name": "Constant Other Color RGB Value Punctuation Definition Constant",
-        "scope": "constant.other.color.rgb-value punctuation.definition.constant",
+        "scope": [
+          "constant.other.color.rgb-value punctuation.definition.constant",
+          "constant.other.color.rgb-value.hex.css",
+        ],
         "settings": {
           "foreground": t5
         }
@@ -889,20 +920,36 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Wildcard(*) selector in Stylesheets",
+        "name": "@media Query Headers",
+        "scope": [
+          "keyword.control.at-rule",
+          "keyword.control.at-rule punctuation.definition"
+        ],
+        "settings": {
+          "foreground": t5,
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "name": "CSS Special Symbols",
         "scope": [
           "entity.name.tag.wildcard.css",
           "entity.name.tag.wildcard.less",
           "entity.name.tag.wildcard.scss",
-          "entity.name.tag.wildcard.sass"
+          "entity.name.tag.wildcard.sass",
+          "keyword.operator.combinator.css"
         ],
         "settings": {
-          "foreground": t1
+          "foreground": t5,
+          "fontStyle": "bold"
         }
       },
       {
-        "name": "CSS Keyword Other Unit",
-        "scope": "keyword.other.unit.css",
+        "name": "CSS Units and Numbers",
+        "scope": [
+          "source.css keyword.other.unit",
+          "source.css constant.numeric"
+        ],
         "settings": {
           "foreground": t2
         }
@@ -918,7 +965,7 @@ module.exports.genTheme = colors => {
         "name": "CSS Property Names",
         "scope": "support.type.property-name.css",
         "settings": {
-          "foreground": fg
+          "foreground": m8
         }
       },
       {
@@ -929,6 +976,57 @@ module.exports.genTheme = colors => {
         ],
         "settings": {
           "foreground": t4
+        }
+      },
+      // Language: SASS/SCSS
+      {
+        "name": "Variables in SASS At-Rules",
+        "scope": [
+          "source.css.scss meta.at-rule variable",
+          "source.css.sass meta.at-rule variable"
+        ],
+        "settings": {
+          "foreground": t4
+        }
+      },
+      {
+        "name": "Attribute Name for SASS",
+        "scope": [
+          "meta.attribute-selector.scss entity.other.attribute-name.attribute",
+          "meta.attribute-selector.sass entity.other.attribute-name.attribute"
+        ],
+        "settings": {
+          "foreground": t5
+        }
+      },
+      {
+        "name": "Tag names in SASS",
+        "scope": [
+          "entity.name.tag.scss",
+          "entity.name.tag.sass"
+        ],
+        "settings": {
+          "foreground": t1
+        }
+      },
+      {
+        "name": "SASS Keyword Other Unit",
+        "scope": [
+          "keyword.other.unit.scss",
+          "keyword.other.unit.sass"
+        ],
+        "settings": {
+          "foreground": t2
+        }
+      },
+      {
+        "name": "SASS Support Functions",
+        "scope": [
+          "support.function.misc.scss",
+          "support.function.misc.sass",
+        ],
+        "settings": {
+          "foreground": t3
         }
       },
       // Language: Elixir
@@ -1146,13 +1244,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "LESS Keyword Other Unit",
-        "scope": "keyword.other.unit.css",
-        "settings": {
-          "foreground": t2
-        }
-      },
-      {
         "name": "Attribute Name for LESS",
         "scope": "meta.attribute-selector.less entity.other.attribute-name.attribute",
         "settings": {
@@ -1309,57 +1400,6 @@ module.exports.genTheme = colors => {
           "foreground": t4
         }
       },
-      // Language: SASS/SCSS
-      {
-        "name": "Variables in SASS At-Rules",
-        "scope": [
-          "source.css.scss meta.at-rule variable",
-          "source.css.sass meta.at-rule variable"
-        ],
-        "settings": {
-          "foreground": t4
-        }
-      },
-      {
-        "name": "Attribute Name for SASS",
-        "scope": [
-          "meta.attribute-selector.scss entity.other.attribute-name.attribute",
-          "meta.attribute-selector.sass entity.other.attribute-name.attribute"
-        ],
-        "settings": {
-          "foreground": t5
-        }
-      },
-      {
-        "name": "Tag names in SASS",
-        "scope": [
-          "entity.name.tag.scss",
-          "entity.name.tag.sass"
-        ],
-        "settings": {
-          "foreground": t1
-        }
-      },
-      {
-        "name": "SASS Keyword Other Unit",
-        "scope": [
-          "keyword.other.unit.scss",
-          "keyword.other.unit.sass"
-        ],
-        "settings": {
-          "foreground": t2
-        }
-      },
-      {
-        "name": "SASS Support Functions",
-        "scope": [
-          "support.function.misc.scss",
-          "support.function.misc.sass",
-        ],
-        "settings": {
-          "foreground": t3
-        }
-      },
       // Language: TypeScript[React]
       {
         "name": "TypeScript[React] Variables and Object Properties",
@@ -1471,10 +1511,10 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "Object separating dots",
-        "scope": "punctuation.separator.period.java",
+        "name": "Separating Commas",
+        "scope": "punctuation.separator",
         "settings": {
-          "foreground": t3
+          "foreground": m7
         }
       },
       {
@@ -1536,6 +1576,7 @@ module.exports.genTheme = colors => {
           "meta.property-list.css meta.property-value.css variable.other.less",
           "meta.property-list.scss variable.scss",
           "meta.property-list.sass variable.sass",
+          "keyword.other.unit",
           "keyword.operator.logical",
           "keyword.operator.arithmetic",
           "keyword.operator.bitwise",
