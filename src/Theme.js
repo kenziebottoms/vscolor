@@ -1029,6 +1029,21 @@ module.exports.genTheme = colors => {
           "foreground": t3
         }
       },
+      // Language: Vue
+      {
+        "name": "Vue Directives",
+        "scope": "meta.directive.vue entity.other.attribute-name",
+        "settings": {
+          "foreground": t2
+        }
+      },
+      {
+        "name": "String Params in Vue Directives",
+        "scope": "meta.directive.vue string.quoted.single.js",
+        "settings": {
+          "foreground": t5
+        }
+      },
       // Language: Elixir
       {
         "name": "Elixir Classes",
@@ -1190,6 +1205,7 @@ module.exports.genTheme = colors => {
         "name": "JavaScript Object Keys (String)",
         "scope": [
           "meta.object-literal.key.js string.quoted",
+          "meta.object-literal.key.js",
         ],
         "settings": {
           "foreground": t1
