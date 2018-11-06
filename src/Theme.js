@@ -739,7 +739,7 @@ module.exports.genTheme = colors => {
           "variable.other.object.property"
         ],
         "settings": {
-          "foreground": t5
+          "foreground": t2
         }
       },
       {
@@ -1038,10 +1038,43 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        "name": "Vue Directive variables",
+        "scope": [
+          "source.directive.vue variable.other.readwrite.js",
+          "source.directive.vue punctuation.definition.string"
+        ],
+        "settings": {
+          "foreground": t1
+        }
+      },
+      {
         "name": "String Params in Vue Directives",
         "scope": "meta.directive.vue string.quoted.single.js",
         "settings": {
           "foreground": t5
+        }
+      },
+      {
+        "name": "String HTML Attribute Values",
+        "scope": "source.vue meta.tag string.quoted",
+        "settings": {
+          "foreground": m8
+        }
+      },
+      {
+        "name": "Vue Template Tag",
+        "scope": "source.vue entity.name.tag.template.html",
+        "settings": {
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "name": "Vue Script Tag",
+        "scope": [
+          "source.vue entity.name.tag.script.html"
+        ],
+        "settings": {
+          "fontStyle": "bold"
         }
       },
       // Language: Elixir
@@ -1125,13 +1158,31 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        "name": "JavaScript module import",
+        "name": "JavaScript Imported Modules",
         "scope": [
           "variable.other.meta.import.js",
           "meta.import.js variable.other"
         ],
         "settings": {
-          "foreground": m8
+          "foreground": t2
+        }
+      },
+      {
+        "name": "JavaScript Import Statements",
+        "scope": [
+          "source.js keyword.control"
+        ],
+        "settings": {
+          "foreground": t5
+        }
+      },
+      {
+        "name": "JavaScript Conditionals",
+        "scope": [
+          "source.js keyword.control.conditional"
+        ],
+        "settings": {
+          "foreground": t5
         }
       },
       {
