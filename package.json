@@ -1,0 +1,42 @@
+{
+  "name": "vscolor",
+  "version": "0.1.0",
+  "dependencies": {
+    "ajv": "^6.8.1",
+    "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
+    "react": "^16.8.0",
+    "react-color": "^2.17.0",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.8.0",
+    "react-scripts": "^2.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "description": "A color theme generator for VS Code.",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenziebottoms/vscolor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenziebottoms/vscolor/issues"
+  },
+  "homepage": "http://kenzie.ink/vscolor"
+}
