@@ -4,6 +4,7 @@
   "dependencies": {
     "ajv": "^6.8.1",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.0",
     "react-color": "^2.17.0",
     "react-copy-to-clipboard": "^5.0.1",
@@ -14,7 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
@@ -35,5 +38,5 @@
   "bugs": {
     "url": "https://github.com/kenziebottoms/vscolor/issues"
   },
-  "homepage": "https://github.com/kenziebottoms/vscolor#readme"
+  "homepage": "http://kenzie.ink/vscolor"
 }
