@@ -3,7 +3,7 @@ import { ChromePicker } from 'react-color';
 
 class ColorPicker extends Component {
   state = {
-    color: '#fff'
+    color: '#fff',
   };
 
   change = (c, e) => {
@@ -12,11 +12,8 @@ class ColorPicker extends Component {
 
   render() {
     return (
-      <div className='picker'>
-        <ChromePicker
-          color={this.state.color}
-          onChangeComplete={this.change}
-        />
+      <div className="picker">
+        <ChromePicker color={this.state.color} onChangeComplete={this.change} />
       </div>
     );
   }

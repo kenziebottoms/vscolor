@@ -1,117 +1,135 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: #000;
-  color: #fff;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #000;
+    color: #fff;
 }
+
 header {
-  background-color: #222;
-  padding: 20px;
-  color: white;
-  overflow: scroll;
-  text-align: center;
+    background-color: #222;
+    padding: 20px;
+    color: white;
+    overflow: auto;
+    text-align: center;
 }
 
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr 20rem;
-  height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 25rem;
+    height: 100vh;
 }
 
 main {
-  overflow: scroll;
-  max-width: 75rem;
-  margin: auto;
+    overflow: auto;
+    max-width: 75rem;
+    margin: auto;
 }
-main > div {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-gap: 0 1rem;
-  align-items: center;
+
+main>div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 0 1rem;
+    align-items: center;
 }
+
 .code {
-  height: 50vh;
-  overflow: scroll;
-  display: grid;
-  grid-template-columns: 50% 50%;
+    height: 50vh;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
+
 h3 {
-  font-weight: normal;
-  font-family: monospace;
-  margin: .75rem 0;
+    font-weight: normal;
+    font-family: monospace;
+    margin: 0.75rem 0;
 }
+
 .swatch {
-  text-align: right;
-  float: none;
+    text-align: right;
+    float: none;
 }
+
 .chrome-picker {
-  margin: auto;
+    margin: auto;
 }
+
 .syntax {
-  align-items: center;
-  flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: wrap;
 }
+
 textarea {
-  width: auto;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-family: monospace;
+    width: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-family: monospace;
 }
 
 .title {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 .intro {
-  font-size: large;
+    font-size: large;
 }
+
 .swatch {
-  width: 40px;
-  display: inline-block;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid #333;
-  transition: .15s;
-  margin: 5px 5px;
-  box-sizing: border-box;
-  color: #000;
-  padding: 5px;
-  cursor: pointer;
-  text-align: center;
-  justify-self: end;
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    transition: 0.15s;
+    margin: 5px 5px;
+    box-sizing: border-box;
+    color: #000;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    justify-self: end;
 }
+
 .new.swatch {
-  align-self: center;
+    align-self: center;
 }
+
 .active.swatch {
-  width: 60px;
-  height: 60px;
-  margin: 0 -5px;
-  padding: 15px;
+    width: 60px;
+    height: 60px;
+    margin: 0 -5px;
+    padding: 15px;
 }
+
 .swatch .hover {
-  opacity: 0;
+    opacity: 0;
 }
+
 .swatch span {
-  position: relative;
-  left: 0;
-  top: 0;
-  text-align: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    text-align: center;
 }
+
 .swatch span:nth-child(1) {
-  margin-right: -5px;
+    margin-right: -5px;
 }
+
 .swatch span:nth-child(2) {
-  margin-left: -5px;
+    margin-left: -5px;
 }
+
 .syntax {
-  text-align: right;
-  padding: 5px 0;
+    text-align: right;
+    padding: 5px 0;
 }
+
 .syntax .active.swatch:hover .hover {
-  opacity: 1;
+    opacity: 1;
 }
+
 .fg .swatch:hover .hover {
-  display: none;
+    display: none;
 }
