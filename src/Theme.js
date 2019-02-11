@@ -54,6 +54,7 @@ module.exports.genTheme = colors => {
       'list.activeSelectionBackground': m3,
       'list.activeSelectionForeground': m8,
       'list.inactiveSelectionBackground': m3,
+      'list.inactiveFocusBackground': m3,
       'list.inactiveSelectionForeground': m8,
       'list.hoverBackground': m2,
       'list.hoverForeground': m8,
