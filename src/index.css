@@ -16,7 +16,7 @@ header {
 
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 25rem;
+    grid-template-columns: 25rem 1fr;
     box-sizing: border-box;
     height: 100vh;
 }

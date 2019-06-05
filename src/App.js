@@ -147,9 +147,9 @@ class App extends Component {
   // validate pasted spine and use it if valid
   importSpine = () => {
     let spine = document.getElementById('import');
-    let validation = this.validateSpine(spine.value);
-    if (validation instanceof Error) {
-      spine.value = 'ERROR: ' + validation.message;
+    let error = this.validateSpine(spine.value);
+    if (error) {
+      spine.value = 'ERROR: ' + error.message;
     } else {
       this.setState({ theme: JSON.parse(spine.value) });
       spine.value = '';
@@ -161,33 +161,16 @@ class App extends Component {
       let spine = JSON.parse(spineJSON);
       let props = ['bg', 'fg', 'pos', 'neg', 'ui'];
       let colorTest = /^#([0-9a-f]{3}){1,2}$/i;
-      for (let i = 0; i < props.length; i++) {
-        let prop = props[i];
-        let color = spine[prop];
-        if (!!color) {
-          if (!colorTest.test(color)) {
-            return new Error({
-              status: 400,
-              message: color + ' is not a valid hex code',
-            });
-          }
-        } else {
-          return new Error({
-            status: 400,
-            message: color + ' is not a valid hex code',
-          });
-        }
-      }
-      let syntaxes = spine.syntax;
-      for (let j = 0; j < syntaxes.length; j++) {
-        if (!colorTest.test(syntaxes[j])) {
-          return new Error({
-            status: 400,
-            message: syntaxes[j] + ' is not a valid hex code',
-          });
-        }
-      }
-      return true;
+      let colors = [...props.map(prop => spine[prop]), ...spine.syntax];
+      let badColors = colors
+        .filter(color => !(color && colorTest.test(color)))
+        .join(', ');
+      if (badColors)
+        return {
+          status: 400,
+          message: 'Invalid hex code(s): ' + badColors,
+        };
+      return false;
     } catch (err) {
       return err;
     }
@@ -199,34 +182,6 @@ class App extends Component {
         className="wrapper"
         style={{ background: this.state.theme.bg, color: this.state.theme.fg }}
       >
-        <main>
-          <div>
-            {this.displaySwatch('bg')}
-            <h3>Background</h3>
-
-            {this.displaySwatch('fg')}
-            <h3>Foreground</h3>
-
-            {this.displaySwatch('pos')}
-            <h3>Positive color</h3>
-
-            {this.displaySwatch('neg')}
-            <h3>Negative color</h3>
-
-            <div className="syntax">
-              {this.displaySyntax()}
-              {this.displayAddSwatch()}
-            </div>
-            <h3>
-              Syntax colors&nbsp;
-              <button onClick={this.shuffleSyntax}>Shuffle</button>
-            </h3>
-
-            {this.displaySwatch('ui')}
-            <h3>UI accent</h3>
-          </div>
-        </main>
-
         <header
           style={{
             background: this.state.theme.fg,
@@ -275,6 +230,34 @@ class App extends Component {
             </div>
           </div>
         </header>
+
+        <main>
+          <div>
+            {this.displaySwatch('bg')}
+            <h3>Background</h3>
+
+            {this.displaySwatch('fg')}
+            <h3>Foreground</h3>
+
+            {this.displaySwatch('pos')}
+            <h3>Positive color</h3>
+
+            {this.displaySwatch('neg')}
+            <h3>Negative color</h3>
+
+            <div className="syntax">
+              {this.displaySyntax()}
+              {this.displayAddSwatch()}
+            </div>
+            <h3>
+              Syntax colors&nbsp;
+              <button onClick={this.shuffleSyntax}>Shuffle</button>
+            </h3>
+
+            {this.displaySwatch('ui')}
+            <h3>UI accent</h3>
+          </div>
+        </main>
       </div>
     );
   }
