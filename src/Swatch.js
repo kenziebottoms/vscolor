@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 
 class Swatch extends Component {
+  classNames() {
+    return [
+      'swatch',
+      this.props.active ? 'active' : '',
+      this.props.new ? 'new' : '',
+    ].join(' ');
+  }
+
   render() {
     return (
       <div
-        className={classnames({
-          swatch: true,
-          active: this.props.active,
-          new: this.props.new,
-        })}
+        className={this.classNames()}
         style={{ background: this.props.color }}
         onClick={() => this.props.onClick()}
       >

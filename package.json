@@ -2,14 +2,15 @@
   "name": "vscolor",
   "version": "0.1.0",
   "dependencies": {
-    "ajv": "^6.8.1",
-    "classnames": "^2.2.6",
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "ajv": "^6.10.0",
     "gh-pages": "^2.0.1",
-    "react": "^16.8.1",
-    "react-color": "^2.17.0",
+    "react": "^16.8.6",
+    "react-color": "^2.17.3",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.8.1",
-    "react-scripts": "^2.1.3"
+    "react-dom": "^16.8.6",
+    "react-scripts": "^3.0.1",
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
