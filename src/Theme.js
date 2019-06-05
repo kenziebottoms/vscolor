@@ -3,7 +3,7 @@ module.exports.genTheme = colors => {
 
   // sets the workbench colors to a gradient between bg and fg
   let m1, m2, m3, m4, m5, m6, m7, m8;
-  let g = gradient(bg, fg);
+  let g = module.exports.gradient(bg, fg);
   m1 = bg;
   m2 = g[0];
   m3 = g[1];
@@ -12,7 +12,7 @@ module.exports.genTheme = colors => {
   m6 = g[5];
   m7 = g[7];
   m8 = fg;
-  let m15 = gradient(m1, m2)[5];
+  let m15 = module.exports.gradient(m1, m2)[5];
   let trans = '#00000000';
 
   let t1, t2, t3, t4, t5, t6, t7;
@@ -1733,7 +1733,7 @@ const blend = (c1, c2, p) => {
   );
 };
 
-const gradient = (c1, c2) => {
+module.exports.gradient = (c1, c2) => {
   return [
     blend(c1, c2, 0.075),
     blend(c1, c2, 0.125),

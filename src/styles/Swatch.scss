@@ -1,0 +1,62 @@
+.swatch {
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    transition: 0.15s;
+    margin: 5px 5px;
+    box-sizing: border-box;
+    color: #000;
+    padding: 9px;
+    cursor: pointer;
+    justify-self: flex-end;
+    text-align: center;
+    &.new {
+        align-self: center;
+    }
+    &.active {
+        width: 60px;
+        height: 60px;
+        margin: 0 -5px;
+        padding: 15px;
+    }
+    .hover {
+        opacity: 0;
+    }
+    span {
+        position: relative;
+        left: 0;
+        top: 0;
+        text-align: center;
+        &:nth-child(1) {
+            margin-right: -5px;
+        }
+        &:nth-child(2) {
+            margin-left: -5px;
+        }
+    }
+}
+
+.syntax {
+    text-align: right;
+    .swatch {
+        &.active {
+            &:hover {
+                .hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.fg {
+    .swatch {
+        &:hover {
+            .hover {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './styles/Swatch.scss';
+
 class Swatch extends Component {
   classNames() {
     return [

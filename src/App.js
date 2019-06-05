@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
-import Swatch from './Swatch';
-import { genTheme, genSettings } from './Theme';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+import './styles/App.scss';
+
+import Swatch from './Swatch';
+import { genTheme, genSettings, gradient } from './Theme';
+
 const _ = require('lodash');
 
 class App extends Component {
@@ -159,12 +163,19 @@ class App extends Component {
     return (
       <div
         className="wrapper"
-        style={{ background: this.state.theme.bg, color: this.state.theme.fg }}
+        style={{
+          background: this.state.theme.bg,
+          color: this.state.theme.fg,
+        }}
       >
-        <header
+        <section
+          className="sidebar"
           style={{
-            background: this.state.theme.fg,
-            color: this.state.theme.bg,
+            background: gradient(
+              this.state.theme.bg,
+              gradient(this.state.theme.bg, this.state.theme.fg)[0]
+            )[5],
+            color: this.state.theme.fg,
           }}
         >
           <ChromePicker
@@ -208,9 +219,9 @@ class App extends Component {
               </CopyToClipboard>
             </div>
           </div>
-        </header>
+        </section>
 
-        <main>
+        <section className="content">
           <div>
             {this.renderSwatch('bg')}
             <h3>Background</h3>
@@ -252,7 +263,7 @@ class App extends Component {
             {this.renderSwatch('ui')}
             <h3>UI accent</h3>
           </div>
-        </main>
+        </section>
       </div>
     );
   }
