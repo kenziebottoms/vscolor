@@ -8,7 +8,7 @@ const _ = require('lodash');
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { theme: null };
+    this.state = { theme: null, active: 'bg' };
     this.state.theme = this.getSaved();
   }
 
@@ -42,19 +42,13 @@ class App extends Component {
   };
 
   // get color value of active swatch
-  getActiveColor = () => {
-    // syntax colors
-    if (this.state.active && this.state.active.indexOf('syntax') !== -1) {
-      return this.state.theme.syntax[this.state.active.split(':')[1]];
-    }
-    // non-syntax
-    else {
-      return this.state.theme[this.state.active];
-    }
-  };
+  getActiveColor = () =>
+    this.state.active.indexOf('syntax') !== -1
+      ? this.state.theme.syntax[this.state.active.split(':')[1]]
+      : this.state.theme[this.state.active];
 
   // update color value of active swatch
-  updateActiveColor = c => {
+  updateActiveColor = (c, _e) => {
     // copy theme to update
     //   like a POST intead of a PUT
     let stateUpdate = { theme: this.state.theme };

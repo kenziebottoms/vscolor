@@ -6,7 +6,7 @@ class ColorPicker extends Component {
     color: '#fff',
   };
 
-  change = (c, e) => {
+  change = (c, _e) => {
     this.setState({ color: c.hex });
   };
 
