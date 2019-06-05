@@ -13,10 +13,9 @@ class App extends Component {
   }
 
   // save current palette to localStorage
-  save = () => {
-    let { localStorage } = window;
-    localStorage.setItem('theme', JSON.stringify(this.state.theme));
-  };
+  save = () =>
+    window.localStorage.setItem('theme', JSON.stringify(this.state.theme));
+
   // extract any saved palette from localStorage
   getSaved = () => {
     let stored = window.localStorage.getItem('theme');
@@ -42,10 +41,6 @@ class App extends Component {
     }
   };
 
-  // set this.state.active
-  setActive = prop => {
-    this.setState({ active: prop });
-  };
   // get color value of active swatch
   getActiveColor = () => {
     // syntax colors
@@ -57,8 +52,9 @@ class App extends Component {
       return this.state.theme[this.state.active];
     }
   };
+
   // update color value of active swatch
-  updateActiveColor = (c, e) => {
+  updateActiveColor = c => {
     // copy theme to update
     //   like a POST intead of a PUT
     let stateUpdate = { theme: this.state.theme };
@@ -73,41 +69,6 @@ class App extends Component {
     this.setState(stateUpdate);
   };
 
-  // render normal swatch with normal ops
-  displaySwatch = slug => {
-    return (
-      <Swatch
-        onClick={() => {
-          this.setActive(slug);
-        }}
-        color={this.state.theme[slug]}
-        active={this.state.active === slug}
-      />
-    );
-  };
-  // render the swatches for the syntax colors
-  displaySyntax = () => {
-    return this.state.theme.syntax.map((c, i) => {
-      return (
-        <Swatch
-          key={i}
-          color={this.state.theme.syntax[i]}
-          onClick={() => {
-            this.clickSwatch(i);
-          }}
-          active={this.state.active === 'syntax:' + i}
-          new={false}
-        />
-      );
-    });
-  };
-  // render add swatch
-  displayAddSwatch = () => {
-    return (
-      <Swatch key={'new'} active={false} new={true} onClick={this.addSwatch} />
-    );
-  };
-
   // handle a click on swatch `i`
   clickSwatch = i => {
     if (this.state.active === 'syntax:' + i) {
@@ -115,22 +76,21 @@ class App extends Component {
       syntaxUpdate.splice(i, 1);
       this.updateSyntax(syntaxUpdate);
     } else {
-      this.setActive('syntax:' + i);
+      this.setState({ active: 'syntax:' + i });
     }
   };
 
   copy = slug => {
-    let text = document.getElementById(slug);
-    text.select();
+    document.getElementById(slug).select();
     document.execCommand('copy');
   };
 
   // add new blank swatch
-  addSwatch = e => {
+  addSwatch = () => {
     let colors = this.state.theme.syntax.slice();
     let active = colors.push('#fff') - 1; // push returns the new length of the array
     this.updateSyntax(colors);
-    this.setActive('syntax:' + active);
+    this.setState({ active: 'syntax:' + active });
   };
 
   // update this.state.theme.syntax without overwriting anything else
@@ -139,10 +99,8 @@ class App extends Component {
     stateUpdate.theme.syntax = syntax;
     this.setState({ stateUpdate });
   };
-  shuffleSyntax = () => {
-    let syntax = this.state.theme.syntax;
-    this.updateSyntax(_.shuffle(syntax));
-  };
+
+  shuffleSyntax = () => this.updateSyntax(_.shuffle(this.state.theme.syntax));
 
   // validate pasted spine and use it if valid
   importSpine = () => {
@@ -175,6 +133,33 @@ class App extends Component {
       return err;
     }
   };
+
+  // render normal swatch with normal ops
+  renderSwatch = slug => {
+    return (
+      <Swatch
+        onClick={() => {
+          this.setState({ active: slug });
+        }}
+        color={this.state.theme[slug]}
+        active={this.state.active === slug}
+      />
+    );
+  };
+
+  // render the swatches for the syntax colors
+  renderSyntaxSwatches = () =>
+    this.state.theme.syntax.map((c, i) => (
+      <Swatch
+        key={i}
+        color={this.state.theme.syntax[i]}
+        onClick={() => {
+          this.clickSwatch(i);
+        }}
+        active={this.state.active === 'syntax:' + i}
+        new={false}
+      />
+    ));
 
   render() {
     return (
@@ -233,28 +218,44 @@ class App extends Component {
 
         <main>
           <div>
-            {this.displaySwatch('bg')}
+            {this.renderSwatch('bg')}
             <h3>Background</h3>
 
-            {this.displaySwatch('fg')}
+            {this.renderSwatch('fg')}
             <h3>Foreground</h3>
 
-            {this.displaySwatch('pos')}
+            {this.renderSwatch('pos')}
             <h3>Positive color</h3>
 
-            {this.displaySwatch('neg')}
+            {this.renderSwatch('neg')}
             <h3>Negative color</h3>
 
             <div className="syntax">
-              {this.displaySyntax()}
-              {this.displayAddSwatch()}
+              {this.state.theme.syntax.map((c, i) => (
+                <Swatch
+                  key={i}
+                  color={this.state.theme.syntax[i]}
+                  onClick={() => {
+                    this.clickSwatch(i);
+                  }}
+                  active={this.state.active === 'syntax:' + i}
+                  new={false}
+                />
+              ))}
+
+              <Swatch
+                key={'new'}
+                active={false}
+                new={true}
+                onClick={this.addSwatch}
+              />
             </div>
             <h3>
               Syntax colors&nbsp;
               <button onClick={this.shuffleSyntax}>Shuffle</button>
             </h3>
 
-            {this.displaySwatch('ui')}
+            {this.renderSwatch('ui')}
             <h3>UI accent</h3>
           </div>
         </main>
