@@ -47,6 +47,12 @@ class App extends Component {
     }
   };
 
+  importFromClipboard = () =>
+    navigator.clipboard
+      .readText()
+      .then(clipboard => this.importSpine(clipboard))
+      .catch(e => console.log(e));
+
   // get color value of active swatch
   getActiveColor = () =>
     this.state.active.indexOf('syntax') !== -1
@@ -103,13 +109,12 @@ class App extends Component {
   shuffleSyntax = () => this.updateSyntax(_.shuffle(this.state.theme.syntax));
 
   // validate pasted spine and use it if valid
-  importSpine = () => {
-    let spine = document.getElementById('import');
-    let error = this.validateSpine(spine.value);
+  importSpine = spine => {
+    let error = this.validateSpine(spine);
     if (error) {
       spine.value = 'ERROR: ' + error.message;
     } else {
-      this.setState({ theme: JSON.parse(spine.value) });
+      this.setState({ theme: JSON.parse(spine) });
       spine.value = '';
     }
   };
@@ -178,6 +183,7 @@ class App extends Component {
           }}
         >
           <Control
+            onClick={this.importFromClipboard}
             icon={faClipboard}
             bg={this.state.theme.bg}
             fg={this.state.theme.fg}
@@ -204,12 +210,6 @@ class App extends Component {
           </button>
 
           <div className="code">
-            <div>
-              <h3>Import Spine</h3>
-              <textarea id="import" rows="5" onChange={this.updateSpine} />
-              <button onClick={this.importSpine}>Import</button>
-            </div>
-
             <div>
               <h3>Spine</h3>
               <CopyToClipboard text={JSON.stringify(this.state.theme)}>
