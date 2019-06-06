@@ -2,7 +2,9 @@
   "name": "vscolor",
   "version": "0.1.0",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "ajv": "^6.10.0",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.12.0",

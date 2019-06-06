@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 import './styles/App.scss';
 
+import Control from './Control';
 import Swatch from './Swatch';
 import { genTheme, genSettings, gradient } from './Theme';
 
@@ -168,6 +170,20 @@ class App extends Component {
           color: this.state.theme.fg,
         }}
       >
+        <section
+          className="controls"
+          style={{
+            background: this.state.theme.bg,
+            color: this.state.theme.ui + '55',
+          }}
+        >
+          <Control
+            icon={faClipboard}
+            bg={this.state.theme.bg}
+            fg={this.state.theme.fg}
+            toolTip={'Import from clipboard'}
+          />
+        </section>
         <section
           className="sidebar"
           style={{
