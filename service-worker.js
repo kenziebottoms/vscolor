@@ -11,13 +11,19 @@
  * See https://goo.gl/2aRDsh
  */
 
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js"
+  "/vscolor/precache-manifest.8fb9853926657a9f583303120d74a35a.js"
 );
 
-importScripts("/vscolor/precache-manifest.8440c192378d48d2fb25c68eda1fc029.js");
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 
-workbox.clientsClaim();
+workbox.core.clientsClaim();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -25,9 +31,9 @@ workbox.clientsClaim();
  * See https://goo.gl/S9QRab
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
-workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/vscolor/index.html", {
-  blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/]
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/vscolor/index.html"), {
+  
+  blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
