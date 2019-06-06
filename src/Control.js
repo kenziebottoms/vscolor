@@ -11,7 +11,9 @@ const Control = props => (
     >
       {props.toolTip}
     </div>
-    <FontAwesomeIcon icon={props.icon} style={{ background: props.bg }} />
+    <div className="icon" style={{ background: props.bg }}>
+      <FontAwesomeIcon icon={props.icon} />
+    </div>
   </div>
 );
 

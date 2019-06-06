@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPaste,
+  faSave,
+  faCogs,
+  faClipboardList,
+  faFileExport,
+  faCode,
+} from '@fortawesome/free-solid-svg-icons';
 
 import './styles/App.scss';
 
@@ -86,10 +93,7 @@ class App extends Component {
     }
   };
 
-  copy = slug => {
-    document.getElementById(slug).select();
-    document.execCommand('copy');
-  };
+  copyToClipBoard = slug => navigator.clipboard.writeText(slug);
 
   // add new blank swatch
   addSwatch = () => {
@@ -184,10 +188,35 @@ class App extends Component {
         >
           <Control
             onClick={this.importFromClipboard}
-            icon={faClipboard}
+            icon={faPaste}
             bg={this.state.theme.bg}
             fg={this.state.theme.fg}
             toolTip={'Import from clipboard'}
+          />
+          <Control
+            onClick={this.save}
+            icon={faSave}
+            bg={this.state.theme.bg}
+            fg={this.state.theme.fg}
+            toolTip={'Save theme'}
+          />
+          <Control
+            onClick={() =>
+              this.copyToClipboard(JSON.stringify(this.state.theme))
+            }
+            icon={faClipboardList}
+            bg={this.state.theme.bg}
+            fg={this.state.theme.fg}
+            toolTip={'Copy theme spine'}
+          />
+          <Control
+            onClick={() =>
+              this.copyToClipboard(JSON.stringify(genTheme(this.state.theme)))
+            }
+            icon={faCode}
+            bg={this.state.theme.bg}
+            fg={this.state.theme.fg}
+            toolTip={'Copy theme code'}
           />
         </section>
         <section
@@ -205,18 +234,7 @@ class App extends Component {
             onChange={this.updateActiveColor}
           />
 
-          <button onClick={this.save} type="Submit">
-            Save
-          </button>
-
           <div className="code">
-            <div>
-              <h3>Spine</h3>
-              <CopyToClipboard text={JSON.stringify(this.state.theme)}>
-                <button>Copy</button>
-              </CopyToClipboard>
-            </div>
-
             <div>
               <h3>Theme Code</h3>
               <CopyToClipboard

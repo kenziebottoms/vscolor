@@ -1,11 +1,15 @@
 .control {
     z-index: 1000;
-    svg {
+    .icon {
+        width: 100%;
         z-index: 1000;
-        padding: 1.5rem;
-        font-size: 2rem;
-        cursor: pointer;
+        text-align: center;
         position: relative;
+        svg {
+            padding: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
     }
     .tooltip {
         position: absolute;
@@ -20,7 +24,7 @@
     }
     &:hover {
         .tooltip {
-            margin-left: 4.5rem;
+            margin-left: 5.25rem;
             display: block;
         }
     }
