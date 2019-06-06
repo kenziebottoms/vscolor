@@ -1,3 +1,5 @@
+@import './breakpoints';
+
 .control {
     z-index: 1000;
     .icon {
@@ -11,21 +13,28 @@
             cursor: pointer;
         }
     }
+
     .tooltip {
-        position: absolute;
-        z-index: -10;
-        display: block;
-        margin-top: 1.2rem;
-        margin-left: -20rem;
-        transition: 0.15s;
-        padding: 0.75rem;
-        z-index: 100;
-        border-radius: 0 0.25rem 0.25rem 0;
+        display: none;
     }
-    &:hover {
+
+    @media (min-width: $md-lg) {
         .tooltip {
-            margin-left: 5.25rem;
+            position: absolute;
+            z-index: -10;
             display: block;
+            margin-top: 1.2rem;
+            margin-left: -20rem;
+            transition: 0.15s;
+            padding: 0.75rem;
+            z-index: 100;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+        &:hover {
+            .tooltip {
+                margin-left: 5.25rem;
+                display: block;
+            }
         }
     }
 }

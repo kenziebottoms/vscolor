@@ -1,3 +1,5 @@
+@import './breakpoints';
+
 body {
     margin: 0;
     padding: 0;
@@ -7,16 +9,21 @@ body {
 }
 
 .wrapper {
-    display: grid;
-    grid-template-columns: auto 25rem 1fr;
+    @media (min-width: $md-lg) {
+        display: grid;
+        grid-template-columns: auto 1fr 2fr;
+        height: 100vh;
+    }
     box-sizing: border-box;
-    height: 100vh;
 
     .controls {
         z-index: 1000;
         display: flex;
-        flex-direction: column;
         align-items: stretch;
+        justify-content: center;
+        @media (min-width: $md-lg) {
+            flex-direction: column;
+        }
     }
 
     .sidebar {
@@ -25,24 +32,15 @@ body {
         color: white;
         overflow: auto;
         text-align: center;
-        .code {
-            height: 50vh;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: 50% 50%;
-        }
+        display: flex;
+        flex-direction: column;
+        align-content: center;
         .chrome-picker {
             margin: auto;
         }
-        .syntax {
-            align-items: flex-end;
-            flex-wrap: wrap;
-            text-align: right;
-            padding: 5px 0;
-            justify-items: flex-end;
-        }
     }
     .content {
+        padding: 2rem 0;
         margin: auto;
         > div {
             display: grid;

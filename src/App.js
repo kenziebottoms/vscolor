@@ -93,7 +93,7 @@ class App extends Component {
     }
   };
 
-  copyToClipBoard = slug => navigator.clipboard.writeText(slug);
+  copyToClipboard = slug => navigator.clipboard.writeText(slug);
 
   // add new blank swatch
   addSwatch = () => {
@@ -156,6 +156,18 @@ class App extends Component {
     );
   };
 
+  renderControl = (action, icon, toolTip) => (
+    <Control
+      onClick={action}
+      icon={icon}
+      bg={this.state.theme.bg}
+      toolTipFg={this.state.theme.fg}
+      fg={this.state.theme.ui + '55'}
+      hoverFg={this.state.theme.ui + '88'}
+      toolTip={toolTip}
+    />
+  );
+
   // render the swatches for the syntax colors
   renderSyntaxSwatches = () =>
     this.state.theme.syntax.map((c, i) => (
@@ -186,38 +198,35 @@ class App extends Component {
             color: this.state.theme.ui + '55',
           }}
         >
-          <Control
-            onClick={this.importFromClipboard}
-            icon={faPaste}
-            bg={this.state.theme.bg}
-            fg={this.state.theme.fg}
-            toolTip={'Import from clipboard'}
-          />
-          <Control
-            onClick={this.save}
-            icon={faSave}
-            bg={this.state.theme.bg}
-            fg={this.state.theme.fg}
-            toolTip={'Save theme'}
-          />
-          <Control
-            onClick={() =>
-              this.copyToClipboard(JSON.stringify(this.state.theme))
-            }
-            icon={faClipboardList}
-            bg={this.state.theme.bg}
-            fg={this.state.theme.fg}
-            toolTip={'Copy theme spine'}
-          />
-          <Control
-            onClick={() =>
-              this.copyToClipboard(JSON.stringify(genTheme(this.state.theme)))
-            }
-            icon={faCode}
-            bg={this.state.theme.bg}
-            fg={this.state.theme.fg}
-            toolTip={'Copy theme code'}
-          />
+          {this.renderControl(
+            this.importFromClipboard,
+            faPaste,
+            'Import from clipboard'
+          )}
+
+          {this.renderControl(this.save, faSave, 'Save theme')}
+
+          {this.renderControl(
+            () => this.copyToClipboard(JSON.stringify(this.state.theme)),
+            faClipboardList,
+            'Copy theme spine'
+          )}
+
+          {this.renderControl(
+            () =>
+              this.copyToClipboard(JSON.stringify(genTheme(this.state.theme))),
+            faCode,
+            'Copy theme code'
+          )}
+
+          {this.renderControl(
+            () =>
+              this.copyToClipboard(
+                JSON.stringify(genSettings(this.state.theme))
+              ),
+            faCogs,
+            'Copy workspace settings'
+          )}
         </section>
         <section
           className="sidebar"
@@ -233,26 +242,6 @@ class App extends Component {
             color={this.getActiveColor()}
             onChange={this.updateActiveColor}
           />
-
-          <div className="code">
-            <div>
-              <h3>Theme Code</h3>
-              <CopyToClipboard
-                text={JSON.stringify(genTheme(this.state.theme))}
-              >
-                <button>Copy</button>
-              </CopyToClipboard>
-            </div>
-
-            <div>
-              <h3>Workspace Settings</h3>
-              <CopyToClipboard
-                text={JSON.stringify(genSettings(this.state.theme))}
-              >
-                <button>Copy</button>
-              </CopyToClipboard>
-            </div>
-          </div>
         </section>
 
         <section className="content">
