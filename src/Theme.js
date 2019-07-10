@@ -999,10 +999,40 @@ module.exports.genTheme = colors => {
       // Language: Vue
       {
         name: 'Vue Directives',
-        scope: 'meta.directive.vue entity.other.attribute-name',
+        scope: [
+          'meta.directive.vue entity.other.attribute-name',
+          'meta.directive.vue punctuation.separator.key-value.html',
+        ],
         settings: {
           foreground: t2,
         },
+      },
+      {
+        name: 'Vue Object Keys (Unquoted)',
+        scope: 'source.directive.vue string.unquoted.label.js',
+        settings: {
+          foreground: t1,
+        },
+      },
+      {
+        name: 'Vue Directive Objects',
+        scope: 'source.directive.vue variable.other.object.js',
+        settings: { foreground: t4 },
+      },
+      {
+        name: 'Vue Embedded Expressions',
+        scope: 'expression.embedded.vue punctuation.definition',
+        settings: { foreground: t1 },
+      },
+      {
+        name: 'Vue Embedded Expression Variables',
+        scope: 'expression.embedded.vue variable.other.readwrite.js',
+        settings: { foreground: m8 },
+      },
+      {
+        name: 'Vue Embedded Expression Variables',
+        scope: 'expression.embedded.vue meta.property.object.js',
+        settings: { foreground: t2 },
       },
       {
         name: 'Vue Directive variables',
@@ -1011,7 +1041,7 @@ module.exports.genTheme = colors => {
           'source.directive.vue punctuation.definition.string',
         ],
         settings: {
-          foreground: t1,
+          foreground: t3,
         },
       },
       {
@@ -1026,6 +1056,13 @@ module.exports.genTheme = colors => {
         scope: 'source.vue meta.tag string.quoted',
         settings: {
           foreground: m8,
+        },
+      },
+      {
+        name: 'String HTML Attribute Values',
+        scope: 'source.vue source.directive.vue string.quoted',
+        settings: {
+          foreground: t3,
         },
       },
       {
@@ -1127,9 +1164,10 @@ module.exports.genTheme = colors => {
         scope: [
           'variable.other.meta.import.js',
           'meta.import.js variable.other',
+          'keyword.operator.module.js',
         ],
         settings: {
-          foreground: t2,
+          foreground: `${t3}bb`,
         },
       },
       {
@@ -1230,6 +1268,13 @@ module.exports.genTheme = colors => {
           'meta.object-literal.key.js string.quoted',
           'meta.object-literal.key.js',
         ],
+        settings: {
+          foreground: t2,
+        },
+      },
+      {
+        name: 'JavaScript Object Keys (Unquoted)',
+        scope: 'string.unquoted.label.js',
         settings: {
           foreground: t2,
         },
