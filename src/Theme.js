@@ -15,7 +15,7 @@ module.exports.genTheme = colors => {
   let m15 = module.exports.gradient(m1, m2)[5];
   let trans = '#00000000';
 
-  let t1, t2, t3, t4, t5, t6, t7;
+  let t1, t2, t3, t4, t5;
   t1 = syntax[0] || null;
   t2 = syntax[1] || null;
   t3 = syntax[2] || null;
@@ -24,8 +24,8 @@ module.exports.genTheme = colors => {
   t6 = syntax[5] || null;
   t7 = syntax[6] || null;
 
-  let pos_faint = `${pos}44`;
-  let neg_faint = `${neg}44`;
+  let pos_faint = `${pos}33`;
+  let neg_faint = `${neg}33`;
   let theme = {
     colors: {
       foreground: m8,

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   faPaste,
   faSave,
   faCogs,
   faClipboardList,
-  faFileExport,
   faCode,
 } from '@fortawesome/free-solid-svg-icons';
 
