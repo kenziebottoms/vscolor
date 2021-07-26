@@ -10,7 +10,9 @@ module.exports.genTheme = colors => {
   m4 = g[2];
   m5 = g[3];
   m6 = g[5];
+  let m55 = module.exports.gradient(m5, m6)[4]
   m7 = g[7];
+  let m65 = module.exports.gradient(m6, m7)[4]
   m8 = fg;
   let m15 = module.exports.gradient(m1, m2)[5];
   let trans = '#00000000';
@@ -202,14 +204,14 @@ module.exports.genTheme = colors => {
         name: 'Comment',
         scope: 'comment',
         settings: {
-          foreground: m5,
+          foreground: m55,
         },
       },
       {
         name: 'Comment Block',
         scope: 'comment.block',
         settings: {
-          foreground: m6,
+          foreground: m65,
         },
       },
       // strings
@@ -224,12 +226,28 @@ module.exports.genTheme = colors => {
         name: 'RegExp String',
         scope: [
           'string.regexp',
-          'string.regexp keyword.other',
+        ],
+        settings: {
+          foreground: t3,
+        },
+      },
+      {
+        name: 'RegExp Slashes',
+        scope: [
           'punctuation.definition.template-expression',
         ],
         settings: {
           foreground: t4,
         },
+      },
+        {
+          name: 'RegExp String Tags',
+          scope: [
+            'string.regexp keyword.other',
+          ],
+          settings: {
+            foreground: t1,
+          },
       },
       {
         name: 'Template Strings',
@@ -296,6 +314,24 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Math ops',
+        scope: [
+          'keyword.operator.arithmetic.js',
+          'keyword.operator.increment.js',
+          'meta.var.expr keyword.operator.assignment'
+        ],
+        settings: {
+          foreground: t2,
+        }
+      },
+      {
+        name: 'Variables in brackets',
+        scope: 'meta.array.literal.js variable.other.readwrite.js',
+        settings: {
+          foreground: t3
+        }
+      },
+      {
         name: 'Constant Character Escape',
         scope: 'constant.character.escape',
         settings: {
@@ -306,7 +342,7 @@ module.exports.genTheme = colors => {
         name: 'Number',
         scope: ['constant.numeric', 'constant.character.numeric'],
         settings: {
-          foreground: t4,
+          foreground: t6 || t4,
         },
       },
       {
@@ -346,11 +382,20 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'undefined',
+        scope: 'constant.language.undefined',
+        settings: {
+          foreground: m7,
+          fontStyle: 'italic',
+        }
+      },
+      {
         name: 'Null',
         scope: 'constant.language.null',
         settings: {
-          foreground: t5 || m6,
-        },
+          foreground: m65,
+          fontStyle: 'bold italic',
+        }
       },
       {
         name: 'Storage type',
