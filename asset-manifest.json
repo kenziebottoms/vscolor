@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/vscolor/static/css/main.04cd7f11.chunk.css",
-    "main.js": "/vscolor/static/js/main.833830e6.chunk.js",
-    "main.js.map": "/vscolor/static/js/main.833830e6.chunk.js.map",
-    "runtime~main.js": "/vscolor/static/js/runtime~main.071f9e06.js",
-    "runtime~main.js.map": "/vscolor/static/js/runtime~main.071f9e06.js.map",
-    "static/js/2.e3a51270.chunk.js": "/vscolor/static/js/2.e3a51270.chunk.js",
-    "static/js/2.e3a51270.chunk.js.map": "/vscolor/static/js/2.e3a51270.chunk.js.map",
+    "main.css": "/vscolor/static/css/main.1bf22b59.chunk.css",
+    "main.js": "/vscolor/static/js/main.7f2390a9.chunk.js",
+    "main.js.map": "/vscolor/static/js/main.7f2390a9.chunk.js.map",
+    "runtime-main.js": "/vscolor/static/js/runtime-main.5095d49b.js",
+    "runtime-main.js.map": "/vscolor/static/js/runtime-main.5095d49b.js.map",
+    "static/js/2.27e56492.chunk.js": "/vscolor/static/js/2.27e56492.chunk.js",
+    "static/js/2.27e56492.chunk.js.map": "/vscolor/static/js/2.27e56492.chunk.js.map",
     "index.html": "/vscolor/index.html",
-    "precache-manifest.06335ac1cd3767e5261d6e267448adf0.js": "/vscolor/precache-manifest.06335ac1cd3767e5261d6e267448adf0.js",
-    "service-worker.js": "/vscolor/service-worker.js",
-    "static/css/main.04cd7f11.chunk.css.map": "/vscolor/static/css/main.04cd7f11.chunk.css.map"
-  }
+    "static/css/main.1bf22b59.chunk.css.map": "/vscolor/static/css/main.1bf22b59.chunk.css.map",
+    "static/js/2.27e56492.chunk.js.LICENSE.txt": "/vscolor/static/js/2.27e56492.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5095d49b.js",
+    "static/js/2.27e56492.chunk.js",
+    "static/css/main.1bf22b59.chunk.css",
+    "static/js/main.7f2390a9.chunk.js"
+  ]
 }
