@@ -2,17 +2,17 @@
   "name": "vscolor",
   "version": "0.1.0",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "ajv": "^6.10.0",
-    "gh-pages": "^2.0.1",
-    "node-sass": "^4.12.0",
-    "react": "^16.8.6",
-    "react-color": "^2.17.3",
-    "react-dom": "^16.8.6",
+    "ajv": "^8.6.2",
+    "gh-pages": "^3.2.3",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-color": "^2.19.3",
+    "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
-    "typescript": "^3.5.1"
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
