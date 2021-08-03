@@ -229,7 +229,30 @@ module.exports.genTheme = colors => {
         ],
         settings: {
           foreground: t3,
+          fontStyle: 'normal'
         },
+      },
+      {
+        name: 'RegExp Keywords',
+        scope: 'keyword.control.anchor.regexp',
+        settings: {
+          fontStyle: 'normal',
+          foreground: t5 || t1
+        }
+      },
+      {
+        name: 'RegExp Escapes',
+        scope: 'constant.character.escape.backslash.regexp',
+        settings: {
+          foreground: t2
+        }
+      },
+      {
+        name: 'RegExp Definition Groups',
+        scope: 'punctuation.definition.group.regexp',
+        settings: {
+          foreground: t4
+        }
       },
       {
         name: 'RegExp Slashes',
@@ -723,6 +746,13 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Keyword Control Flow',
+        scope: 'keyword.control.flow',
+        settings: {
+          foreground: t5 || t2,
+        }
+      },
+      {
         name: 'Keyword Operator Logical',
         scope: 'keyword.operator.logical',
         settings: {
@@ -1038,6 +1068,17 @@ module.exports.genTheme = colors => {
         scope: ['support.function.misc.scss', 'support.function.misc.sass'],
         settings: {
           foreground: t3,
+        },
+      },
+      {
+        name: "SASS URL Parameters",
+        scope: [
+          'variable.parameter.url.scss',
+          'variable.parameter.url.sass'
+        ],
+        settings: {
+          foreground: m65,
+          fontStyle: 'italic underline'
         },
       },
       // Language: Vue
@@ -1364,6 +1405,23 @@ module.exports.genTheme = colors => {
           foreground: t5 || t1,
         },
       },
+      {
+        name: 'Ruby Control Keywords',
+        scope: 'keyword.control',
+        settings: {
+          foreground: t5 || t2
+        }
+      },
+      {
+        name: 'Ruby String Embedded Variables',
+        scope: [
+          'meta.embedded.line.ruby variable.other.readwrite.instance.ruby',
+          'meta.embedded.line.swift'
+        ],
+        settings: {
+          foreground: t4
+        }
+      },
       // Language: LESS
       {
         name: 'LESS Tag names',
@@ -1503,6 +1561,13 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Number Storage Type',
+        scope: 'storage.type.number.python',
+        settings: {
+          foreground: t5 || m6,
+        }
+      },
+      {
         name: 'Python Function Parameter and Arguments',
         scope: [
           'variable.parameter.function.python',
@@ -1523,7 +1588,8 @@ module.exports.genTheme = colors => {
         name: 'Decorator Functions in Python',
         scope: 'entity.name.function.decorator.python',
         settings: {
-          foreground: t4,
+          foreground: t5 || m7,
+          fontStyle: 'italic'
         },
       },
       // Language: TypeScript[React]
@@ -1610,7 +1676,7 @@ module.exports.genTheme = colors => {
         name: 'comment docs',
         scope: 'comment.block.javadoc keyword.other.documentation',
         settings: {
-          foreground: `${t2}90`,
+          foreground: `${t5 || t4}90`,
         },
       },
       {
@@ -1663,21 +1729,56 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Java Class Modifiers',
+        scope: 'meta.class.java storage.modifier.java',
+        settings: {
+          foreground: t2
+        }
+      },
+      {
+        name: 'Java Variable Modifiers',
+        scope: 'meta.class.body.java storage.modifier.java',
+        settings: {
+          foreground: m7
+        }
+      },
+      {
+        name: 'Java Method Modifiers',
+        scope: 'meta.class.body meta.method storage.modifier.java ',
+        settings: {
+          foreground: t2
+        }
+      },
+      {
         name: 'Other object variables',
         scope: [
           'storage.modifier.import.java',
           'meta.import.java storage.modifier.java',
         ],
         settings: {
-          foreground: `${t2}99`,
+          foreground: m6,
         },
+      },
+      {
+        name: 'Import Wildcards',
+        scope: 'storage.modifier.import.java variable.language.wildcard',
+        settings: {
+          foreground: `${t1}99`
+        }
       },
       {
         name: 'Other object variables',
         scope: 'keyword.other.import.java',
         settings: {
-          foreground: `${t3}99`,
+          foreground: `${t2}99`,
         },
+      },
+      {
+        name: 'Java Package',
+        scope: 'keyword.other.package.java',
+        settings: {
+          foreground: t3
+        }
       },
       {
         name: 'Other object variables',
@@ -1685,6 +1786,20 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: `${m8}99`,
         },
+      },
+      {
+        name: 'Java Variable Types',
+        scope: 'meta.definition.variable.java storage.type.java',
+        settings: {
+          foreground: t5 || t3
+        }
+      },
+      {
+        name: 'Java Extends',
+        scope: 'storage.modifier.extends.java',
+        settings: {
+          foreground: m65
+        }
       },
       // global font styles
       {
