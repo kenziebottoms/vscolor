@@ -74,7 +74,7 @@ module.exports.genTheme = colors => {
       'editor.background': m1,
       'editor.foreground': m8,
       'editorWidget.background': m1,
-      'editor.selectionBackground': m4,
+      'editor.selectionBackground': m3,
       'editor.inactiveSelectionBackground': `${fg}11`,
       'editor.selectionHighlightBackground': m3,
       'editor.findMatchBackground': pos_faint,
@@ -109,6 +109,7 @@ module.exports.genTheme = colors => {
       'editorMarkerNavigationWarning.background': neg,
       'editorMarkerNavigation.background': m1,
       'editor.wordHighlightBackground': m3,
+      'editorWhitespace.foreground': m5,
       'editor.wordHighlightStrongBackground': m2,
       'peekViewTitle.background': m1,
       'peekViewTitleLabel.foreground': m8,
@@ -202,7 +203,10 @@ module.exports.genTheme = colors => {
       // comments
       {
         name: 'Comment',
-        scope: 'comment',
+        scope: [
+          'comment',
+          'punctuation.definition.comment'
+        ],
         settings: {
           foreground: m55,
         },
@@ -217,7 +221,11 @@ module.exports.genTheme = colors => {
       // strings
       {
         name: 'String',
-        scope: ['string', 'string.quoted'],
+        scope: [
+          'string',
+          'string.quoted',
+          'punctuation.definition.string'
+        ],
         settings: {
           foreground: t3,
         },
@@ -482,6 +490,7 @@ module.exports.genTheme = colors => {
         ],
         settings: {
           foreground: m8,
+          fontStyle: 'italic'
         },
       },
       {
@@ -818,6 +827,7 @@ module.exports.genTheme = colors => {
           'variable.other.instance',
           'variable.reaedwrite.instance',
           'variable.other.readwrite.instance',
+          'variable.other.readwrite.instance punctuation.definition.variable'
         ],
         settings: {
           foreground: t1,
@@ -995,6 +1005,13 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: m8,
         },
+      },
+      {
+        name: 'C# using',
+        scope: 'keyword.other.using',
+        settings: {
+          foreground: t5 || t1
+        }
       },
       {
         name: 'C# Classes & Storage types',
@@ -1294,6 +1311,16 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Arrow Function Parentheses',
+        scope: [
+          'meta.arrow.js punctuation.definition.parameters.begin.js',
+          'meta.arrow.js punctuation.definition.parameters.end.js'
+        ],
+        settings: {
+          foreground: m65
+        }
+      },
+      {
         name: 'JavaScript Method Declaration e.g. `constructor`',
         scope: 'meta.method.declaration storage.type.js',
         settings: {
@@ -1307,6 +1334,16 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: m8,
         },
+      },
+      {
+        name: 'Export Default',
+        scope: [
+          'meta.export.default.js',
+          'meta.export.default.js keyword.control'
+        ],
+        settings: {
+          foreground: t5 || t1
+        }
       },
       {
         name: 'JavaScript Meta Punctuation Definition',
@@ -1328,7 +1365,7 @@ module.exports.genTheme = colors => {
       },
       {
         name: 'JavaScript Import Statements',
-        scope: ['source.js keyword.control'],
+        scope: 'source.js keyword.control',
         settings: {
           foreground: t2,
         },
@@ -1463,6 +1500,13 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Ruby Keywords',
+        scope: 'source.ruby keyword.control',
+        settings: {
+          foreground: t2
+        }
+      },
+      {
         name: 'Ruby Hashkeys',
         scope: 'constant.language.symbol.hashkey.ruby',
         settings: {
@@ -1470,8 +1514,12 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'Ruby & Swift String Embedded Variables',
-        scope: 'meta.embedded.line.ruby variable.other.readwrite.instance.ruby',
+        name: 'Ruby String Embedded Variables',
+        scope: [
+          'meta.embedded.line.ruby variable.other.readwrite.instance',
+          'meta.embedded.line.ruby variable.other.readwrite.instance punctuation.definition.variable.ruby',
+          'meta.embedded.line.ruby punctuation.definition.variable'
+        ],
         settings: {
           foreground: t5 || t4
         }
@@ -1699,6 +1747,20 @@ module.exports.genTheme = colors => {
         }
       },
       {
+        name: 'Python Flow Control',
+        scope: 'keyword.control.flow.python',
+        settings: {
+          foreground: t2,
+        },
+      },
+      {
+        name: 'Python Built-In Support',
+        scope: 'support.function.builtin.python',
+        settings: {
+          foreground: t5 || t1
+        }
+      },
+      {
         name: 'Number Storage Type',
         scope: 'storage.type.number.python',
         settings: {
@@ -1730,9 +1792,9 @@ module.exports.genTheme = colors => {
           fontStyle: 'italic'
         },
       },
-      // Language: TypeScript[React]
+      // Language: React
       {
-        name: 'TypeScript[React] Variables and Object Properties',
+        name: 'React Variables and Object Properties',
         scope: [
           'variable.other.readwrite.alias.ts',
           'variable.other.readwrite.alias.tsx',
@@ -1752,21 +1814,21 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'TypeScript[React] Entity Name Types',
+        name: 'React Entity Name Types',
         scope: ['entity.name.type.ts', 'entity.name.type.tsx'],
         settings: {
           foreground: t4,
         },
       },
       {
-        name: 'TypeScript[React] Node Classes',
+        name: 'React Node Classes',
         scope: ['support.class.node.ts', 'support.class.node.tsx'],
         settings: {
           foreground: t4,
         },
       },
       {
-        name: 'TypeScript[React] Entity Name Types as Parameters',
+        name: 'React Entity Name Types as Parameters',
         scope: [
           'meta.type.parameters.ts entity.name.type',
           'meta.type.parameters.tsx entity.name.type',
@@ -1776,7 +1838,7 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'TypeScript[React] Import Punctuations',
+        name: 'React Import Punctuations',
         scope: [
           'meta.import.ts punctuation.definition.block',
           'meta.import.tsx punctuation.definition.block',
@@ -1786,7 +1848,7 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'TypeScript[React] Punctuation Decorators',
+        name: 'React Punctuation Decorators',
         scope: [
           'meta.decorator punctuation.decorator.ts',
           'meta.decorator punctuation.decorator.tsx',
@@ -1796,7 +1858,7 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'TypeScript[React] Punctuation Decorators',
+        name: 'React Punctuation Decorators',
         scope: ['meta.jsx.children.tsx', 'meta.tag.js meta.jsx.children.tsx'],
         settings: {
           foreground: t4,
