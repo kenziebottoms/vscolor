@@ -462,7 +462,7 @@ module.exports.genTheme = colors => {
         name: 'Function Parameters',
         scope: 'variable.parameter',
         settings: {
-          foreground: t3,
+          foreground: fg
         },
       },
       // meta
@@ -803,6 +803,13 @@ module.exports.genTheme = colors => {
           foreground: t2,
         },
       },
+      {
+        name: 'Control Keywords',
+        scope: 'keyword.control',
+        settings: {
+          foreground: t5 || t1
+        }
+      },
       // variables
       {
         name: 'Variable Instances',
@@ -1014,6 +1021,16 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: t1,
         },
+      },
+      {
+        name: 'CSS Class Names',
+        scope: [
+          'entity.other.attribute-name.class.css',
+          'entity.other.attribute-name.class.scss'
+        ],
+        settings: {
+          foreground: t4
+        }
       },
       {
         name: 'CSS Pseudo Elements',
@@ -1332,7 +1349,7 @@ module.exports.genTheme = colors => {
       },
       {
         name: 'JavaScript Variable Parameter Function',
-        scope: 'variable.parameter.function.js',
+        scope: 'source.js variable.parameter',
         settings: {
           foreground: t3,
         },
@@ -1453,18 +1470,8 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'Ruby Control Keywords',
-        scope: 'source.ruby keyword.control',
-        settings: {
-          foreground: t2
-        }
-      },
-      {
-        name: 'Ruby String Embedded Variables',
-        scope: [
-          'meta.embedded.line.ruby variable.other.readwrite.instance.ruby',
-          'meta.embedded.line.swift'
-        ],
+        name: 'Ruby & Swift String Embedded Variables',
+        scope: 'meta.embedded.line.ruby variable.other.readwrite.instance.ruby',
         settings: {
           foreground: t5 || t4
         }
@@ -1484,6 +1491,65 @@ module.exports.genTheme = colors => {
         scope: 'entity.name.type.class.ruby',
         settings: {
           fontStyle: 'bold'
+        }
+      },
+      // Language: Swift
+      {
+        name: 'Swift Function Parameters',
+        scope: 'variable.parameter.function.swift entity.name.function.swift',
+        settings: {
+          foreground: fg
+        }
+      },
+      {
+        name: 'Swift Function Parameter Type',
+        scope: 'meta.parameter-clause.swift support.type.swift',
+        settings: {
+          foreground: t3
+        }
+      },
+      {
+        name: 'Swift Class',
+        scope: 'meta.definition.type.class.swift storage.type.class.swift',
+        settings: {
+          foreground: t5 || t4
+        }
+      },
+      {
+        name: 'Swift Class Definition',
+        scope: 'meta.definition.type.class.swift entity.name.type.class.swift',
+        settings: {
+          fontStyle: 'bold',
+          foreground: t3
+        }
+      },
+      {
+        name: 'Swift Class Definition Parent',
+        scope: 'meta.definition.type.class.swift meta.inheritance-clause.swift',
+        settings: {
+          foreground: m65,
+          fontStyle: 'italic'
+        }
+      },
+      {
+        name: 'Swift Keyword Controls',
+        scope: 'source.swift keyword.control',
+        settings: {
+          foreground: t5 || t1
+        }
+      },
+      {
+        name: 'Swift Init',
+        scope: 'meta.definition.function.initializer.swift storage.type.function.swift',
+        settings: {
+          foreground: pos
+        }
+      },
+      {
+        name: 'Swift Embedded Variables',
+        scope: 'meta.embedded.line.swift',
+        settings: {
+          foreground: fg
         }
       },
       // Language: LESS
@@ -1748,7 +1814,7 @@ module.exports.genTheme = colors => {
         name: 'comment docs',
         scope: 'comment.block.javadoc keyword.other.documentation',
         settings: {
-          foreground: `${t5 || t4}90`,
+          foreground: `${t2}90`,
         },
       },
       {
@@ -1808,13 +1874,6 @@ module.exports.genTheme = colors => {
         }
       },
       {
-        name: 'Java Variable Modifiers',
-        scope: 'meta.class.body.java storage.modifier.java',
-        settings: {
-          foreground: m7
-        }
-      },
-      {
         name: 'Java Method Modifiers',
         scope: 'meta.class.body meta.method storage.modifier.java ',
         settings: {
@@ -1849,7 +1908,23 @@ module.exports.genTheme = colors => {
         name: 'Java Package',
         scope: 'keyword.other.package.java',
         settings: {
-          foreground: t3
+          foreground: t3,
+          fontStyle: 'bold italic'
+        }
+      },
+      {
+        name: 'Java Class Name',
+        scope: 'entity.name.type.class.java',
+        settings: {
+          foreground: t4,
+          fontStyle: 'bold',
+        }
+      },
+      {
+        name: 'Java Package Name',
+        scope: 'storage.modifier.package.java',
+        settings: {
+          foreground: m8
         }
       },
       {
@@ -1936,7 +2011,6 @@ module.exports.genTheme = colors => {
           'storage.type.class',
           'type.var',
           'meta.parameter',
-          'variable.parameter',
           'meta.parameters',
           'keyword.control',
           'modifier',
