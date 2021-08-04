@@ -362,8 +362,12 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'Number',
-        scope: ['constant.numeric', 'constant.character.numeric'],
+        name: 'Numbers',
+        scope: [
+          'constant.numeric',
+          'constant.character.numeric',
+          'constant.numeric.hex'
+        ],
         settings: {
           foreground: t6 || t4,
         },
@@ -469,7 +473,7 @@ module.exports.genTheme = colors => {
           foreground: m8,
         },
       },
-      // documentation
+      // documentation, JSDoc
       {
         name: 'Entity Names in Code Documentations',
         scope: [
@@ -486,6 +490,39 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: t3,
         },
+      },
+      {
+        name: '@param in JSDoc',
+        scope: [
+          'storage.type.class.jsdoc',
+          'punctuation.definition.block.tag.jsdoc'
+        ],
+        settings: {
+          foreground: t5 || t1,
+          fontStyle: 'italic'
+        },
+      },
+      {
+        name: 'Variable Types in JSDoc',
+        scope: 'entity.name.type.instance.jsdoc',
+        settings: {
+          foreground: m8
+        }
+      },
+      {
+        name: 'Curlies in JSDoc',
+        scope: 'entity.name.type.instance.jsdoc punctuation.definition.bracket',
+        settings: {
+          foreground: m65,
+          fontStyle: 'italic'
+        }
+      },
+      {
+        name: 'Variable names in JSDoc',
+        scope: 'comment.block.documentation.js variable.other.jsdoc',
+        settings: {
+          fontStyle: 'bold'
+        }
       },
       // Language: HTML
       {
@@ -631,6 +668,13 @@ module.exports.genTheme = colors => {
         settings: {
           foreground: t4,
         },
+      },
+      {
+        name: 'Storage Modifier Default',
+        scope: 'storage.modifier',
+        settings: {
+          foreground: t1
+        }
       },
       {
         name: 'Keyword Operator Relational',
@@ -972,6 +1016,16 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'CSS Pseudo Elements',
+        scope: [
+          'entity.other.attribute-name.pseudo-element.css',
+          'entity.other.attribute-name.pseudo-element.scss'
+        ],
+        settings: {
+          foreground: t4
+        }
+      },
+      {
         name: '@media Query Headers',
         scope: [
           'keyword.control.at-rule',
@@ -1259,7 +1313,7 @@ module.exports.genTheme = colors => {
         name: 'JavaScript Import Statements',
         scope: ['source.js keyword.control'],
         settings: {
-          foreground: t5 || t1,
+          foreground: t2,
         },
       },
       {
@@ -1271,16 +1325,9 @@ module.exports.genTheme = colors => {
       },
       {
         name: 'JavaScript Conditionals',
-        scope: ['source.js keyword.control.conditional'],
+        scope: ['keyword.control.conditional.js'],
         settings: {
-          foreground: t5 || t1,
-        },
-      },
-      {
-        name: 'JavaScript Hex',
-        scope: 'constant.numeric.hex.js',
-        settings: {
-          foreground: t5 || t4,
+          foreground: t2,
         },
       },
       {
@@ -1407,9 +1454,9 @@ module.exports.genTheme = colors => {
       },
       {
         name: 'Ruby Control Keywords',
-        scope: 'keyword.control',
+        scope: 'source.ruby keyword.control',
         settings: {
-          foreground: t5 || t2
+          foreground: t2
         }
       },
       {
@@ -1419,7 +1466,24 @@ module.exports.genTheme = colors => {
           'meta.embedded.line.swift'
         ],
         settings: {
-          foreground: t4
+          foreground: t5 || t4
+        }
+      },
+      {
+        name: 'Ruby Class Names',
+        scope: [
+          'source.ruby support.class',
+          'entity.name.type.class.ruby',
+        ],
+        settings: {
+          foreground: t1
+        }
+      },
+      {
+        name: 'Ruby Class Definition',
+        scope: 'entity.name.type.class.ruby',
+        settings: {
+          fontStyle: 'bold'
         }
       },
       // Language: LESS
@@ -1561,10 +1625,18 @@ module.exports.genTheme = colors => {
         },
       },
       {
+        name: 'Python Logical Operators',
+        scope: 'keyword.operator.logical.python',
+        settings: {
+          foreground: t2,
+          fontStyle: 'italic'
+        }
+      },
+      {
         name: 'Number Storage Type',
         scope: 'storage.type.number.python',
         settings: {
-          foreground: t5 || m6,
+          foreground: m6,
         }
       },
       {
@@ -1588,7 +1660,7 @@ module.exports.genTheme = colors => {
         name: 'Decorator Functions in Python',
         scope: 'entity.name.function.decorator.python',
         settings: {
-          foreground: t5 || m7,
+          foreground: m7,
           fontStyle: 'italic'
         },
       },
