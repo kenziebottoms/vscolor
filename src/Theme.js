@@ -322,10 +322,24 @@ module.exports.genTheme = colors => {
       },
       // booleans
       {
-        name: 'Boolean',
+        name: 'Booleans',
         scope: 'constant.language.boolean',
         settings: {
-          foreground: t5 || t1,
+          fontStyle: 'bold'
+        }
+      },
+      {
+        name: 'True',
+        scope: 'constant.language.boolean.true',
+        settings: {
+          foreground: `${pos}bb`,
+        },
+      },
+      {
+        name: 'False',
+        scope: 'constant.language.boolean.false',
+        settings: {
+          foreground: `${neg}bb`,
         },
       },
       // constants
@@ -1369,10 +1383,21 @@ module.exports.genTheme = colors => {
         name: 'Export Default',
         scope: [
           'meta.export.default.js',
-          'meta.export.default.js keyword.control'
+          'meta.export.default.js keyword.control',
+          'keyword.control.export.js',
         ],
         settings: {
-          foreground: t5 || t1
+          foreground: m65
+        }
+      },
+      {
+        name: 'Export Default Item',
+        scope: [
+          'meta.export.default.js variable.other.readwrite.js',
+        ],
+        settings: {
+          foreground: t3,
+          fontStyle: 'bold'
         }
       },
       {
@@ -1390,14 +1415,14 @@ module.exports.genTheme = colors => {
           'keyword.operator.module.js',
         ],
         settings: {
-          foreground: `${t3}bb`,
+          foreground: t3,
         },
       },
       {
         name: 'JavaScript Import Statements',
         scope: 'source.js keyword.control',
         settings: {
-          foreground: t2,
+          foreground: t5 || t1,
         },
       },
       {
