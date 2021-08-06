@@ -162,17 +162,36 @@ module.exports.genTheme = colors => {
       'extensionButton.prominentBackground': t3,
       'extensionButton.prominentForeground': m1,
       'extensionButton.prominentHoverBackground': t3,
-      'settings.textInputBackground': m3,
-      'settings.checkboxBackground': m3,
-      'settings.numberInputBackground': m3,
-      'settings.dropdownBackground': m3,
-      'settings.checkboxForeground': m8,
+
+      // Settings Editor Colors
+      // https://code.visualstudio.com/api/references/theme-color#settings-editor-colors
+      'settings.headerForeground': ui,
       'settings.inactiveSelectedItemBorder': ui,
-      'settings.modifiedItemForeground': ui,
+      'settings.modifiedItemIndicator': ui,
+      
+      'settings.textInputForeground': fg,
+      'settings.textInputBackground': m3,
       'settings.textInputBorder': trans,
-      'settings.checkboxBorder': trans,
+      
+      'settings.numberInputForeground': fg,
+      'settings.numberInputBackground': m3,
       'settings.numberInputBorder': trans,
+      
+      'settings.checkboxForeground': fg,
+      'settings.checkboxBackground': m3,
+      'settings.checkboxBorder': trans,
+
+      'settings.dropdownForeground': m8,
+      'settings.dropdownBackground': m3,
       'settings.dropdownBorder': trans,
+      'settings.dropdownListBorder': ui,
+      
+      'settings.rowHoverBackground': m1,
+      'settings.focusedRowBackground': m2,
+      'settings.focusedRowBorder': m2,
+
+      // Integrated Terminal Colors
+      // https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
       'terminal.ansiBlack': m7,
       'terminal.ansiRed': neg,
       'terminal.ansiGreen': pos,
@@ -189,6 +208,9 @@ module.exports.genTheme = colors => {
       'terminal.ansiBrightMagenta': t2,
       'terminal.ansiBrightCyan': t3,
       'terminal.ansiBrightWhite': m8,
+
+      // Git Colors
+      // https://code.visualstudio.com/api/references/theme-color#git-colors
       'gitDecoration.addedResourceForeground': pos,
       'gitDecoration.modifiedResourceForeground': ui,
       'gitDecoration.stageModifiedResourceForeground': t5,
@@ -196,8 +218,16 @@ module.exports.genTheme = colors => {
       'gitDecoration.ignoredResourceForeground': m6,
       'gitDecoration.conflictingResourceForeground': neg,
       'gitDecoration.submoduleResourceForeground': t3,
-      'textLink.foreground': t5,
-      'textLink.activeForeground': t5 || t1,
+
+      // Text Colors — Colors inside a text document/markdown preview.
+      // https://code.visualstudio.com/api/references/theme-color#text-colors
+      'textPreformat.foreground': t3,
+      'textBlockQuote.background': `${ui}2a`,
+      'textBlockQuote.border': ui,
+      'textCodeBlock.background': '#00000033',
+      'textLink.activeForeground': `${ui}aa`,
+      'textLink.foreground': ui,
+      'textSeparator.foreground': '#00000022',
     },
     tokenColors: [
       // comments
@@ -1619,16 +1649,26 @@ module.exports.genTheme = colors => {
       // Language: Markdown
       {
         name: 'Markdown Headings',
-        scope: 'markup.heading.markdown',
+        scope: [
+          'markup.heading.markdown',
+          'markup.heading.markdown entity.name.section.markdown'
+        ],
         settings: {
-          foreground: t4,
+          foreground: t1,
         },
+      },
+      {
+        name: 'Markdown Heading #',
+        scope: 'punctuation.definition.heading.markdown',
+        settings: {
+          foreground: `${t1}88`
+        }
       },
       {
         name: 'Markdown Italics',
         scope: 'markup.italic.markdown',
         settings: {
-          foreground: t1,
+          foreground: fg,
           fontStyle: 'italic',
         },
       },
@@ -1641,19 +1681,42 @@ module.exports.genTheme = colors => {
         },
       },
       {
-        name: 'Markdown Quote + others',
-        scope: 'markup.quote.markdown',
+        name: 'Markdown Quote',
+        scope: [
+          'markup.quote.markdown',
+          'markup.quote.markdown meta.paragraph.markdown'
+        ],
         settings: {
-          foreground: t3,
+          foreground: ui,
           fontStyle: 'italic',
         },
       },
       {
+        name: 'Markdown Quote >',
+        scope: [
+          'punctuation.definition.quote.begin.markdown',
+          'punctuation.definition.quote.end.markdown',
+        ],
+        settings: {
+          foreground: `${ui}88`
+        }
+      },
+      {
         name: 'Markdown Raw Code + others',
-        scope: 'markup.inline.raw.markdown',
+        scope: [
+          'markup.inline.raw.markdown',
+          'markup.inline.raw.string.markdown'
+        ],
         settings: {
           foreground: t3,
         },
+      },
+      {
+        name: 'Markdown Raw Code Ticks',
+        scope: 'punctuation.definition.raw.markdown',
+        settings: {
+          foreground: `${t3}88`
+        }
       },
       {
         name: 'Markdown Links',
@@ -1670,35 +1733,29 @@ module.exports.genTheme = colors => {
         scope: [
           'string.other.link.title.markdown',
           'string.other.link.description.markdown',
+          'meta.link.inline.markdown string.other.link.title.markdown'
         ],
         settings: {
-          foreground: m8,
+          foreground: t2,
+          fontStyle: ''
         },
       },
       {
         name: 'Markdown Punctuation',
         scope: [
-          'punctuation.definition.string.markdown',
-          'punctuation.definition.string.begin.markdown',
-          'punctuation.definition.string.end.markdown',
-          'meta.link.inline.markdown punctuation.definition.string',
+          'text.html.markdown punctuation.definition',
+          'punctuation.definition.bold.markdown',
+          'punctuation.definition.italic.markdown',
+          'meta.link.inline.markdown punctuation.definition.string.begin.markdown',
+          'meta.link.inline.markdown punctuation.definition.string.end.markdown',
+          'punctuation.definition.metadata.markdown',
+          'punctuation.definition.markdown',
+          'punctuation.definition.list.begin.markdown',
+          'punctuation.definition.list.end.markdown',
+          'fenced_code.block.language.markdown'
         ],
         settings: {
-          foreground: t4,
-        },
-      },
-      {
-        name: 'Markdown MetaData Punctuation',
-        scope: ['punctuation.definition.metadata.markdown'],
-        settings: {
-          foreground: t1,
-        },
-      },
-      {
-        name: 'Markdown List Punctuation',
-        scope: ['beginning.punctuation.definition.list.markdown'],
-        settings: {
-          foreground: t2,
+          foreground: m6,
         },
       },
       // Language: PHP
