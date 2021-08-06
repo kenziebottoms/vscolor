@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/vscolor/static/css/main.1bf22b59.chunk.css",
-    "main.js": "/vscolor/static/js/main.0638586d.chunk.js",
-    "main.js.map": "/vscolor/static/js/main.0638586d.chunk.js.map",
+    "main.js": "/vscolor/static/js/main.ee027b7c.chunk.js",
+    "main.js.map": "/vscolor/static/js/main.ee027b7c.chunk.js.map",
     "runtime-main.js": "/vscolor/static/js/runtime-main.5095d49b.js",
     "runtime-main.js.map": "/vscolor/static/js/runtime-main.5095d49b.js.map",
     "static/js/2.27e56492.chunk.js": "/vscolor/static/js/2.27e56492.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.5095d49b.js",
     "static/js/2.27e56492.chunk.js",
     "static/css/main.1bf22b59.chunk.css",
-    "static/js/main.0638586d.chunk.js"
+    "static/js/main.ee027b7c.chunk.js"
   ]
 }
