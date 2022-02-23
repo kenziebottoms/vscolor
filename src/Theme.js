@@ -1,33 +1,33 @@
-module.exports.genTheme = colors => {
+export const genTheme = colors => {
   let { syntax, bg, fg, pos, neg, ui } = colors;
 
   // sets the workbench colors to a gradient between bg and fg
   let m1, m2, m3, m4, m5, m6, m7, m8;
-  let g = module.exports.gradient(bg, fg);
+  let g = gradient(bg, fg);
   m1 = bg;
   m2 = g[0];
   m3 = g[1];
   m4 = g[2];
   m5 = g[3];
   m6 = g[5];
-  let m55 = module.exports.gradient(m5, m6)[4]
+  let m55 = gradient(m5, m6)[4]
   m7 = g[7];
-  let m65 = module.exports.gradient(m6, m7)[4]
+  let m65 = gradient(m6, m7)[4]
   m8 = fg;
-  let m15 = module.exports.gradient(m1, m2)[5];
+  let m15 = gradient(m1, m2)[5];
   let trans = '#00000000';
 
-  let t1, t2, t3, t4, t5;
+  let t1, t2, t3, t4, t5, t6;
   t1 = syntax[0] || null;
   t2 = syntax[1] || null;
   t3 = syntax[2] || null;
   t4 = syntax[3] || null;
   t5 = syntax[4] || null;
   t6 = syntax[5] || null;
-  t7 = syntax[6] || null;
 
-  let pos_faint = `${pos}33`;
-  let neg_faint = `${neg}33`;
+  let pos_faint = gradient(bg, pos)[2];
+  let neg_faint = gradient(bg, neg)[2];
+  let neg_mild = gradient(bg, neg)[6];
   let theme = {
     colors: {
       foreground: m8,
@@ -104,7 +104,8 @@ module.exports.genTheme = colors => {
       'editorLineNumber.foreground': m6,
       'editorRuler.foreground': m6,
       'editorError.foreground': neg,
-      'editorWarning.foreground': neg,
+      'editorWarning.foreground': neg_mild,
+      'editorInfo.foreground': t3,
       'editorMarkerNavigationError.background': neg,
       'editorMarkerNavigationWarning.background': neg,
       'editorMarkerNavigation.background': m1,
@@ -2194,8 +2195,8 @@ module.exports.genTheme = colors => {
   return theme;
 };
 
-module.exports.genSettings = colors => {
-  let theme = module.exports.genTheme(colors);
+export const genSettings = colors => {
+  let theme = genTheme(colors);
   return {
     'workbench.colorCustomizations': theme.colors,
     'editor.tokenColorCustomizations': {
@@ -2227,7 +2228,7 @@ const blend = (c1, c2, p) => {
   );
 };
 
-module.exports.gradient = (c1, c2) => {
+export const gradient = (c1, c2) => {
   return [
     blend(c1, c2, 0.075),
     blend(c1, c2, 0.125),
