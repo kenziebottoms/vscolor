@@ -1,20 +1,7 @@
 export const genTheme = colors => {
   let { syntax, bg, fg, pos, neg, ui } = colors;
 
-  // sets the workbench colors to a gradient between bg and fg
-  let m1, m2, m3, m4, m5, m6, m7, m8;
-  let g = gradient(bg, fg);
-  m1 = bg;
-  m2 = g[0];
-  m3 = g[1];
-  m4 = g[2];
-  m5 = g[3];
-  m6 = g[5];
-  let m55 = gradient(m5, m6)[4]
-  m7 = g[7];
-  let m65 = gradient(m6, m7)[4]
-  m8 = fg;
-  let m15 = gradient(m1, m2)[5];
+  const monoSpec = gradient(bg, fg)
   let trans = '#00000000';
 
   let t1, t2, t3, t4, t5, t6;
@@ -25,69 +12,69 @@ export const genTheme = colors => {
   t5 = syntax[4] || null;
   t6 = syntax[5] || null;
 
-  let pos_faint = gradient(bg, pos)[2];
-  let neg_faint = gradient(bg, neg)[2];
-  let neg_mild = gradient(bg, neg)[6];
+  const posSpec = gradient(bg, pos)
+  const negSpec = gradient(bg, neg)
+
   let theme = {
     colors: {
-      foreground: m8,
+      foreground: monoSpec['100'],
       errorForeground: neg,
       focusBorder: trans,
-      contrastBorder: m1,
-      'input.foreground': m8,
-      'input.background': m2,
-      'input.placeholderForeground': m6,
+      contrastBorder: monoSpec['0'],
+      'input.foreground': monoSpec['100'],
+      'input.background': monoSpec['7.5'],
+      'input.placeholderForeground': monoSpec['50'],
       'input.border': `${ui}44`,
-      'inputOption.activeBorder': m8,
+      'inputOption.activeBorder': monoSpec['100'],
       'inputValidation.infoBackground': t3,
       'inputValidation.infoBorder': t3,
-      'inputValidation.warningBackground': neg_faint,
-      'inputValidation.warningBorder': neg_faint,
+      'inputValidation.warningBackground': negSpec['20'],
+      'inputValidation.warningBorder': negSpec['20'],
       'inputValidation.errorBackground': neg,
       'inputValidation.errorBorder': neg,
-      'dropdown.background': m1,
-      'dropdown.foreground': m8,
+      'dropdown.background': monoSpec['0'],
+      'dropdown.foreground': monoSpec['100'],
       'dropdown.border': trans,
       'list.errorForeground': neg,
       'list.warningForeground': neg,
       'list.invalidItemForeground': neg,
-      'list.focusBackground': m4,
-      'list.focusForeground': m8,
-      'list.activeSelectionBackground': m4,
-      'list.activeSelectionForeground': m8,
-      'list.inactiveSelectionBackground': m3,
-      'list.inactiveFocusBackground': m3,
-      'list.inactiveSelectionForeground': m8,
-      'list.hoverBackground': m2,
-      'list.hoverForeground': m8,
-      'list.highlightForeground': m8,
+      'list.focusBackground': monoSpec['20'],
+      'list.focusForeground': monoSpec['100'],
+      'list.activeSelectionBackground': monoSpec['20'],
+      'list.activeSelectionForeground': monoSpec['100'],
+      'list.inactiveSelectionBackground': monoSpec['12.5'],
+      'list.inactiveFocusBackground': monoSpec['12.5'],
+      'list.inactiveSelectionForeground': monoSpec['100'],
+      'list.hoverBackground': monoSpec['7.5'],
+      'list.hoverForeground': monoSpec['100'],
+      'list.highlightForeground': monoSpec['100'],
       'pickerGroup.foreground': t3,
-      'button.foreground': m1,
+      'button.foreground': monoSpec['0'],
       'button.background': ui,
       'button.hoverBackground': t3,
       'badge.background': ui,
-      'badge.foreground': m1,
-      'scrollbarSlider.background': m4,
-      'scrollbarSlider.hoverBackground': m3,
-      'scrollbarSlider.activeBackground': m3,
+      'badge.foreground': monoSpec['0'],
+      'scrollbarSlider.background': monoSpec['20'],
+      'scrollbarSlider.hoverBackground': monoSpec['12.5'],
+      'scrollbarSlider.activeBackground': monoSpec['12.5'],
       'progressBar.background': t3,
-      'editor.background': m1,
-      'editor.foreground': m8,
-      'editorWidget.background': m1,
-      'editor.selectionBackground': m3,
+      'editor.background': monoSpec['0'],
+      'editor.foreground': monoSpec['100'],
+      'editorWidget.background': monoSpec['0'],
+      'editor.selectionBackground': monoSpec['12.5'],
       'editor.inactiveSelectionBackground': `${fg}11`,
-      'editor.selectionHighlightBackground': m3,
-      'editor.findMatchBackground': pos_faint,
-      'editor.findMatchHighlightBackground': pos_faint,
+      'editor.selectionHighlightBackground': monoSpec['12.5'],
+      'editor.findMatchBackground': posSpec['20'],
+      'editor.findMatchHighlightBackground': posSpec['20'],
       'editor.findRangeHighlightBackground': `${fg}22`,
       'editor.hoverHighlightBackground': `${fg}11`,
-      'editorSuggestWidget.background': m2,
-      'editorSuggestWidget.border': m5,
-      'editorSuggestWidget.foreground': m8,
-      'editorHoverWidget.background': m2,
+      'editorSuggestWidget.background': monoSpec['7.5'],
+      'editorSuggestWidget.border': monoSpec['30'],
+      'editorSuggestWidget.foreground': monoSpec['100'],
+      'editorHoverWidget.background': monoSpec['7.5'],
       'editorHoverWidget.border': ui,
-      'diffEditor.insertedTextBackground': pos_faint,
-      'diffEditor.removedTextBackground': neg_faint,
+      'diffEditor.insertedTextBackground': posSpec['20'],
+      'diffEditor.removedTextBackground': negSpec['20'],
       'diffEditor.insertedTextBorder': trans,
       'diffEditor.removedTextBorder': trans,
       'merge.currentHeaderBackground': t3,
@@ -98,70 +85,70 @@ export const genTheme = colors => {
       'editor.lineHighlightBackground': `${fg}11`,
       'editor.lineHighlightBorder': trans,
       'editor.rangeHighlightBackground': `${fg}22`,
-      'editorCursor.foreground': m6,
-      'editorIndentGuide.background': m3,
-      'editorIndentGuide.activeBackground': m5,
-      'editorLineNumber.foreground': m6,
-      'editorRuler.foreground': m6,
+      'editorCursor.foreground': monoSpec['50'],
+      'editorIndentGuide.background': monoSpec['12.5'],
+      'editorIndentGuide.activeBackground': monoSpec['30'],
+      'editorLineNumber.foreground': monoSpec['50'],
+      'editorRuler.foreground': monoSpec['50'],
       'editorError.foreground': neg,
-      'editorWarning.foreground': neg_mild,
+      'editorWarning.foreground': negSpec['60'],
       'editorInfo.foreground': t3,
       'editorMarkerNavigationError.background': neg,
       'editorMarkerNavigationWarning.background': neg,
-      'editorMarkerNavigation.background': m1,
-      'editor.wordHighlightBackground': m3,
-      'editorWhitespace.foreground': m5,
-      'editor.wordHighlightStrongBackground': m2,
-      'peekViewTitle.background': m1,
-      'peekViewTitleLabel.foreground': m8,
+      'editorMarkerNavigation.background': monoSpec['0'],
+      'editor.wordHighlightBackground': monoSpec['12.5'],
+      'editorWhitespace.foreground': monoSpec['30'],
+      'editor.wordHighlightStrongBackground': monoSpec['7.5'],
+      'peekViewTitle.background': monoSpec['0'],
+      'peekViewTitleLabel.foreground': monoSpec['100'],
       'peekView.border': t3,
-      'peekViewResult.lineForeground': m8,
-      'peekViewResult.fileForeground': m8,
-      'peekViewResult.selectionForeground': m8,
-      'peekViewResult.matchHighlightBackground': pos_faint,
-      'peekViewEditor.matchHighlightBackground': pos_faint,
-      'tab.activeBackground': m3,
-      'tab.inactiveBackground': m2,
-      'tab.border': m1,
+      'peekViewResult.lineForeground': monoSpec['100'],
+      'peekViewResult.fileForeground': monoSpec['100'],
+      'peekViewResult.selectionForeground': monoSpec['100'],
+      'peekViewResult.matchHighlightBackground': posSpec['20'],
+      'peekViewEditor.matchHighlightBackground': posSpec['20'],
+      'tab.activeBackground': monoSpec['12.5'],
+      'tab.inactiveBackground': monoSpec['7.5'],
+      'tab.border': monoSpec['0'],
       'tab.activeBorder': ui,
-      'tab.unfocusedActiveBorder': m1,
-      'tab.activeForeground': m8,
-      'tab.inactiveForeground': m6,
-      'editorGroupHeader.tabsBackground': m1,
-      'editorGroupHeader.tabsBorder': m1,
-      'panel.background': m1,
-      'panel.border': m3,
-      'panelTitle.activeForeground': m8,
-      'panelTitle.inactiveForeground': m6,
+      'tab.unfocusedActiveBorder': monoSpec['0'],
+      'tab.activeForeground': monoSpec['100'],
+      'tab.inactiveForeground': monoSpec['50'],
+      'editorGroupHeader.tabsBackground': monoSpec['0'],
+      'editorGroupHeader.tabsBorder': monoSpec['0'],
+      'panel.background': monoSpec['0'],
+      'panel.border': monoSpec['12.5'],
+      'panelTitle.activeForeground': monoSpec['100'],
+      'panelTitle.inactiveForeground': monoSpec['50'],
       'panelTitle.activeBorder': ui,
-      'statusBar.foreground': `${m8}88`,
-      'statusBar.background': m1,
-      'statusBar.noFolderBackground': m1,
-      'statusBar.border': m1,
-      'statusBar.debuggingBackground': neg_faint,
-      'activityBar.background': m1,
+      'statusBar.foreground': `${monoSpec['100']}88`,
+      'statusBar.background': monoSpec['0'],
+      'statusBar.noFolderBackground': monoSpec['0'],
+      'statusBar.border': monoSpec['0'],
+      'statusBar.debuggingBackground': negSpec['20'],
+      'activityBar.background': monoSpec['0'],
       'activityBar.foreground': `${ui}cc`,
       'activityBar.border': trans,
       'activityBar.dropBackground': `${ui}55`,
       'activityBarBadge.background': ui,
-      'activityBarBadge.foreground': m1,
-      'sideBar.background': m15,
-      'sideBar.foreground': m8,
+      'activityBarBadge.foreground': monoSpec['0'],
+      'sideBar.background': monoSpec['4'],
+      'sideBar.foreground': monoSpec['100'],
       'sideBar.border': trans,
-      'sideBarTitle.foreground': m8,
-      'sideBarSectionHeader.background': m1,
-      'sideBarSectionHeader.foreground': m6,
-      'titleBar.activeForeground': m6,
-      'titleBar.inactiveForeground': m6,
-      'titleBar.activeBackground': m1,
+      'sideBarTitle.foreground': monoSpec['100'],
+      'sideBarSectionHeader.background': monoSpec['0'],
+      'sideBarSectionHeader.foreground': monoSpec['50'],
+      'titleBar.activeForeground': monoSpec['50'],
+      'titleBar.inactiveForeground': monoSpec['50'],
+      'titleBar.activeBackground': monoSpec['0'],
       'debugExceptionWidget.border': t3,
-      'debugExceptionWidget.background': m1,
+      'debugExceptionWidget.background': monoSpec['0'],
       'editorGutter.modifiedBackground': `${ui}44`,
-      'editorGutter.addedBackground': pos_faint,
-      'editorGutter.deletedBackground': neg_faint,
-      'debugToolBar.background': m1,
+      'editorGutter.addedBackground': posSpec['20'],
+      'editorGutter.deletedBackground': negSpec['20'],
+      'debugToolBar.background': monoSpec['0'],
       'extensionButton.prominentBackground': t3,
-      'extensionButton.prominentForeground': m1,
+      'extensionButton.prominentForeground': monoSpec['0'],
       'extensionButton.prominentHoverBackground': t3,
 
       // Settings Editor Colors
@@ -171,44 +158,44 @@ export const genTheme = colors => {
       'settings.modifiedItemIndicator': ui,
       
       'settings.textInputForeground': fg,
-      'settings.textInputBackground': m3,
+      'settings.textInputBackground': monoSpec['12.5'],
       'settings.textInputBorder': trans,
       
       'settings.numberInputForeground': fg,
-      'settings.numberInputBackground': m3,
+      'settings.numberInputBackground': monoSpec['12.5'],
       'settings.numberInputBorder': trans,
       
       'settings.checkboxForeground': fg,
-      'settings.checkboxBackground': m3,
+      'settings.checkboxBackground': monoSpec['12.5'],
       'settings.checkboxBorder': trans,
 
-      'settings.dropdownForeground': m8,
-      'settings.dropdownBackground': m3,
+      'settings.dropdownForeground': monoSpec['100'],
+      'settings.dropdownBackground': monoSpec['12.5'],
       'settings.dropdownBorder': trans,
       'settings.dropdownListBorder': ui,
       
-      'settings.rowHoverBackground': m1,
-      'settings.focusedRowBackground': m2,
-      'settings.focusedRowBorder': m2,
+      'settings.rowHoverBackground': monoSpec['0'],
+      'settings.focusedRowBackground': monoSpec['7.5'],
+      'settings.focusedRowBorder': monoSpec['7.5'],
 
       // Integrated Terminal Colors
       // https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
-      'terminal.ansiBlack': m7,
+      'terminal.ansiBlack': monoSpec['70'],
       'terminal.ansiRed': neg,
       'terminal.ansiGreen': pos,
       'terminal.ansiYellow': t4,
       'terminal.ansiBlue': t5,
       'terminal.ansiMagenta': t1,
       'terminal.ansiCyan': t3,
-      'terminal.ansiWhite': m8,
-      'terminal.ansiBrightBlack': m7,
+      'terminal.ansiWhite': monoSpec['100'],
+      'terminal.ansiBrightBlack': monoSpec['70'],
       'terminal.ansiBrightRed': neg,
       'terminal.ansiBrightGreen': pos,
       'terminal.ansiBrightYellow': t4,
       'terminal.ansiBrightBlue': t3,
       'terminal.ansiBrightMagenta': t2,
       'terminal.ansiBrightCyan': t3,
-      'terminal.ansiBrightWhite': m8,
+      'terminal.ansiBrightWhite': monoSpec['100'],
 
       // Git Colors
       // https://code.visualstudio.com/api/references/theme-color#git-colors
@@ -216,7 +203,7 @@ export const genTheme = colors => {
       'gitDecoration.modifiedResourceForeground': ui,
       'gitDecoration.stageModifiedResourceForeground': t5,
       'gitDecoration.untrackedResourceForeground': pos,
-      'gitDecoration.ignoredResourceForeground': m6,
+      'gitDecoration.ignoredResourceForeground': monoSpec['50'],
       'gitDecoration.conflictingResourceForeground': neg,
       'gitDecoration.submoduleResourceForeground': t3,
 
@@ -239,14 +226,14 @@ export const genTheme = colors => {
           'punctuation.definition.comment'
         ],
         settings: {
-          foreground: m55,
+          foreground: monoSpec['40'],
         },
       },
       {
         name: 'Comment Block',
         scope: 'comment.block',
         settings: {
-          foreground: m65,
+          foreground: monoSpec['60'],
         },
       },
       // strings
@@ -361,7 +348,7 @@ export const genTheme = colors => {
           'source.elixir constant.other.keywords.elixir',
         ],
         settings: {
-          foreground: t5 || m7,
+          foreground: t5 || monoSpec['70'],
         },
       },
       {
@@ -437,7 +424,7 @@ export const genTheme = colors => {
         name: 'Keyword',
         scope: ['punctuation.accessor', 'keyword'],
         settings: {
-          foreground: m7,
+          foreground: monoSpec['70'],
         },
       },
       {
@@ -465,7 +452,7 @@ export const genTheme = colors => {
         name: 'undefined',
         scope: 'constant.language.undefined',
         settings: {
-          foreground: m7,
+          foreground: monoSpec['70'],
           fontStyle: 'italic',
         }
       },
@@ -473,7 +460,7 @@ export const genTheme = colors => {
         name: 'Null',
         scope: 'constant.language.null',
         settings: {
-          foreground: m65,
+          foreground: monoSpec['60'],
           fontStyle: 'bold italic',
         }
       },
@@ -523,7 +510,7 @@ export const genTheme = colors => {
         name: 'Meta Tag',
         scope: ['punctuation.definition.tag', 'meta.tag'],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       // documentation, JSDoc
@@ -534,7 +521,7 @@ export const genTheme = colors => {
           'entity.name.type.instance.phpdoc',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
           fontStyle: 'italic'
         },
       },
@@ -560,14 +547,14 @@ export const genTheme = colors => {
         name: 'Variable Types in JSDoc',
         scope: 'entity.name.type.instance.jsdoc',
         settings: {
-          foreground: m8
+          foreground: monoSpec['100']
         }
       },
       {
         name: 'Curlies in JSDoc',
         scope: 'entity.name.type.instance.jsdoc punctuation.definition.bracket',
         settings: {
-          foreground: m65,
+          foreground: monoSpec['60'],
           fontStyle: 'italic'
         }
       },
@@ -748,7 +735,7 @@ export const genTheme = colors => {
         name: 'Meta Brace',
         scope: 'meta.brace',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -762,7 +749,7 @@ export const genTheme = colors => {
         name: 'Object Comma',
         scope: 'object.comma',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -833,7 +820,7 @@ export const genTheme = colors => {
         name: 'Punctuation Definition Parameters',
         scope: 'punctuation.definition.parameters',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -896,7 +883,7 @@ export const genTheme = colors => {
         name: 'Variable Property Other',
         scope: 'variable.other.object.property',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -917,7 +904,7 @@ export const genTheme = colors => {
         name: 'Support Function',
         scope: 'support.function',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       // errors
@@ -967,7 +954,7 @@ export const genTheme = colors => {
         name: 'Variable Function',
         scope: 'variable.function',
         settings: {
-          foreground: t5 || m8,
+          foreground: t5 || monoSpec['100'],
         },
       },
       {
@@ -1033,7 +1020,7 @@ export const genTheme = colors => {
         name: 'CoffeeScript Parameter Function',
         scope: 'variable.parameter.function.coffee',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1048,7 +1035,7 @@ export const genTheme = colors => {
         name: 'C# Readwrite Variables',
         scope: 'variable.other.readwrite.cs',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1148,7 +1135,7 @@ export const genTheme = colors => {
         name: 'CSS Property Names',
         scope: 'support.type.property-name.css',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1210,7 +1197,7 @@ export const genTheme = colors => {
           'variable.parameter.url.sass'
         ],
         settings: {
-          foreground: m65,
+          foreground: monoSpec['60'],
           fontStyle: 'italic underline'
         },
       },
@@ -1245,7 +1232,7 @@ export const genTheme = colors => {
       {
         name: 'Vue Embedded Expression Variables',
         scope: 'expression.embedded.vue variable.other.readwrite.js',
-        settings: { foreground: m8 },
+        settings: { foreground: monoSpec['100'] },
       },
       {
         name: 'Vue Embedded Expression Variables',
@@ -1273,7 +1260,7 @@ export const genTheme = colors => {
         name: 'String HTML Attribute Values',
         scope: 'source.vue meta.tag string.quoted',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1362,7 +1349,7 @@ export const genTheme = colors => {
           'meta.arrow.js punctuation.definition.parameters.end.js'
         ],
         settings: {
-          foreground: m65
+          foreground: monoSpec['60']
         }
       },
       {
@@ -1377,7 +1364,7 @@ export const genTheme = colors => {
         name: 'JavaScript Terminator',
         scope: 'terminator.js',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1388,7 +1375,7 @@ export const genTheme = colors => {
           'keyword.control.export.js',
         ],
         settings: {
-          foreground: m65
+          foreground: monoSpec['60']
         }
       },
       {
@@ -1405,7 +1392,7 @@ export const genTheme = colors => {
         name: 'JavaScript Meta Punctuation Definition',
         scope: 'meta.js punctuation.definition.js',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1451,7 +1438,7 @@ export const genTheme = colors => {
         name: 'JavaScript Variable Other ReadWrite',
         scope: 'variable.other.readwrite.js',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1470,7 +1457,7 @@ export const genTheme = colors => {
           'variable.object.property.jsx',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1480,14 +1467,14 @@ export const genTheme = colors => {
           'meta.jsx punctuation.definition.tag',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
         name: 'JavaScript Variables',
         scope: ['variable.js', 'variable.other.js'],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1501,7 +1488,7 @@ export const genTheme = colors => {
         name: 'JavaScript Support Classes',
         scope: 'support.class.js',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1552,7 +1539,7 @@ export const genTheme = colors => {
         name: 'Ruby Variables',
         scope: 'variable.other.ruby',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1631,7 +1618,7 @@ export const genTheme = colors => {
         name: 'Swift Class Definition Parent',
         scope: 'meta.definition.type.class.swift meta.inheritance-clause.swift',
         settings: {
-          foreground: m65,
+          foreground: monoSpec['60'],
           fontStyle: 'italic'
         }
       },
@@ -1702,7 +1689,7 @@ export const genTheme = colors => {
         name: 'Markdown Bold',
         scope: 'markup.bold.markdown',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
           fontStyle: 'bold',
         },
       },
@@ -1781,7 +1768,7 @@ export const genTheme = colors => {
           'fenced_code.block.language.markdown'
         ],
         settings: {
-          foreground: m6,
+          foreground: monoSpec['50'],
         },
       },
       // Language: PHP
@@ -1796,7 +1783,7 @@ export const genTheme = colors => {
         name: 'Punctuations in PHP function calls',
         scope: 'meta.function-call.php punctuation',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1847,7 +1834,7 @@ export const genTheme = colors => {
         name: 'Number Storage Type',
         scope: 'storage.type.number.python',
         settings: {
-          foreground: m6,
+          foreground: monoSpec['50'],
         }
       },
       {
@@ -1864,14 +1851,14 @@ export const genTheme = colors => {
         name: 'Punctuations in Python',
         scope: 'punctuation.python',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
         name: 'Decorator Functions in Python',
         scope: 'entity.name.function.decorator.python',
         settings: {
-          foreground: m7,
+          foreground: monoSpec['70'],
           fontStyle: 'italic'
         },
       },
@@ -1893,7 +1880,7 @@ export const genTheme = colors => {
           'variable.ts',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1917,7 +1904,7 @@ export const genTheme = colors => {
           'meta.type.parameters.tsx entity.name.type',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1927,7 +1914,7 @@ export const genTheme = colors => {
           'meta.import.tsx punctuation.definition.block',
         ],
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -1980,7 +1967,7 @@ export const genTheme = colors => {
         name: 'Separating Commas',
         scope: 'punctuation.separator',
         settings: {
-          foreground: m7,
+          foreground: monoSpec['70'],
         },
       },
       {
@@ -2001,7 +1988,7 @@ export const genTheme = colors => {
         name: 'Other object variables',
         scope: 'variable.other.object.java',
         settings: {
-          foreground: m8,
+          foreground: monoSpec['100'],
         },
       },
       {
@@ -2032,7 +2019,7 @@ export const genTheme = colors => {
           'meta.import.java storage.modifier.java',
         ],
         settings: {
-          foreground: m6,
+          foreground: monoSpec['50'],
         },
       },
       {
@@ -2069,14 +2056,14 @@ export const genTheme = colors => {
         name: 'Java Package Name',
         scope: 'storage.modifier.package.java',
         settings: {
-          foreground: m8
+          foreground: monoSpec['100']
         }
       },
       {
         name: 'Other object variables',
         scope: 'meta.import.java punctuation',
         settings: {
-          foreground: `${m8}99`,
+          foreground: `${monoSpec['100']}99`,
         },
       },
       {
@@ -2090,7 +2077,7 @@ export const genTheme = colors => {
         name: 'Java Extends',
         scope: 'storage.modifier.extends.java',
         settings: {
-          foreground: m65
+          foreground: monoSpec['60']
         }
       },
       // global font styles
@@ -2228,16 +2215,25 @@ const blend = (c1, c2, p) => {
   );
 };
 
+/**
+ * Return a mapped spectrum of colors from `color1` to `color2` (inclusive)
+ * @param {string} c1 - The hex code of the first color in format `#000000`
+ * @param {string} c2 - The hex code of the second color in format `#000000`
+ */
 export const gradient = (c1, c2) => {
-  return [
-    blend(c1, c2, 0.075),
-    blend(c1, c2, 0.125),
-    blend(c1, c2, 0.2),
-    blend(c1, c2, 0.3),
-    blend(c1, c2, 0.4),
-    blend(c1, c2, 0.5),
-    blend(c1, c2, 0.6),
-    blend(c1, c2, 0.7),
-    blend(c1, c2, 0.9),
-  ];
+  return {
+    0: c1,
+    4: blend(c1, c2, 0.04),
+    7.5: blend(c1, c2, 0.075),
+    12.5: blend(c1, c2, 0.125),
+    20: blend(c1, c2, 0.2),
+    30: blend(c1, c2, 0.3),
+    40: blend(c1, c2, 0.4),
+    50: blend(c1, c2, 0.5),
+    55: blend(c1, c2, 0.55),
+    60: blend(c1, c2, 0.6),
+    70: blend(c1, c2, 0.7),
+    90: blend(c1, c2, 0.9),
+    100: c2,
+  };
 };
