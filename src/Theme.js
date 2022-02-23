@@ -1,21 +1,24 @@
-export const genTheme = colors => {
-  let { syntax, bg, fg, pos, neg, ui } = colors;
-
+/**
+ * Generates color theme settings from an object full of colors in the format `#ffffff`
+ * @param {Object} colors 
+ * @param {Object[]} colors.syntax - A list of colors to use for syntax highlighting
+ * @param {string} bg - The color to use as the background color
+ * @param {string} fg - The color to use as the text color
+ * @param {string} pos - The color to use for success messages and diff additions
+ * @param {string} neg - The color to use for error indicators and diff subtractions
+ * @param {string} ui - The color to use as UI accent
+ * Note: does not mutate the original color theme object
+ */
+export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
   const monoSpec = gradient(bg, fg)
   let trans = '#00000000';
 
-  let t1, t2, t3, t4, t5, t6;
-  t1 = syntax[0] || null;
-  t2 = syntax[1] || null;
-  t3 = syntax[2] || null;
-  t4 = syntax[3] || null;
-  t5 = syntax[4] || null;
-  t6 = syntax[5] || null;
+  const palette = syntax.map(color => color || null)
 
   const posSpec = gradient(bg, pos)
   const negSpec = gradient(bg, neg)
 
-  let theme = {
+  return {
     colors: {
       foreground: monoSpec['100'],
       errorForeground: neg,
@@ -26,8 +29,8 @@ export const genTheme = colors => {
       'input.placeholderForeground': monoSpec['50'],
       'input.border': `${ui}44`,
       'inputOption.activeBorder': monoSpec['100'],
-      'inputValidation.infoBackground': t3,
-      'inputValidation.infoBorder': t3,
+      'inputValidation.infoBackground': palette[2],
+      'inputValidation.infoBorder': palette[2],
       'inputValidation.warningBackground': negSpec['20'],
       'inputValidation.warningBorder': negSpec['20'],
       'inputValidation.errorBackground': neg,
@@ -48,16 +51,16 @@ export const genTheme = colors => {
       'list.hoverBackground': monoSpec['7.5'],
       'list.hoverForeground': monoSpec['100'],
       'list.highlightForeground': monoSpec['100'],
-      'pickerGroup.foreground': t3,
+      'pickerGroup.foreground': palette[2],
       'button.foreground': monoSpec['0'],
       'button.background': ui,
-      'button.hoverBackground': t3,
+      'button.hoverBackground': palette[2],
       'badge.background': ui,
       'badge.foreground': monoSpec['0'],
       'scrollbarSlider.background': monoSpec['20'],
       'scrollbarSlider.hoverBackground': monoSpec['12.5'],
       'scrollbarSlider.activeBackground': monoSpec['12.5'],
-      'progressBar.background': t3,
+      'progressBar.background': palette[2],
       'editor.background': monoSpec['0'],
       'editor.foreground': monoSpec['100'],
       'editorWidget.background': monoSpec['0'],
@@ -77,11 +80,11 @@ export const genTheme = colors => {
       'diffEditor.removedTextBackground': negSpec['20'],
       'diffEditor.insertedTextBorder': trans,
       'diffEditor.removedTextBorder': trans,
-      'merge.currentHeaderBackground': t3,
-      'merge.incomingHeaderBackground': t3,
-      'editorOverviewRuler.currentContentForeground': t3,
-      'editorOverviewRuler.incomingContentForeground': t3,
-      'editorOverviewRuler.commonContentForeground': t3,
+      'merge.currentHeaderBackground': palette[2],
+      'merge.incomingHeaderBackground': palette[2],
+      'editorOverviewRuler.currentContentForeground': palette[2],
+      'editorOverviewRuler.incomingContentForeground': palette[2],
+      'editorOverviewRuler.commonContentForeground': palette[2],
       'editor.lineHighlightBackground': `${fg}11`,
       'editor.lineHighlightBorder': trans,
       'editor.rangeHighlightBackground': `${fg}22`,
@@ -92,7 +95,7 @@ export const genTheme = colors => {
       'editorRuler.foreground': monoSpec['50'],
       'editorError.foreground': neg,
       'editorWarning.foreground': negSpec['60'],
-      'editorInfo.foreground': t3,
+      'editorInfo.foreground': palette[2],
       'editorMarkerNavigationError.background': neg,
       'editorMarkerNavigationWarning.background': neg,
       'editorMarkerNavigation.background': monoSpec['0'],
@@ -101,7 +104,7 @@ export const genTheme = colors => {
       'editor.wordHighlightStrongBackground': monoSpec['7.5'],
       'peekViewTitle.background': monoSpec['0'],
       'peekViewTitleLabel.foreground': monoSpec['100'],
-      'peekView.border': t3,
+      'peekView.border': palette[2],
       'peekViewResult.lineForeground': monoSpec['100'],
       'peekViewResult.fileForeground': monoSpec['100'],
       'peekViewResult.selectionForeground': monoSpec['100'],
@@ -141,15 +144,15 @@ export const genTheme = colors => {
       'titleBar.activeForeground': monoSpec['50'],
       'titleBar.inactiveForeground': monoSpec['50'],
       'titleBar.activeBackground': monoSpec['0'],
-      'debugExceptionWidget.border': t3,
+      'debugExceptionWidget.border': palette[2],
       'debugExceptionWidget.background': monoSpec['0'],
       'editorGutter.modifiedBackground': `${ui}44`,
       'editorGutter.addedBackground': posSpec['20'],
       'editorGutter.deletedBackground': negSpec['20'],
       'debugToolBar.background': monoSpec['0'],
-      'extensionButton.prominentBackground': t3,
+      'extensionButton.prominentBackground': palette[2],
       'extensionButton.prominentForeground': monoSpec['0'],
-      'extensionButton.prominentHoverBackground': t3,
+      'extensionButton.prominentHoverBackground': palette[2],
 
       // Settings Editor Colors
       // https://code.visualstudio.com/api/references/theme-color#settings-editor-colors
@@ -183,33 +186,33 @@ export const genTheme = colors => {
       'terminal.ansiBlack': monoSpec['70'],
       'terminal.ansiRed': neg,
       'terminal.ansiGreen': pos,
-      'terminal.ansiYellow': t4,
-      'terminal.ansiBlue': t5,
-      'terminal.ansiMagenta': t1,
-      'terminal.ansiCyan': t3,
+      'terminal.ansiYellow': palette[3],
+      'terminal.ansiBlue': palette[4],
+      'terminal.ansiMagenta': palette[0],
+      'terminal.ansiCyan': palette[2],
       'terminal.ansiWhite': monoSpec['100'],
       'terminal.ansiBrightBlack': monoSpec['70'],
       'terminal.ansiBrightRed': neg,
       'terminal.ansiBrightGreen': pos,
-      'terminal.ansiBrightYellow': t4,
-      'terminal.ansiBrightBlue': t3,
-      'terminal.ansiBrightMagenta': t2,
-      'terminal.ansiBrightCyan': t3,
+      'terminal.ansiBrightYellow': palette[3],
+      'terminal.ansiBrightBlue': palette[2],
+      'terminal.ansiBrightMagenta': palette[1],
+      'terminal.ansiBrightCyan': palette[2],
       'terminal.ansiBrightWhite': monoSpec['100'],
 
       // Git Colors
       // https://code.visualstudio.com/api/references/theme-color#git-colors
       'gitDecoration.addedResourceForeground': pos,
       'gitDecoration.modifiedResourceForeground': ui,
-      'gitDecoration.stageModifiedResourceForeground': t5,
+      'gitDecoration.stageModifiedResourceForeground': palette[4],
       'gitDecoration.untrackedResourceForeground': pos,
       'gitDecoration.ignoredResourceForeground': monoSpec['50'],
       'gitDecoration.conflictingResourceForeground': neg,
-      'gitDecoration.submoduleResourceForeground': t3,
+      'gitDecoration.submoduleResourceForeground': palette[2],
 
       // Text Colors — Colors inside a text document/markdown preview.
       // https://code.visualstudio.com/api/references/theme-color#text-colors
-      'textPreformat.foreground': t3,
+      'textPreformat.foreground': palette[2],
       'textBlockQuote.background': `${ui}2a`,
       'textBlockQuote.border': ui,
       'textCodeBlock.background': '#00000033',
@@ -245,7 +248,7 @@ export const genTheme = colors => {
           'punctuation.definition.string'
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -254,7 +257,7 @@ export const genTheme = colors => {
           'string.regexp',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
           fontStyle: ''
         },
       },
@@ -263,21 +266,21 @@ export const genTheme = colors => {
         scope: 'keyword.control.anchor.regexp',
         settings: {
           fontStyle: '',
-          foreground: t5 || t1
+          foreground: palette[4] || palette[0]
         }
       },
       {
         name: 'RegExp Escapes',
         scope: 'constant.character.escape.backslash.regexp',
         settings: {
-          foreground: t2
+          foreground: palette[1]
         }
       },
       {
         name: 'RegExp Definition Groups',
         scope: 'punctuation.definition.group.regexp',
         settings: {
-          foreground: t4
+          foreground: palette[3]
         }
       },
       {
@@ -286,7 +289,7 @@ export const genTheme = colors => {
           'punctuation.definition.template-expression',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
         {
@@ -295,7 +298,7 @@ export const genTheme = colors => {
             'string.regexp keyword.other',
           ],
           settings: {
-            foreground: t1,
+            foreground: palette[0],
           },
       },
       {
@@ -305,7 +308,7 @@ export const genTheme = colors => {
           'string.template.js',
         ],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       // booleans
@@ -335,7 +338,7 @@ export const genTheme = colors => {
         name: 'Support Constant Math',
         scope: 'support.constant.math',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -348,14 +351,14 @@ export const genTheme = colors => {
           'source.elixir constant.other.keywords.elixir',
         ],
         settings: {
-          foreground: t5 || monoSpec['70'],
+          foreground: palette[4] || monoSpec['70'],
         },
       },
       {
         name: 'User-defined constant',
         scope: ['constant.character', 'constant.other'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -366,14 +369,14 @@ export const genTheme = colors => {
           'keyword.other.new',
         ],
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'JSON Support Constants',
         scope: 'support.constant.json',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -384,21 +387,21 @@ export const genTheme = colors => {
           'meta.var.expr keyword.operator.assignment'
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         }
       },
       {
         name: 'Variables in brackets',
         scope: 'meta.array.literal.js variable.other.readwrite.js',
         settings: {
-          foreground: t3
+          foreground: palette[2]
         }
       },
       {
         name: 'Constant Character Escape',
         scope: 'constant.character.escape',
         settings: {
-          foreground: t5 || t3,
+          foreground: palette[4] || palette[2],
         },
       },
       {
@@ -409,14 +412,14 @@ export const genTheme = colors => {
           'constant.numeric.hex'
         ],
         settings: {
-          foreground: t6 || t4,
+          foreground: palette[5] || palette[3],
         },
       },
       {
         name: 'Variable',
         scope: 'variable',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       // keywords
@@ -431,21 +434,21 @@ export const genTheme = colors => {
         name: 'Keyword Other Unit',
         scope: 'keyword.other.unit',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Keyword Operator',
         scope: 'keyword.operator',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Storage',
         scope: 'storage',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -472,7 +475,7 @@ export const genTheme = colors => {
           'meta.class meta.method.declaration meta.var.expr storage.type.js',
         ],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       // class names
@@ -480,14 +483,14 @@ export const genTheme = colors => {
         name: 'Class name',
         scope: ['entity.name.class', 'meta.class entity.name.type.class'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Inherited class',
         scope: 'entity.other.inherited-class',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       // function names
@@ -495,7 +498,7 @@ export const genTheme = colors => {
         name: 'Function name',
         scope: 'entity.name.function',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -529,7 +532,7 @@ export const genTheme = colors => {
         name: 'Other Variables in Code Documentations',
         scope: ['variable.other.jsdoc', 'variable.other.phpdoc'],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -539,7 +542,7 @@ export const genTheme = colors => {
           'punctuation.definition.block.tag.jsdoc'
         ],
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
           fontStyle: 'italic'
         },
       },
@@ -578,7 +581,7 @@ export const genTheme = colors => {
           'meta.tag.html',
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -606,7 +609,7 @@ export const genTheme = colors => {
           'punctuation.definition.tag',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -616,28 +619,28 @@ export const genTheme = colors => {
           'meta.tag.metadata.script punctuation.definition.tag',
         ],
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'HTML Punctuation Definition Tag',
         scope: 'punctuation.definition.tag.html',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Tag attribute',
         scope: 'entity.other.attribute-name',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'HTML attribute values',
         scope: 'meta.attribute string.quoted',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -650,21 +653,21 @@ export const genTheme = colors => {
           'meta.attribute.src.html entity.other.attribute-name',
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Entity Name Tag Custom',
         scope: 'entity.name.tag.custom',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Unicode',
         scope: 'constant.character.entity.named',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -678,7 +681,7 @@ export const genTheme = colors => {
           'meta.tag.metadata.doctype.html punctuation.definition.tag',
         ],
         settings: {
-          foreground: `${t2}99`,
+          foreground: `${palette[1]}99`,
           fontStyle: 'italic',
         },
       },
@@ -686,49 +689,49 @@ export const genTheme = colors => {
         name: 'Library (function & constant)',
         scope: ['support.constant'],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Support Constant Property Value meta',
         scope: 'support.constant.meta.property-value',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Library class/type',
         scope: ['support.type', 'support.class'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Support Variable DOM',
         scope: 'support.variable.dom',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Storage Modifier Default',
         scope: 'storage.modifier',
         settings: {
-          foreground: t1
+          foreground: palette[0]
         }
       },
       {
         name: 'Keyword Operator Relational',
         scope: 'keyword.operator.relational',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Keyword Operator Assignment',
         scope: 'keyword.operator.assignment',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -742,7 +745,7 @@ export const genTheme = colors => {
         name: 'Meta Delimiter Period',
         scope: 'meta.delimiter.period',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -756,7 +759,7 @@ export const genTheme = colors => {
         name: 'Variable Parameter Function',
         scope: 'variable.parameter.function',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -768,14 +771,14 @@ export const genTheme = colors => {
           'meta.property-list entity.name.tag',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Entity Name tag reference in stylesheets',
         scope: 'meta.property-list entity.name.tag.reference',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -785,35 +788,35 @@ export const genTheme = colors => {
           'constant.other.color.rgb-value.hex.css',
         ],
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Constant Other Color',
         scope: 'constant.other.color',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Meta Selector',
         scope: 'meta.selector',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Entity Other Attribute Name Id',
         scope: 'entity.other.attribute-name.id',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Meta Property Name',
         scope: 'meta.property-name',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -827,28 +830,28 @@ export const genTheme = colors => {
         name: 'Keyword Control Operator',
         scope: 'keyword.control.operator',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Keyword Control Flow',
         scope: 'keyword.control.flow',
         settings: {
-          foreground: t5 || t2,
+          foreground: palette[4] || palette[1],
         }
       },
       {
         name: 'Keyword Operator Logical',
         scope: 'keyword.operator.logical',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Control Keywords',
         scope: 'keyword.control',
         settings: {
-          foreground: t5 || t1
+          foreground: palette[4] || palette[0]
         }
       },
       // variables
@@ -862,21 +865,21 @@ export const genTheme = colors => {
           'variable.other.readwrite.instance punctuation.definition.variable'
         ],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Language Variable',
         scope: 'variable.language',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Variable Property Other',
         scope: ['variable.other.property'],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -890,14 +893,14 @@ export const genTheme = colors => {
         name: 'Entity Name Function',
         scope: 'entity.name.function',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Keyword Operator Comparison',
         scope: 'keyword.operator.comparison',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -940,49 +943,49 @@ export const genTheme = colors => {
         name: 'Support Variable Property',
         scope: 'support.variable.property',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'DOM Support Variable Property',
         scope: 'support.variable.property.dom.js',
         settings: {
-          foreground: t5 || t3,
+          foreground: palette[4] || palette[2],
         },
       },
       {
         name: 'Variable Function',
         scope: 'variable.function',
         settings: {
-          foreground: t5 || monoSpec['100'],
+          foreground: palette[4] || monoSpec['100'],
         },
       },
       {
         name: 'Variable Interpolation',
         scope: 'variable.interpolation',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Meta Function Call',
         scope: 'meta.function-call',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Punctuation Section Embedded',
         scope: 'punctuation.section.embedded',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Italics',
         scope: 'italic',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
           fontStyle: 'italic',
         },
       },
@@ -990,7 +993,7 @@ export const genTheme = colors => {
         name: 'Bold',
         scope: 'bold',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
           fontStyle: 'bold',
         },
       },
@@ -998,14 +1001,14 @@ export const genTheme = colors => {
         name: 'Quote',
         scope: 'quote',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Raw Code',
         scope: 'raw',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       // language: CoffeeScript
@@ -1013,7 +1016,7 @@ export const genTheme = colors => {
         name: 'CoffeeScript Variable Assignment',
         scope: 'variable.assignment.coffee',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -1027,7 +1030,7 @@ export const genTheme = colors => {
         name: 'CoffeeScript Assignments',
         scope: 'variable.assignment.coffee',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       // Language: C#
@@ -1042,21 +1045,21 @@ export const genTheme = colors => {
         name: 'C# using',
         scope: 'keyword.other.using',
         settings: {
-          foreground: t5 || t1
+          foreground: palette[4] || palette[0]
         }
       },
       {
         name: 'C# Classes & Storage types',
         scope: ['entity.name.type.class.cs', 'storage.type.cs'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'C# Namespaces',
         scope: 'entity.name.type.namespace.cs',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       // Language: CSS
@@ -1068,7 +1071,7 @@ export const genTheme = colors => {
           'entity.name.tag.custom.css',
         ],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -1078,7 +1081,7 @@ export const genTheme = colors => {
           'entity.other.attribute-name.class.scss'
         ],
         settings: {
-          foreground: t4
+          foreground: palette[3]
         }
       },
       {
@@ -1088,7 +1091,7 @@ export const genTheme = colors => {
           'entity.other.attribute-name.pseudo-element.scss'
         ],
         settings: {
-          foreground: t4
+          foreground: palette[3]
         }
       },
       {
@@ -1098,7 +1101,7 @@ export const genTheme = colors => {
           'keyword.control.at-rule punctuation.definition',
         ],
         settings: {
-          foreground: t5,
+          foreground: palette[4],
           fontStyle: 'bold',
         },
       },
@@ -1112,7 +1115,7 @@ export const genTheme = colors => {
           'keyword.operator.combinator.css',
         ],
         settings: {
-          foreground: t5,
+          foreground: palette[4],
           fontStyle: 'bold',
         },
       },
@@ -1120,7 +1123,7 @@ export const genTheme = colors => {
         name: 'CSS Units and Numbers',
         scope: ['source.css keyword.other.unit', 'source.css constant.numeric'],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -1128,7 +1131,7 @@ export const genTheme = colors => {
         scope:
           'meta.attribute-selector.css entity.other.attribute-name.attribute',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -1145,7 +1148,7 @@ export const genTheme = colors => {
           'meta.property-value.scss support.type.property-name.css',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       // Language: SASS/SCSS
@@ -1156,7 +1159,7 @@ export const genTheme = colors => {
           'source.css.sass meta.at-rule variable',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -1166,28 +1169,28 @@ export const genTheme = colors => {
           'meta.attribute-selector.sass entity.other.attribute-name.attribute',
         ],
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Tag names in SASS',
         scope: ['entity.name.tag.scss', 'entity.name.tag.sass'],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'SASS Keyword Other Unit',
         scope: ['keyword.other.unit.scss', 'keyword.other.unit.sass'],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'SASS Support Functions',
         scope: ['support.function.misc.scss', 'support.function.misc.sass'],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1209,25 +1212,25 @@ export const genTheme = colors => {
           'meta.directive.vue punctuation.separator.key-value.html',
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Vue Object Keys (Unquoted)',
         scope: 'source.directive.vue string.unquoted.label.js',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Vue Directive Objects',
         scope: 'source.directive.vue variable.other.object.js',
-        settings: { foreground: t4 },
+        settings: { foreground: palette[3] },
       },
       {
         name: 'Vue Embedded Expressions',
         scope: 'expression.embedded.vue punctuation.definition',
-        settings: { foreground: t1 },
+        settings: { foreground: palette[0] },
       },
       {
         name: 'Vue Embedded Expression Variables',
@@ -1237,7 +1240,7 @@ export const genTheme = colors => {
       {
         name: 'Vue Embedded Expression Variables',
         scope: 'expression.embedded.vue meta.property.object.js',
-        settings: { foreground: t2 },
+        settings: { foreground: palette[1] },
       },
       {
         name: 'Vue Directive variables',
@@ -1246,14 +1249,14 @@ export const genTheme = colors => {
           'source.directive.vue punctuation.definition.string',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'String Params in Vue Directives',
         scope: 'meta.directive.vue string.quoted.single.js',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -1267,7 +1270,7 @@ export const genTheme = colors => {
         name: 'String HTML Attribute Values',
         scope: 'source.vue source.directive.vue string.quoted',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1292,21 +1295,21 @@ export const genTheme = colors => {
           'source.elixir meta.module.elixir entity.name.class.elixir',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Elixir Functions',
         scope: 'source.elixir entity.name.function',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Elixir String Punctuations',
         scope: 'source.elixir punctuation.definition.string',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1316,14 +1319,14 @@ export const genTheme = colors => {
           'source.elixir variable.other.readwrite.module.elixir punctuation.definition.variable.elixir',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Elixir Binary Punctuations',
         scope: 'source.elixir .punctuation.binary.elixir',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       // Language: Go
@@ -1331,7 +1334,7 @@ export const genTheme = colors => {
         name: 'Go Function Calls',
         scope: 'source.go meta.function-call.go',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       // Language: JavaScript
@@ -1339,7 +1342,7 @@ export const genTheme = colors => {
         name: 'JavaScript Classes',
         scope: 'meta.class entity.name.type.class.js',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -1356,7 +1359,7 @@ export const genTheme = colors => {
         name: 'JavaScript Method Declaration e.g. `constructor`',
         scope: 'meta.method.declaration storage.type.js',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
           fontStyle: '',
         },
       },
@@ -1384,7 +1387,7 @@ export const genTheme = colors => {
           'meta.export.default.js variable.other.readwrite.js',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
           fontStyle: 'bold'
         }
       },
@@ -1403,35 +1406,35 @@ export const genTheme = colors => {
           'keyword.operator.module.js',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'JavaScript Import Statements',
         scope: 'source.js keyword.control',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'JavaScript Export Default',
         scope: ['support.type.object.module.js'],
         settings: {
-          foreground: `${t4}99`,
+          foreground: `${palette[3]}99`,
         },
       },
       {
         name: 'JavaScript Conditionals',
         scope: ['keyword.control.conditional.js'],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'JavaScript Variable Parameter Function',
         scope: 'source.js variable.parameter',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1445,7 +1448,7 @@ export const genTheme = colors => {
         name: 'JavaScript Variable Other ReadWrite',
         scope: 'string.quoted.double.js meta.object-literal.key',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
@@ -1481,7 +1484,7 @@ export const genTheme = colors => {
         name: 'JavaScript Entity Name Type',
         scope: ['entity.name.type.js', 'entity.name.type.module.js'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -1498,14 +1501,14 @@ export const genTheme = colors => {
           'meta.object-literal.key.js',
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'JavaScript Object Keys (Unquoted)',
         scope: 'string.unquoted.label.js',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       // Language: JSON
@@ -1513,7 +1516,7 @@ export const genTheme = colors => {
         name: 'JSON Property Names',
         scope: 'support.type.property-name.json',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -1523,7 +1526,7 @@ export const genTheme = colors => {
           'string.quoted.double.json punctuation.definition.string.json',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1531,7 +1534,7 @@ export const genTheme = colors => {
         scope:
           'meta.structure.dictionary.json meta.structure.dictionary.value constant.language',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       // language: Ruby
@@ -1546,14 +1549,14 @@ export const genTheme = colors => {
         name: 'Ruby Keywords',
         scope: 'source.ruby keyword.control',
         settings: {
-          foreground: t2
+          foreground: palette[1]
         }
       },
       {
         name: 'Ruby Hashkeys',
         scope: 'constant.language.symbol.hashkey.ruby',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -1564,7 +1567,7 @@ export const genTheme = colors => {
           'meta.embedded.line.ruby punctuation.definition.variable'
         ],
         settings: {
-          foreground: t5 || t4
+          foreground: palette[4] || palette[3]
         }
       },
       {
@@ -1574,7 +1577,7 @@ export const genTheme = colors => {
           'entity.name.type.class.ruby',
         ],
         settings: {
-          foreground: t1
+          foreground: palette[0]
         }
       },
       {
@@ -1596,14 +1599,14 @@ export const genTheme = colors => {
         name: 'Swift Function Parameter Type',
         scope: 'meta.parameter-clause.swift support.type.swift',
         settings: {
-          foreground: t3
+          foreground: palette[2]
         }
       },
       {
         name: 'Swift Class',
         scope: 'meta.definition.type.class.swift storage.type.class.swift',
         settings: {
-          foreground: t5 || t4
+          foreground: palette[4] || palette[3]
         }
       },
       {
@@ -1611,7 +1614,7 @@ export const genTheme = colors => {
         scope: 'meta.definition.type.class.swift entity.name.type.class.swift',
         settings: {
           fontStyle: 'bold',
-          foreground: t3
+          foreground: palette[2]
         }
       },
       {
@@ -1626,7 +1629,7 @@ export const genTheme = colors => {
         name: 'Swift Keyword Controls',
         scope: 'source.swift keyword.control',
         settings: {
-          foreground: t5 || t1
+          foreground: palette[4] || palette[0]
         }
       },
       {
@@ -1648,7 +1651,7 @@ export const genTheme = colors => {
         name: 'LESS Tag names',
         scope: 'entity.name.tag.less',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -1656,7 +1659,7 @@ export const genTheme = colors => {
         scope:
           'meta.attribute-selector.less entity.other.attribute-name.attribute',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       // Language: Markdown
@@ -1667,14 +1670,14 @@ export const genTheme = colors => {
           'markup.heading.markdown entity.name.section.markdown'
         ],
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
         name: 'Markdown Heading #',
         scope: 'punctuation.definition.heading.markdown',
         settings: {
-          foreground: `${t1}88`
+          foreground: `${palette[0]}88`
         }
       },
       {
@@ -1721,14 +1724,14 @@ export const genTheme = colors => {
           'markup.inline.raw.string.markdown'
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Markdown Raw Code Ticks',
         scope: 'punctuation.definition.raw.markdown',
         settings: {
-          foreground: `${t3}88`
+          foreground: `${palette[2]}88`
         }
       },
       {
@@ -1738,7 +1741,7 @@ export const genTheme = colors => {
           'markup.underline.link.image.markdown',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1749,7 +1752,7 @@ export const genTheme = colors => {
           'meta.link.inline.markdown string.other.link.title.markdown'
         ],
         settings: {
-          foreground: t2,
+          foreground: palette[1],
           fontStyle: ''
         },
       },
@@ -1776,7 +1779,7 @@ export const genTheme = colors => {
         name: 'Support Classes in PHP',
         scope: 'support.class.php',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -1790,14 +1793,14 @@ export const genTheme = colors => {
         name: 'PHP Global Variables',
         scope: 'variable.other.global.php',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Declaration Punctuation in PHP Global Variables',
         scope: 'variable.other.global.php punctuation.definition.variable',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       // Language: Python
@@ -1805,14 +1808,14 @@ export const genTheme = colors => {
         name: 'Language Constants in Python',
         scope: 'constant.language.python',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
         name: 'Python Logical Operators',
         scope: 'keyword.operator.logical.python',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
           fontStyle: 'italic'
         }
       },
@@ -1820,14 +1823,14 @@ export const genTheme = colors => {
         name: 'Python Flow Control',
         scope: 'keyword.control.flow.python',
         settings: {
-          foreground: t2,
+          foreground: palette[1],
         },
       },
       {
         name: 'Python Built-In Support',
         scope: 'support.function.builtin.python',
         settings: {
-          foreground: t5 || t1
+          foreground: palette[4] || palette[0]
         }
       },
       {
@@ -1844,7 +1847,7 @@ export const genTheme = colors => {
           'meta.function-call.arguments.python',
         ],
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
@@ -1887,14 +1890,14 @@ export const genTheme = colors => {
         name: 'React Entity Name Types',
         scope: ['entity.name.type.ts', 'entity.name.type.tsx'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'React Node Classes',
         scope: ['support.class.node.ts', 'support.class.node.tsx'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
@@ -1924,21 +1927,21 @@ export const genTheme = colors => {
           'meta.decorator punctuation.decorator.tsx',
         ],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'React Punctuation Decorators',
         scope: ['meta.jsx.children.tsx', 'meta.tag.js meta.jsx.children.tsx'],
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'YAML Entity Name Tags',
         scope: 'entity.name.tag.yaml',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       // language: Java
@@ -1946,21 +1949,21 @@ export const genTheme = colors => {
         name: 'comment docs',
         scope: 'comment.block.javadoc keyword.other.documentation',
         settings: {
-          foreground: `${t2}90`,
+          foreground: `${palette[1]}90`,
         },
       },
       {
         name: 'comment docs',
         scope: 'comment.block.javadoc entity.name.type.class',
         settings: {
-          foreground: `${t4}90`,
+          foreground: `${palette[3]}90`,
         },
       },
       {
         name: 'comment docs',
         scope: 'comment.block.javadoc variable.parameter',
         settings: {
-          foreground: `${t3}90`,
+          foreground: `${palette[2]}90`,
         },
       },
       {
@@ -1974,14 +1977,14 @@ export const genTheme = colors => {
         name: 'Java strings',
         scope: 'string.quoted.double.java',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
         },
       },
       {
         name: 'Generic storage type',
         scope: 'storage.type.generic.java',
         settings: {
-          foreground: t5 || t1,
+          foreground: palette[4] || palette[0],
         },
       },
       {
@@ -1995,21 +1998,21 @@ export const genTheme = colors => {
         name: 'Instance function calls',
         scope: 'meta.method-call.java entity.name.function.java',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
       {
         name: 'Java Class Modifiers',
         scope: 'meta.class.java storage.modifier.java',
         settings: {
-          foreground: t2
+          foreground: palette[1]
         }
       },
       {
         name: 'Java Method Modifiers',
         scope: 'meta.class.body meta.method storage.modifier.java ',
         settings: {
-          foreground: t2
+          foreground: palette[1]
         }
       },
       {
@@ -2026,21 +2029,21 @@ export const genTheme = colors => {
         name: 'Import Wildcards',
         scope: 'storage.modifier.import.java variable.language.wildcard',
         settings: {
-          foreground: `${t1}99`
+          foreground: `${palette[0]}99`
         }
       },
       {
         name: 'Other object variables',
         scope: 'keyword.other.import.java',
         settings: {
-          foreground: `${t2}99`,
+          foreground: `${palette[1]}99`,
         },
       },
       {
         name: 'Java Package',
         scope: 'keyword.other.package.java',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
           fontStyle: 'bold italic'
         }
       },
@@ -2048,7 +2051,7 @@ export const genTheme = colors => {
         name: 'Java Class Name',
         scope: 'entity.name.type.class.java',
         settings: {
-          foreground: t4,
+          foreground: palette[3],
           fontStyle: 'bold',
         }
       },
@@ -2070,7 +2073,7 @@ export const genTheme = colors => {
         name: 'Java Variable Types',
         scope: 'meta.definition.variable.java storage.type.java',
         settings: {
-          foreground: t5 || t3
+          foreground: palette[4] || palette[2]
         }
       },
       {
@@ -2156,7 +2159,7 @@ export const genTheme = colors => {
       {
         scope: 'token.info-token',
         settings: {
-          foreground: t1,
+          foreground: palette[0],
         },
       },
       {
@@ -2174,14 +2177,17 @@ export const genTheme = colors => {
       {
         scope: 'token.debug-token',
         settings: {
-          foreground: t3,
+          foreground: palette[2],
         },
       },
     ],
   };
-  return theme;
 };
 
+/**
+ * Convert color theme settings into a format usable in Workspace Settings
+ * @param {Object} colors - A color theme generated by #genTheme
+ */
 export const genSettings = colors => {
   let theme = genTheme(colors);
   return {
@@ -2192,7 +2198,14 @@ export const genSettings = colors => {
   };
 };
 
-// copied from https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+/**
+ * Return a color at a specified point in the spectrum between colors 1 and 2
+ * @param {string} c1 - The first color in the format `#ffffff`
+ * @param {string} c2 - The second color in the format `#ffffff`
+ * @param {string} p - A percentage representing where in the gradient you want the
+ * color from (0 would return `c1`, and 1 would return `c2`).
+ * @source https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+ */
 const blend = (c1, c2, p) => {
   let f = parseInt(c1.slice(1), 16);
   let t = parseInt(c2.slice(1), 16);
@@ -2216,9 +2229,9 @@ const blend = (c1, c2, p) => {
 };
 
 /**
- * Return a mapped spectrum of colors from `color1` to `color2` (inclusive)
- * @param {string} c1 - The hex code of the first color in format `#000000`
- * @param {string} c2 - The hex code of the second color in format `#000000`
+ * Return a mapped spectrum of colors from `c1` to `c2` (inclusive)
+ * @param {string} c1 - The first color in the format `#ffffff`
+ * @param {string} c2 - The second color in the format `#ffffff`
  */
 export const gradient = (c1, c2) => {
   return {
