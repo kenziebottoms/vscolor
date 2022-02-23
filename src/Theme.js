@@ -268,14 +268,14 @@ export const genTheme = colors => {
         ],
         settings: {
           foreground: t3,
-          fontStyle: 'normal'
+          fontStyle: ''
         },
       },
       {
         name: 'RegExp Keywords',
         scope: 'keyword.control.anchor.regexp',
         settings: {
-          fontStyle: 'normal',
+          fontStyle: '',
           foreground: t5 || t1
         }
       },
