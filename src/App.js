@@ -114,10 +114,9 @@ class App extends Component {
   importSpine = spine => {
     let error = this.validateSpine(spine);
     if (error) {
-      spine.value = 'ERROR: ' + error.message;
+      console.error(error.message);
     } else {
       this.setState({ theme: JSON.parse(spine) });
-      spine.value = '';
     }
   };
   // make sure the pasted spine has the right property names and valid colors
@@ -131,12 +130,10 @@ class App extends Component {
         .filter(color => !(color && colorTest.test(color)))
         .join(', ');
       if (badColors)
-        return {
-          status: 400,
-          message: 'Invalid hex code(s): ' + badColors,
-        };
+        console.error('Invalid hex code(s): ' + badColors);
       return false;
     } catch (err) {
+      console.error('Invalid spine JSON');
       return err;
     }
   };
