@@ -1703,7 +1703,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'markup.quote.markdown meta.paragraph.markdown'
         ],
         settings: {
-          foreground: ui,
+          foreground: palette[2],
           fontStyle: 'italic',
         },
       },
@@ -1714,14 +1714,21 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'punctuation.definition.quote.end.markdown',
         ],
         settings: {
-          foreground: `${ui}88`
+          foreground: `${palette[2]}88`
         }
       },
       {
-        name: 'Markdown Raw Code + others',
+        name: 'Markdown Inline Code',
+        scope: 'markup.inline.raw.string.markdown',
+        settings: {
+          foreground: palette[3]
+        }
+      },
+      {
+        name: 'Markdown Code Blocks',
         scope: [
           'markup.inline.raw.markdown',
-          'markup.inline.raw.string.markdown'
+          'markup.fenced_code.block.markdown'
         ],
         settings: {
           foreground: palette[2],
@@ -1731,7 +1738,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         name: 'Markdown Raw Code Ticks',
         scope: 'punctuation.definition.raw.markdown',
         settings: {
-          foreground: `${palette[2]}88`
+          foreground: `${palette[3]}88`
         }
       },
       {
@@ -1741,7 +1748,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'markup.underline.link.image.markdown',
         ],
         settings: {
-          foreground: palette[2],
+          foreground: palette[4] || palette[2],
         },
       },
       {
@@ -1773,6 +1780,28 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         settings: {
           foreground: monoSpec['50'],
         },
+      },
+      {
+        name: 'Markdown Link Brackets',
+        scope: [
+          'punctuation.definition.link.title.begin.markdown',
+          'punctuation.definition.link.title.end.markdown'
+        ],
+        settings: {
+          // fontStyle: 'bold',
+          foreground: `${palette[1]}`,
+        }
+      },
+      {
+        name: 'Markdown Link Parens',
+        scope: [
+
+          'punctuation.definition.metadata.markdown'
+        ],
+        settings: {
+          // fontStyle: 'bold',
+          foreground: `${palette[4] || palette[2]}`
+        }
       },
       // Language: PHP
       {
@@ -2103,9 +2132,13 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'keyword.operator.or.regexp',
           'punctuation.definintion.string',
           'punctuation',
+          'markup.list.unnumbered.markdown',
+          'markup.list.numbered.markdown',
+          'meta.embedded'
         ],
         settings: {
           fontStyle: '',
+          foreground: fg
         },
       },
       {
