@@ -9,11 +9,13 @@ body {
 }
 
 .wrapper {
-    @media (min-width: $md-lg) {
+    overflow-x: hidden;
+    @media (min-width: $sm-md) {
         display: grid;
-        grid-template-columns: auto 1fr 2fr;
-        height: 100vh;
+        grid-template-columns: auto 2fr 3fr;
+        overflow-y: hidden;
     }
+    min-height: 100vh;
     box-sizing: border-box;
 
     .controls {
@@ -21,14 +23,13 @@ body {
         display: flex;
         align-items: stretch;
         justify-content: center;
-        @media (min-width: $md-lg) {
+        @media (min-width: $sm-md) {
             flex-direction: column;
         }
     }
 
     .sidebar {
         background-color: #222;
-        padding: 20px;
         color: white;
         overflow: auto;
         text-align: center;

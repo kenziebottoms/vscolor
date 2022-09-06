@@ -18,7 +18,7 @@
         display: none;
     }
 
-    @media (min-width: $md-lg) {
+    @media (min-width: $sm-md) {
         .tooltip {
             position: absolute;
             z-index: -10;

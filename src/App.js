@@ -228,8 +228,8 @@ class App extends Component {
           style={{
             background: gradient(
               this.state.theme.bg,
-              gradient(this.state.theme.bg, this.state.theme.fg)[0]
-            )[5],
+              gradient(this.state.theme.bg, this.state.theme.fg)['7.5']
+            )['50'],
             color: this.state.theme.fg,
           }}
         >
