@@ -1,12 +1,25 @@
-const fs = require('fs');
+const fs = require('fs')
+const { genSettings } = require('./src/Theme.js')
 
-const destination = process.argv[2] || '.vscode/settings.json';
+const spineSource = process.argv[2] || null
+if (!spineSource) {
+  console.error('No or invalid spine source!')
+} else {
+  const destination = process.argv[3] || '.vscode/settings.json'
 
-const content = 'Some content! Love, ' + new Date().toString();
+  fs.readFile(spineSource, 'utf8', (err, spine) => {
+    if (err) {
+      console.error(err)
+      return
+    }
 
-fs.writeFile(destination, content, err => {
-  if (err) {
-    console.error(err);
-  }
-  // file written successfully
-});
+    const content = JSON.stringify(genSettings(JSON.parse(spine)))
+    
+    fs.writeFile(destination, content, err => {
+      if (err) {
+        console.error(err)
+      }
+      // file written successfully
+    })
+  })
+}
