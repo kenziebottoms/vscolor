@@ -391,6 +391,15 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         }
       },
       {
+        name: 'JSX attribute equal signs',
+        scope: [
+          'meta.tag.attributes.js.jsx keyword.operator.assignment'
+        ],
+        settings: {
+          foreground: palette[2]
+        }
+      },
+      {
         name: 'Variables in brackets',
         scope: 'meta.array.literal.js variable.other.readwrite.js',
         settings: {
@@ -585,7 +594,16 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         },
       },
       {
-        name: 'Important HTML Tag Names',
+        name: 'HTML text',
+        scope: [
+          'meta.jsx.children.js.jsx'
+        ],
+        settings: {
+          foreground: fg
+        }
+      },
+      {
+        name: 'Structural HTML Tag Names',
         scope: [
           'meta.tag.structure.body entity.name.tag',
           'meta.tag.structure.head entity.name.tag',
@@ -638,10 +656,35 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       },
       {
         name: 'HTML attribute values',
-        scope: 'meta.attribute string.quoted',
+        scope: [
+          'meta.attribute string.quoted',
+          'meta.tag.attributes.js.jsx string.quoted.double.js.jsx',
+          'meta.tag.attributes.js.jsx string.quoted.single.js.jsx',
+        ],
         settings: {
           foreground: palette[0],
         },
+      },
+      {
+        name: 'HTML attribute quotes',
+        scope: [
+          'meta.tag.attributes.js.jsx punctuation.definition.string.begin.js.jsx',
+          'meta.tag.attributes.js.jsx punctuation.definition.string.end.js.jsx',
+        ],
+        settings: {
+          foreground: `${palette[0]}aa`,
+        },
+      },
+      {
+        name: 'HTML entities',
+        scope: [
+          'punctuation.definition.entity.js.jsx',
+          'constant.character.entity.js.jsx'
+        ],
+        settings: {
+          foreground: palette[4] || palette[0],
+          fontStyle: 'bold italic',
+        }
       },
       {
         name: 'ID Attribute Name in HTML',
@@ -1470,7 +1513,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.jsx punctuation.definition.tag',
         ],
         settings: {
-          foreground: monoSpec['100'],
+          foreground: palette[2],
         },
       },
       {
@@ -2137,8 +2180,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.embedded'
         ],
         settings: {
-          fontStyle: '',
-          foreground: fg
+          fontStyle: ''
         },
       },
       {
