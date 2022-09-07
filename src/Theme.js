@@ -63,31 +63,35 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       'progressBar.background': palette[2],
       'editor.background': monoSpec['0'],
       'editor.foreground': monoSpec['100'],
-      'editorWidget.background': monoSpec['0'],
-      'editor.selectionBackground': monoSpec['12.5'],
+      'editor.selectionBackground': `${ui}29`,
       'editor.inactiveSelectionBackground': `${fg}11`,
-      'editor.selectionHighlightBackground': monoSpec['12.5'],
+      'editor.selectionHighlightBackground': `${ui}11`,
       'editor.findMatchBackground': posSpec['20'],
       'editor.findMatchHighlightBackground': posSpec['20'],
       'editor.findRangeHighlightBackground': `${fg}22`,
       'editor.hoverHighlightBackground': `${fg}11`,
+      "editorBracketMatch.border": trans,
+      "editorBracketMatch.background": `${ui}44`,
       'editorSuggestWidget.background': monoSpec['7.5'],
       'editorSuggestWidget.border': monoSpec['30'],
       'editorSuggestWidget.foreground': monoSpec['100'],
       'editorHoverWidget.background': monoSpec['7.5'],
       'editorHoverWidget.border': ui,
-      'diffEditor.insertedTextBackground': `${posSpec['100']}2a`,
-      'diffEditor.removedTextBackground': `${negSpec['100']}2a`,
-      'diffEditor.insertedTextBorder': bg,
-      'diffEditor.removedTextBorder': bg,
+      'editorWidget.background': monoSpec['0'],
+      'diffEditor.insertedTextBackground': `${pos}22`,
+      'diffEditor.insertedLineBackground': `${pos}11`,
+      'diffEditor.removedTextBackground': `${neg}33`,
+      'diffEditor.removedLineBackground': `${neg}1f`,
+      'diffEditor.insertedTextBorder': trans,
+      'diffEditor.removedTextBorder': trans,
       'merge.currentHeaderBackground': palette[2],
       'merge.incomingHeaderBackground': palette[2],
       'editorOverviewRuler.currentContentForeground': palette[2],
       'editorOverviewRuler.incomingContentForeground': palette[2],
       'editorOverviewRuler.commonContentForeground': palette[2],
-      'editor.lineHighlightBackground': `${fg}11`,
+      'editor.lineHighlightBackground': `${ui}22`,
       'editor.lineHighlightBorder': trans,
-      'editor.rangeHighlightBackground': `${fg}22`,
+      'editor.rangeHighlightBackground': `${ui}22`,
       'editorCursor.foreground': monoSpec['50'],
       'editorIndentGuide.background': monoSpec['12.5'],
       'editorIndentGuide.activeBackground': monoSpec['30'],
@@ -99,9 +103,9 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       'editorMarkerNavigationError.background': neg,
       'editorMarkerNavigationWarning.background': neg,
       'editorMarkerNavigation.background': monoSpec['0'],
-      'editor.wordHighlightBackground': monoSpec['12.5'],
       'editorWhitespace.foreground': monoSpec['30'],
-      'editor.wordHighlightStrongBackground': monoSpec['7.5'],
+      'editor.wordHighlightBackground': trans,
+      'editor.wordHighlightStrongBackground': trans,
       'peekViewTitle.background': monoSpec['0'],
       'peekViewTitleLabel.foreground': monoSpec['100'],
       'peekView.border': palette[2],
@@ -234,7 +238,10 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       },
       {
         name: 'Comment Block',
-        scope: 'comment.block',
+        scope: [
+          'comment.block',
+          'comment.block punctuation.definition.comment'
+        ],
         settings: {
           foreground: monoSpec['60'],
         },
@@ -292,14 +299,14 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           foreground: palette[3],
         },
       },
-        {
-          name: 'RegExp String Tags',
-          scope: [
-            'string.regexp keyword.other',
-          ],
-          settings: {
-            foreground: palette[2],
-          },
+      {
+        name: 'RegExp String Tags',
+        scope: [
+          'string.regexp keyword.other',
+        ],
+        settings: {
+          foreground: palette[2],
+        },
       },
       {
         name: 'Template Strings',
@@ -600,8 +607,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.jsx.children.js.jsx'
         ],
         settings: {
-          foreground: `${fg}aa`,
-          fontStyle: 'italic'
+          foreground: palette[1]
         }
       },
       {
@@ -629,8 +635,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'punctuation.definition.tag',
         ],
         settings: {
-          foreground: palette[2],
-          fontStyle: ''
+          foreground: fg,
         },
       },
       {
@@ -688,7 +693,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         ],
         settings: {
           foreground: palette[4] || palette[0],
-          fontStyle: 'bold italic',
+          fontStyle: 'bold',
         }
       },
       {
