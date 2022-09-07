@@ -630,7 +630,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         ],
         settings: {
           foreground: palette[2],
-          fontStyle: 'normal'
+          fontStyle: ''
         },
       },
       {
@@ -655,7 +655,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         scope: 'entity.other.attribute-name',
         settings: {
           foreground: palette[3],
-          fontStyle: 'normal'
+          fontStyle: ''
         },
       },
       {
@@ -667,7 +667,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         ],
         settings: {
           foreground: palette[2],
-          fontStyle: 'normal'
+          fontStyle: ''
         },
       },
       {
