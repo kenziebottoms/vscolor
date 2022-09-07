@@ -298,7 +298,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
             'string.regexp keyword.other',
           ],
           settings: {
-            foreground: palette[0],
+            foreground: palette[2],
           },
       },
       {
@@ -308,7 +308,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'string.template.js',
         ],
         settings: {
-          foreground: palette[0],
+          foreground: palette[2],
         },
       },
       // booleans
@@ -347,6 +347,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'constant.language',
           'punctuation.definition.constant',
           'variable.other.constant',
+          'variable.other.env',
           'source.elixir constant.other.symbol.elixir',
           'source.elixir constant.other.keywords.elixir',
         ],
@@ -599,7 +600,8 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.jsx.children.js.jsx'
         ],
         settings: {
-          foreground: fg
+          foreground: `${fg}aa`,
+          fontStyle: 'italic'
         }
       },
       {
@@ -628,6 +630,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         ],
         settings: {
           foreground: palette[2],
+          fontStyle: 'normal'
         },
       },
       {
@@ -652,6 +655,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         scope: 'entity.other.attribute-name',
         settings: {
           foreground: palette[3],
+          fontStyle: 'normal'
         },
       },
       {
@@ -662,7 +666,8 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.tag.attributes.js.jsx string.quoted.single.js.jsx',
         ],
         settings: {
-          foreground: palette[0],
+          foreground: palette[2],
+          fontStyle: 'normal'
         },
       },
       {
@@ -672,7 +677,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.tag.attributes.js.jsx punctuation.definition.string.end.js.jsx',
         ],
         settings: {
-          foreground: `${palette[0]}aa`,
+          foreground: `${palette[2]}aa`,
         },
       },
       {
@@ -986,7 +991,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         name: 'Support Variable Property',
         scope: 'support.variable.property',
         settings: {
-          foreground: palette[4] || palette[0],
+          foreground: palette[2],
         },
       },
       {
@@ -1382,6 +1387,15 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       },
       // Language: JavaScript
       {
+        name: "Javascript Destructuring Assignments",
+        scope: [
+          'meta.object-binding-pattern-variable.js variable.other.constant.js',
+        ],
+        settings: {
+          foreground: palette[2]
+        }
+      },
+      {
         name: 'JavaScript Classes',
         scope: 'meta.class entity.name.type.class.js',
         settings: {
@@ -1447,6 +1461,10 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'variable.other.meta.import.js',
           'meta.import.js variable.other',
           'keyword.operator.module.js',
+          'meta.import.js.jsx string.quoted',
+          'meta.import.js.jsx punctuation.definition.string',
+          'meta.export.default.js.jsx string.quoted',
+          'meta.export.default.js.jsx punctuation.definition.string',
         ],
         settings: {
           foreground: palette[2],
@@ -1454,7 +1472,10 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       },
       {
         name: 'JavaScript Import Statements',
-        scope: 'source.js keyword.control',
+        scope: [
+          'source.js keyword.control',
+          'keyword.operator.expression.import.js.jsx'
+        ],
         settings: {
           foreground: palette[4] || palette[0],
         },
@@ -1499,11 +1520,27 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         scope: [
           'variable.other.object.js',
           'variable.other.object.jsx',
-          'variable.object.property.js',
-          'variable.object.property.jsx',
         ],
         settings: {
-          foreground: monoSpec['100'],
+          foreground: fg,
+        },
+      },
+      {
+        name: 'Javascript[React] Function Properties',
+        scope: 'meta.function-call.js.jsx entity.name.function',
+        settings: {
+          foreground: palette[3]
+        }
+      },
+      {
+        name: 'JavaScript[React] Variable Properties',
+        scope: [
+          'variable.object.property.js',
+          'variable.object.property.jsx',
+          'variable.other.property.js.jsx'
+        ],
+        settings: {
+          foreground: palette[2],
         },
       },
       {
@@ -1513,7 +1550,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.jsx punctuation.definition.tag',
         ],
         settings: {
-          foreground: palette[2],
+          foreground: fg,
         },
       },
       {
