@@ -21,9 +21,9 @@ I have used this tool to optimize color themes specifically for:
   - HTML
   - CSS/SCSS
   - Java
+  - Python
 
 I have spot-checked the following languages:
-  - Python
   - Ruby
   - Swift
   - C#

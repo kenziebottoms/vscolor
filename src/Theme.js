@@ -163,15 +163,15 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       'settings.headerForeground': ui,
       'settings.inactiveSelectedItemBorder': ui,
       'settings.modifiedItemIndicator': ui,
-      
+
       'settings.textInputForeground': fg,
       'settings.textInputBackground': monoSpec['12.5'],
       'settings.textInputBorder': trans,
-      
+
       'settings.numberInputForeground': fg,
       'settings.numberInputBackground': monoSpec['12.5'],
       'settings.numberInputBorder': trans,
-      
+
       'settings.checkboxForeground': fg,
       'settings.checkboxBackground': monoSpec['12.5'],
       'settings.checkboxBorder': trans,
@@ -180,7 +180,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
       'settings.dropdownBackground': monoSpec['12.5'],
       'settings.dropdownBorder': trans,
       'settings.dropdownListBorder': ui,
-      
+
       'settings.rowHoverBackground': monoSpec['0'],
       'settings.focusedRowBackground': monoSpec['7.5'],
       'settings.focusedRowBorder': monoSpec['7.5'],
@@ -240,10 +240,13 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         name: 'Comment Block',
         scope: [
           'comment.block',
-          'comment.block punctuation.definition.comment'
+          'comment.block punctuation.definition.comment',
+          'string.quoted.docstring.multi.python',
+          'string.quoted.docstring.multi.python punctuation.definition.string',
         ],
         settings: {
           foreground: monoSpec['60'],
+          fontStyle: 'italic'
         },
       },
       // strings
@@ -357,6 +360,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'variable.other.env',
           'source.elixir constant.other.symbol.elixir',
           'source.elixir constant.other.keywords.elixir',
+          'constant.other.caps.python'
         ],
         settings: {
           foreground: palette[4] || monoSpec['70'],
@@ -1980,6 +1984,81 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           fontStyle: 'italic'
         },
       },
+      {
+        name: 'Self',
+        scope: [
+          'variable.parameter.function.language.special.self.python',
+          'variable.language.special.self.python'
+        ],
+        settings: {
+          foreground: palette[4] || palette[0],
+          fontStyle: 'bold italic'
+        }
+      },
+      {
+        name: 'Params',
+        scope: [
+          'meta.function.parameters.python',
+          'meta.function.parameters.python support.type.python'
+        ],
+        settings: {
+          foreground: monoSpec['70'],
+          fontStyle: 'italic',
+        }
+      },
+      {
+        name: 'Param names',
+        scope: 'meta.function.parameters.python variable.parameter.function.language.python',
+        settings: {
+          foreground: palette[1],
+          fontStyle: '',
+        }
+      },
+      {
+        name: 'Array brackets',
+        scope: [
+          'punctuation.definition.list.begin.python',
+          'punctuation.definition.list.end.python',
+        ],
+        settings: {
+          foreground: fg,
+        },
+      },
+      {
+        name: "Function decorators",
+        scope: [
+          'entity.name.function.decorator.python',
+          'entity.name.function.decorator.python punctuation.separator.period.python',
+        ],
+        settings: {
+          foreground: palette[4] || palette[0]
+        }
+      },
+      {
+        name: 'String interpolation prefix',
+        scope: [
+          'string.interpolated.python storage.type.string.python'
+        ],
+        settings: {
+          foreground: palette[4] || palette[0],
+          fontStyle: ''
+        }
+      },
+      {
+        name: 'Code tags',
+        scope: 'keyword.codetag.notation.python',
+        settings: {
+          fontStyle: 'bold'
+        }
+      },
+      {
+        name: 'Code tags in comments',
+        scope: 'comment.line.number-sign.python keyword.codetag.notation.python',
+        settings: {
+          foreground: monoSpec['40'],
+          fontStyle: 'italic bold'
+        }
+      },
       // Language: React
       {
         name: 'React Variables and Object Properties',
@@ -2227,7 +2306,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         },
       },
       {
-        name: 'Italicsify certain tokens',
+        name: 'Italicize certain tokens',
         scope: [
           'meta.import.ts meta.block.ts variable.other.readwrite.alias.ts',
           'meta.import.tsx meta.block.tsx variable.other.readwrite.alias.tsx',
@@ -2241,7 +2320,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           'meta.tag.sgml.doctype',
           'entity.other.attribute-name',
           'entity.name.tag.custom',
-          'source.js.jsx keyword.control.flow.js',
+          'keyword.control.flow',
           'support.type.property.css',
           'support.function.basic_functions',
           'variable.assignment.coffee',
