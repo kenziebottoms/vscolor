@@ -1584,6 +1584,7 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
         scope: [
           'meta.object-literal.key.js string.quoted',
           'meta.object-literal.key.js',
+          'meta.object-literal.key.js punctuation.definition.string',
         ],
         settings: {
           foreground: palette[1],
