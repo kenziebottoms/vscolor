@@ -93,20 +93,6 @@ class App extends Component {
     }
   };
 
-  // render the swatches for the syntax colors
-  renderSyntaxSwatches = () =>
-    this.state.theme.syntax.map((c, i) => (
-      <Swatch
-        key={i}
-        color={this.state.theme.syntax[i]}
-        onClick={() => {
-          this.clickSwatch(i);
-        }}
-        active={this.state.active === 'syntax:' + i}
-        new={false}
-      />
-    ));
-
   render() {
     return (
       <div
@@ -194,14 +180,12 @@ class App extends Component {
             ))}
             
             <div className="syntax">
-              {this.state.theme.syntax.map((c, i) => (
+              {this.state.theme.syntax.map((color, i) => (
                 <Swatch
                   key={i}
-                  color={this.state.theme.syntax[i]}
-                  onClick={() => {
-                    this.clickSwatch(i);
-                  }}
-                  active={this.state.active === 'syntax:' + i}
+                  color={color}
+                  onClick={() => this.clickSwatch(i)}
+                  active={this.state.active === `syntax:${i}`}
                 />
               ))}
 
