@@ -14,7 +14,7 @@ import Control from './Control';
 import Swatch from './Swatch';
 import { genTheme, genSettings, gradient } from './Theme';
 
-import { loadLocalSpine, saveLocalSpine } from './Spine';
+import { loadLocalSpine, saveLocalSpine, validateSpine } from './Spine';
 
 const _ = require('lodash');
 
@@ -85,29 +85,11 @@ class App extends Component {
 
   // validate pasted spine and use it if valid
   importSpine = spine => {
-    let error = this.validateSpine(spine);
+    let error = validateSpine(spine);
     if (error) {
       console.error(error.message);
     } else {
       this.setState({ theme: JSON.parse(spine) });
-    }
-  };
-  // make sure the pasted spine has the right property names and valid colors
-  validateSpine = spineJSON => {
-    try {
-      let spine = JSON.parse(spineJSON);
-      let props = ['bg', 'fg', 'pos', 'neg', 'ui'];
-      let colorTest = /^#([0-9a-f]{3}){1,2}$/i;
-      let colors = [...props.map(prop => spine[prop]), ...spine.syntax];
-      let badColors = colors
-        .filter(color => !(color && colorTest.test(color)))
-        .join(', ');
-      if (badColors)
-        console.error('Invalid hex code(s): ' + badColors);
-      return false;
-    } catch (err) {
-      console.error('Invalid spine JSON');
-      return err;
     }
   };
 
