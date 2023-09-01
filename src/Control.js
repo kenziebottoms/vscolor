@@ -1,42 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './styles/Control.scss';
 
-class Control extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hover: false };
-  }
-  render() {
-    return (
+const Control = ({ onClick, icon, bg, fg, ui, label }) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className="control"
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div
-        className="control"
-        onClick={this.props.onClick}
-        onMouseEnter={() => this.setState({ hover: true })}
-        onMouseLeave={() => this.setState({ hover: false })}
+        className="tooltip"
+        style={{
+          background: bg,
+          color: fg,
+        }}
       >
-        <div
-          className="tooltip"
-          style={{
-            background: this.props.bg,
-            color: this.props.toolTipFg + '88',
-          }}
-        >
-          {this.props.toolTip}
-        </div>
-        <div
-          className="icon"
-          style={{
-            background: this.props.bg,
-            color: this.state.hover ? this.props.hoverFg : 'inherit',
-          }}
-        >
-          <FontAwesomeIcon icon={this.props.icon} />
-        </div>
+        {label}
       </div>
-    );
-  }
-}
+      <div
+        className="icon"
+        style={{
+          background: bg,
+          color: hovered ? `${ui}88` : 'inherit',
+        }}
+      >
+        <FontAwesomeIcon icon={icon} />
+      </div>
+    </div>
+  );
+};
 
 export default Control;
