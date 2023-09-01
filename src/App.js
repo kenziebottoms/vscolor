@@ -93,19 +93,6 @@ class App extends Component {
     }
   };
 
-  // render normal swatch with normal ops
-  renderSwatch = slug => {
-    return (
-      <Swatch
-        onClick={() => {
-          this.setState({ active: slug });
-        }}
-        color={this.state.theme[slug]}
-        active={this.state.active === slug}
-      />
-    );
-  };
-
   // render the swatches for the syntax colors
   renderSyntaxSwatches = () =>
     this.state.theme.syntax.map((c, i) => (
@@ -189,18 +176,23 @@ class App extends Component {
 
         <section className="content">
           <div>
-            {this.renderSwatch('bg')}
-            <h3>Background</h3>
-
-            {this.renderSwatch('fg')}
-            <h3>Foreground</h3>
-
-            {this.renderSwatch('pos')}
-            <h3>Positive color</h3>
-
-            {this.renderSwatch('neg')}
-            <h3>Negative color</h3>
-
+            {[
+              ['Background', 'bg'],
+              ['Foreground', 'fg'],
+              ['UI accent', 'ui'],
+              ['Positive color', 'pos'],
+              ['Negative color', 'neg'],
+            ].map(([label, slug]) => (
+              <>
+                <Swatch
+                  onClick={() => this.setState({ active: slug })}
+                  color={this.state.theme[slug]}
+                  active={this.state.active === slug}
+                />
+                <h3>{label}</h3>
+              </>
+            ))}
+            
             <div className="syntax">
               {this.state.theme.syntax.map((c, i) => (
                 <Swatch
@@ -223,9 +215,6 @@ class App extends Component {
               Syntax colors&nbsp;
               <button onClick={this.shuffleSyntax}>Shuffle</button>
             </h3>
-
-            {this.renderSwatch('ui')}
-            <h3>UI accent</h3>
           </div>
         </section>
       </div>
