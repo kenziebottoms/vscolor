@@ -14,7 +14,7 @@ import Control from './Control';
 import Swatch from './Swatch';
 import { genTheme, genSettings, gradient } from './Theme';
 
-import { loadLocalSpine } from './Spine';
+import { loadLocalSpine, saveLocalSpine } from './Spine';
 
 const _ = require('lodash');
 
@@ -24,10 +24,6 @@ class App extends Component {
     this.state = { theme: null, active: 'bg' };
     this.state.theme = loadLocalSpine();
   }
-
-  // save current palette to localStorage
-  save = () =>
-    window.localStorage.setItem('theme', JSON.stringify(this.state.theme));
 
   importFromClipboard = () =>
     navigator.clipboard
@@ -176,7 +172,7 @@ class App extends Component {
             'Import from clipboard'
           )}
 
-          {this.renderControl(this.save, faSave, 'Save theme')}
+          {this.renderControl(() => saveLocalSpine(this.state.theme), faSave, 'Save theme')}
 
           {this.renderControl(
             () => this.copyToClipboard(JSON.stringify(this.state.theme)),

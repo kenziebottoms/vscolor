@@ -29,3 +29,7 @@ export const loadLocalSpine = () => {
     return DEFAULT_SPINE
   }
 };
+
+export const saveLocalSpine = (spine) => {
+  window.localStorage.setItem('theme', JSON.stringify(spine));
+}
