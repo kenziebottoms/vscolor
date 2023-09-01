@@ -7,6 +7,7 @@ import {
   faClipboardList,
   faCode,
 } from '@fortawesome/free-solid-svg-icons';
+import { shuffle } from 'lodash';
 
 import './styles/App.scss';
 
@@ -15,8 +16,6 @@ import Swatch from './Swatch';
 import { genTheme, genSettings, gradient } from './Theme';
 
 import { loadLocalSpine, saveLocalSpine, validateSpine } from './Spine';
-
-const _ = require('lodash');
 
 class App extends Component {
   constructor(props) {
@@ -81,7 +80,7 @@ class App extends Component {
     this.setState({ stateUpdate });
   };
 
-  shuffleSyntax = () => this.updateSyntax(_.shuffle(this.state.theme.syntax));
+  shuffleSyntax = () => this.updateSyntax(shuffle(this.state.theme.syntax));
 
   // validate pasted spine and use it if valid
   importSpine = spine => {
