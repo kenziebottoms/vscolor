@@ -210,14 +210,12 @@ class App extends Component {
                     this.clickSwatch(i);
                   }}
                   active={this.state.active === 'syntax:' + i}
-                  new={false}
                 />
               ))}
 
               <Swatch
                 key={'new'}
-                active={false}
-                new={true}
+                isNew
                 onClick={this.addSwatch}
               />
             </div>
