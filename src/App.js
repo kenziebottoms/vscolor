@@ -14,43 +14,20 @@ import Control from './Control';
 import Swatch from './Swatch';
 import { genTheme, genSettings, gradient } from './Theme';
 
+import { loadLocalSpine } from './Spine';
+
 const _ = require('lodash');
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { theme: null, active: 'bg' };
-    this.state.theme = this.getSaved();
+    this.state.theme = loadLocalSpine();
   }
 
   // save current palette to localStorage
   save = () =>
     window.localStorage.setItem('theme', JSON.stringify(this.state.theme));
-
-  // extract any saved palette from localStorage
-  getSaved = () => {
-    let stored = window.localStorage.getItem('theme');
-    if (!stored) {
-      return {
-        bg: '#000000',
-        fg: '#ffffff',
-        pos: '#00ff00',
-        neg: '#ff0000',
-        syntax: ['#ffff00'],
-        ui: '#0000ff',
-      };
-    } else {
-      let { bg, fg, syntax, pos, neg, ui } = JSON.parse(stored);
-      return {
-        bg,
-        fg,
-        pos,
-        neg,
-        syntax,
-        ui,
-      };
-    }
-  };
 
   importFromClipboard = () =>
     navigator.clipboard
