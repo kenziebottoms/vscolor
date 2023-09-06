@@ -11,7 +11,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0",
     "sass": "^1.49.8",
-    "typescript": "^4.5.5"
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +39,11 @@
   "bugs": {
     "url": "https://github.com/kenziebottoms/vscolor/issues"
   },
-  "homepage": "http://kenzie.ink/vscolor"
+  "homepage": "http://kenzie.ink/vscolor",
+  "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.9",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7"
+  }
 }

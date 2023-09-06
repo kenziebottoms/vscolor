@@ -13,18 +13,21 @@ import './styles/App.scss';
 
 import Control from './Control';
 import Swatch from './Swatch';
-import { genTheme, genSettings, gradient } from './Theme';
+import { Theme } from './Theme.ts';
 
-import { loadLocalSpine, saveLocalSpine, validateSpine } from './Spine';
+import { saveLocalSpine } from './Spine';
+import { gradient } from './colorUtils';
 
 const App = () => {
-  const [theme, setTheme] = useState(loadLocalSpine());
+  const [theme, setTheme] = useState(
+    Theme.fromJsonString(localStorage.getItem('theme')).generateSpine()
+  );
   const [activeSwatch, setActiveSwatch] = useState('bg');
 
   const importFromClipboard = () =>
     navigator.clipboard
       .readText()
-      .then(clipboard => importSpine(clipboard))
+      .then(clipboard => setTheme(Theme.fromJsonString(clipboard).generateSpine()))
       .catch(e => console.log(e));
 
   // get color value of active swatch
@@ -84,17 +87,7 @@ const App = () => {
     ...theme,
     syntax: shuffle(theme.syntax)
   });
-
-  // validate pasted spine and use it if valid
-  const importSpine = spine => {
-    let error = validateSpine(spine);
-    if (error) {
-      console.error(error.message);
-    } else {
-      setTheme(JSON.parse(spine));
-    }
-  };
-
+  
   return (
     <div
       className="wrapper"

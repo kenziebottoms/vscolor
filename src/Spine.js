@@ -1,3 +1,5 @@
+import { Theme } from './Theme.ts';
+
 const DEFAULT_SPINE = {
   bg: '#000000',
   fg: '#ffffff',
@@ -8,26 +10,8 @@ const DEFAULT_SPINE = {
 }
 
 export const loadLocalSpine = () => {
-  let stored = window.localStorage.getItem('theme')
-
-  if (!stored) {
-    return DEFAULT_SPINE;
-  }
-
-  try {
-    let { bg, fg, syntax, pos, neg, ui } = JSON.parse(stored);
-    return {
-      bg,
-      fg,
-      pos,
-      neg,
-      syntax,
-      ui,
-    }
-  } catch (err) {
-    console.error(err)
-    return DEFAULT_SPINE
-  }
+  let stored = window.localStorage.getItem('theme') || '';
+  return Theme.fromJsonSpine(stored);
 };
 
 export const saveLocalSpine = (spine) => {
