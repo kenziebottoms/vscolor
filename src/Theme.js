@@ -1344,6 +1344,21 @@ export const genTheme = ({ syntax, bg, fg, pos, neg, ui }) => {
           fontStyle: 'bold',
         },
       },
+      // Environment variables
+      {
+        name: "Numeric environment variable values",
+        scope: ['source.env constant.numeric.env'],
+        settings: {
+          foreground: palette[0]
+        }
+      },
+      {
+        name: "Numeric environment variable values",
+        scope: ['source.env variable.other.env'],
+        settings: {
+          foreground: palette[3]
+        }
+      },
       // Language: Elixir
       {
         name: 'Elixir Classes',
